@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group 'me.oggalz'
+version '1.0-SNAPSHOT'
+
+repositories {
+    maven {
+        url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    }
+}
+
+dependencies {
+    implementation group: 'org.spigotmc', name: 'spigot-api', version: '1.16.2-R0.1-SNAPSHOT'
+    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.28'
+}
+
+shadowJar {
+    destinationDirectory = file("~/Bureau/local-server/plugins")
+}
