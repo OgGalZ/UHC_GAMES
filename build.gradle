@@ -7,16 +7,23 @@ group 'me.oggalz'
 version '1.0-SNAPSHOT'
 
 repositories {
+    mavenCentral()
     maven {
         url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
+    } content {
+        includeGroup 'org.bukkit'
+        includeGroup 'org.spigotmc'
     }
+    maven { url = 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url = 'https://oss.sonatype.org/content/repositories/central' }
 }
 
 dependencies {
-    implementation group: 'org.spigotmc', name: 'spigot-api', version: '1.8.8-R0.1-SNAPSHOT'
-    implementation group: 'org.yaml', name: 'snakeyaml', version: '1.28'
+    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+
 }
 
+
 shadowJar {
-    destinationDirectory = file("~/Bureau/local-server/plugins")
+    destinationDirectory = file("/home/oggalz/Bureau/local-server/plugins/")
 }
