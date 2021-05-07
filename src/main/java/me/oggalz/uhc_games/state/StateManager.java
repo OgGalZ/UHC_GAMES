@@ -6,6 +6,7 @@ public class StateManager {
 
     public StateManager() {
         gameState = State.WAITING;
+
     }
 
 }

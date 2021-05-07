@@ -9,10 +9,11 @@ public class Main extends JavaPlugin {
     public void onEnable() {
 
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent() , this);
+
     }
 
     @Override
     public void onDisable() {
-
+        saveDefaultConfig();
     }
 }
