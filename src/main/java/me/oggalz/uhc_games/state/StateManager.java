@@ -17,6 +17,11 @@ public class StateManager {
         return gameState == State.STARTING;
     }
 
+    public boolean hasNotStarted(){
+        return gameState == State.WAITING;
+    }
+
+
     public State getState() {
         return gameState;
     }

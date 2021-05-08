@@ -1,6 +1,9 @@
 package me.oggalz.uhc_games;
 
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
+import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.state.State;
+import me.oggalz.uhc_games.state.StateManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
@@ -8,7 +11,10 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-    getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this), this);
+        PlayerManager playerManager = new PlayerManager();
+        StateManager stateManager = new StateManager();
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this , playerManager , stateManager) , this);
+        saveDefaultConfig();
     }
 
     @Override

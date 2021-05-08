@@ -8,7 +8,7 @@ public class PlayerManager {
 
     private final Map<UUID, Player> players;
 
-    public PlayerManager(UUID uuid) {
+    public PlayerManager() {
         players = new HashMap<>();
     }
 
