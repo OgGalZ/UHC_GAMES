@@ -9,4 +9,15 @@ public class StateManager {
 
     }
 
+    public void startGame() {
+        gameState = State.STARTING;
+    }
+
+    public boolean hasStarted() {
+        return gameState == State.STARTING;
+    }
+
+    public State getState() {
+        return gameState;
+    }
 }

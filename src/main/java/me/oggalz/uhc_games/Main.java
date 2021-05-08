@@ -8,8 +8,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent() , this);
-
+    getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this), this);
     }
 
     @Override
