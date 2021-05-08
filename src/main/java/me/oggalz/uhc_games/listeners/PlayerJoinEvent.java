@@ -40,7 +40,7 @@ public class PlayerJoinEvent implements Listener {
         if (stateManager.hasStarted()) {
             player.setGameMode(GameMode.SPECTATOR);
             playerManager.addPlayer(player.getUniqueId());
-
+            player.sendMessage("lul");
         } else if (stateManager.hasNotStarted()) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION , 999999999, 5000));
             player.getInventory().clear();
