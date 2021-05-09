@@ -44,6 +44,7 @@ public class PlayerJoinEvent implements Listener {
             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION , 999999999, 5000));
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
+
         }
 
     }
