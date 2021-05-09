@@ -2,7 +2,6 @@ package me.oggalz.uhc_games;
 
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.state.State;
 import me.oggalz.uhc_games.state.StateManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
