@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -36,17 +37,21 @@ public class PlayerJoinEvent implements Listener {
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinate");
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2));
-        player.teleport(location);
+
         if (stateManager.hasStarted()) {
             player.setGameMode(GameMode.SPECTATOR);
-            playerManager.addPlayer(player.getUniqueId());
         } else if (stateManager.hasNotStarted()) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION , 999999999, 5000));
+            player.teleport(location);
+            playerManager.addPlayer(player.getUniqueId());
+            player.setFoodLevel(20);
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
 
         }
 
     }
+
+
+
 
 }
