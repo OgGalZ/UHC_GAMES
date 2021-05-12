@@ -41,6 +41,7 @@ public class PlayerJoinEvent implements Listener {
         if (stateManager.hasStarted()) {
             player.setGameMode(GameMode.SPECTATOR);
         } else if (stateManager.hasNotStarted()) {
+            event.setJoinMessage(player.getName() +ChatColor.DARK_AQUA +" a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
             player.setFoodLevel(20);
