@@ -1,5 +1,10 @@
-#coordinate for the spawn
-coordinate:
-  - 279.013
-  - 67
-  - 305.207
+#coordinates for the spawn
+coordinatespawn:
+  - 2.810
+  - 75
+  - 6.409
+#coordinates when the player dies
+coordinateplayerdies:
+  - 2.300
+  - 79
+  - 20.311

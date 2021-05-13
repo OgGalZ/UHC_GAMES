@@ -35,24 +35,29 @@ public class PlayerJoinEvent implements Listener {
         Player player = event.getPlayer();
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
-        List<Integer> coordinate = configuration.getIntegerList("coordinate");
+        List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2));
 
-        if (stateManager.hasStarted()) {
-            player.setGameMode(GameMode.SPECTATOR);
-        } else if (stateManager.hasNotStarted()) {
-            event.setJoinMessage(player.getName() +ChatColor.DARK_AQUA +" a rejoint la partie :) ");
+
+        if (stateManager.hasNotStarted()) {
+            event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
             player.setFoodLevel(20);
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
 
+            if (playerManager.getPlayers() == 1) {
+                stateManager.startGame();
+                Bukkit.broadcastMessage("Lancement de la game");
+                player.setGameMode(GameMode.SURVIVAL);
+            }
+
+        } else {
+            player.setGameMode(GameMode.SPECTATOR);
         }
 
     }
-
-
 
 
 }

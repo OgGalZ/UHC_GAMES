@@ -14,7 +14,7 @@ public class Main extends JavaPlugin {
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this , playerManager , stateManager) , this);
-        getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager) , this);
+        getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager , this) , this);
         saveDefaultConfig();
     }
 
