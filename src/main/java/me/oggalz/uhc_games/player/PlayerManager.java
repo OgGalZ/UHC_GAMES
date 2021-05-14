@@ -1,5 +1,8 @@
 package me.oggalz.uhc_games.player;
 
+import org.bukkit.Location;
+import org.bukkit.World;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,6 +19,7 @@ public class PlayerManager {
         return players.size();
     }
 
+
     public void addPlayer(UUID uuid) {
         Player Player = new Player(uuid);
         players.put(uuid, Player);
@@ -25,6 +29,9 @@ public class PlayerManager {
         return players.get(uuid);
     }
 
+    public void removePlayer(UUID uuid) {
+        players.remove(uuid);
+    }
 
 
 }

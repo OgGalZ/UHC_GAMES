@@ -1,6 +1,4 @@
 package me.oggalz.uhc_games.player;
-
-
 import java.util.UUID;
 
 public class Player {
@@ -9,13 +7,10 @@ public class Player {
 
     public Player(UUID uuid) {
         this.uuid = uuid;
-
     }
-
 
     public UUID getUniqueId() {
         return uuid;
     }
-
 
 }

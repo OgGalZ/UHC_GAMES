@@ -44,17 +44,21 @@ public class PlayerJoinEvent implements Listener {
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
             player.setFoodLevel(20);
+            player.setHealth(20);
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
 
-            if (playerManager.getPlayers() == 1) {
+            if (playerManager.getPlayers() == 5) {
                 stateManager.startGame();
                 Bukkit.broadcastMessage("Lancement de la game");
-                player.setGameMode(GameMode.SURVIVAL);
+                for (Player player1 : Bukkit.getOnlinePlayers()) {
+
+                }
             }
 
         } else {
             player.setGameMode(GameMode.SPECTATOR);
+            player.sendMessage(ChatColor.DARK_AQUA + "La partie a déjà commencé :/");
         }
 
     }

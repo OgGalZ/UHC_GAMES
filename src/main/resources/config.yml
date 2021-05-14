@@ -3,8 +3,3 @@ coordinatespawn:
   - 2.810
   - 75
   - 6.409
-#coordinates when the player dies
-coordinateplayerdies:
-  - 2.300
-  - 79
-  - 20.311

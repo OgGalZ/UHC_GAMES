@@ -8,7 +8,6 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
@@ -18,11 +17,12 @@ public class UtilsListeners implements Listener {
 
     private StateManager stateManager;
     private final Main main;
-
-    public UtilsListeners(StateManager stateManager , Main main) {
+     private final PlayerManager playerManager ;
+    public UtilsListeners(StateManager stateManager, Main main, PlayerManager playerManager) {
 
         this.stateManager = stateManager;
         this.main = main;
+        this.playerManager = playerManager;
     }
 
 
@@ -40,9 +40,8 @@ public class UtilsListeners implements Listener {
         FileConfiguration configuration = main.getConfig();
         Player player = event.getEntity();
         World world = player.getWorld();
+        playerManager.removePlayer(player.getUniqueId());
         List<Integer> coordinate = configuration.getIntegerList("coordinateplayerdies");
-        Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2));
-        player.sendMessage("vus etes morts");
         player.setGameMode(GameMode.ADVENTURE);
 
     }
