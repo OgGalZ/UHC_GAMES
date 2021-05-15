@@ -37,12 +37,11 @@ public class UtilsListeners implements Listener {
     }
     @EventHandler
     public void PlayerDeathEvent(PlayerDeathEvent event) {
-        FileConfiguration configuration = main.getConfig();
         Player player = event.getEntity();
         World world = player.getWorld();
         playerManager.removePlayer(player.getUniqueId());
-        List<Integer> coordinate = configuration.getIntegerList("coordinateplayerdies");
         player.setGameMode(GameMode.ADVENTURE);
+        player.sendMessage("gg");
 
     }
 }

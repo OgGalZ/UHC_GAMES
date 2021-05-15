@@ -50,7 +50,8 @@ public class PlayerJoinEvent implements Listener {
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
             if ( playerManager.getPlayers() == 1) {
-                BukkitTask task = new SpawnLocation().runTaskTimer(main , 100L , 20L);
+                stateManager.startGame();
+                BukkitTask task = new SpawnLocation(playerManager).runTaskTimer(main , 100L , 20L);
             }
 
             } else {
