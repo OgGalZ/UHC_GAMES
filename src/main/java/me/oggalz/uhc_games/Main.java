@@ -4,7 +4,11 @@ import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.UtilsListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
+import me.oggalz.uhc_games.tasks.SpawnLocation;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 public class Main extends JavaPlugin {
 
@@ -13,10 +17,12 @@ public class Main extends JavaPlugin {
 
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this , playerManager , stateManager) , this);
-        getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager , this, playerManager) , this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager), this);
+        getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager, this, playerManager), this);
         saveDefaultConfig();
+
     }
+
 
     @Override
     public void onDisable() {
