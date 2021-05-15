@@ -48,12 +48,8 @@ public class PlayerJoinEvent implements Listener {
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
 
-            if (playerManager.getPlayers() == 5) {
+            if (playerManager.getPlayers() == 1) {
                 stateManager.startGame();
-                Bukkit.broadcastMessage("Lancement de la game");
-                for (Player player1 : Bukkit.getOnlinePlayers()) {
-
-                }
             }
 
         } else {
