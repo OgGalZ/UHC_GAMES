@@ -33,6 +33,7 @@ public class UtilsListeners implements Listener {
         } else {
             event.setCancelled(false);
 
+
         }
     }
     @EventHandler
@@ -42,6 +43,7 @@ public class UtilsListeners implements Listener {
         playerManager.removePlayer(player.getUniqueId());
         player.setGameMode(GameMode.ADVENTURE);
         player.sendMessage("gg");
+        player.sendMessage("MDR");
 
     }
 }
