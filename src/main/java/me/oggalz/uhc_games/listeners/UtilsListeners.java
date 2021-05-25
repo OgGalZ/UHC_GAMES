@@ -32,8 +32,6 @@ public class UtilsListeners implements Listener {
             event.setCancelled(true);
         } else {
             event.setCancelled(false);
-
-
         }
     }
     @EventHandler
