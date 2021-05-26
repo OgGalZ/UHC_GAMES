@@ -2,25 +2,15 @@ package me.oggalz.uhc_games.listeners;
 
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.state.State;
 import me.oggalz.uhc_games.state.StateManager;
-import me.oggalz.uhc_games.tasks.SpawnLocation;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.lang.management.ManagementFactory;
-import java.sql.BatchUpdateException;
 import java.util.List;
-import java.util.Map;
 
 public class PlayerJoinEvent implements Listener {
     private final Main main;
@@ -49,11 +39,6 @@ public class PlayerJoinEvent implements Listener {
             player.setHealth(20);
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
-            if ( playerManager.getPlayers() == 1) {
-                stateManager.startGame();
-                BukkitTask task = new SpawnLocation(playerManager).runTaskTimer(main , 100L , 20L);
-            }
-
             } else {
             player.setGameMode(GameMode.SPECTATOR);
             player.sendMessage(ChatColor.DARK_AQUA + "La partie a déjà commencé :/");

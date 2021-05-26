@@ -39,8 +39,7 @@ public class UtilsListeners implements Listener {
         World world = player.getWorld();
         playerManager.removePlayer(player.getUniqueId());
         player.setGameMode(GameMode.ADVENTURE);
-        player.sendMessage("gg");
-        player.sendMessage("MDR");
 
     }
+
 }
