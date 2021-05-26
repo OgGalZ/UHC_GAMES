@@ -25,7 +25,6 @@ public class UtilsListeners implements Listener {
         this.playerManager = playerManager;
     }
 
-
     @EventHandler
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
         if (stateManager.hasNotStarted()) {
