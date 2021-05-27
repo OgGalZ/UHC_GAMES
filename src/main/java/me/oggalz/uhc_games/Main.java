@@ -19,7 +19,7 @@ public class Main extends JavaPlugin {
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
-        Item itemstack = new Item(null , 0 , null);
+        Item itemstack = new Item(null , 0 , null , null);
         InventoryClass inventoryClass = new InventoryClass(0, null);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager), this);
         getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager, this, playerManager), this);

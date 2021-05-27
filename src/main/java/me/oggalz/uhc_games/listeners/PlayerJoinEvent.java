@@ -46,7 +46,7 @@ public class PlayerJoinEvent implements Listener {
             player.setGameMode(GameMode.ADVENTURE);
             if (player.isOp()) {
                 player.getInventory().clear();
-              ItemStack itemStack =   Item.createItemstack(Material.COMPASS, 1, ChatColor.DARK_RED + "CONFIGURATION");
+              ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS , 1 , ChatColor.BLUE + "Config" , null);
                 player.getInventory().setItem(4 , itemStack);
             }
         } else {
