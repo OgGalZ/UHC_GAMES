@@ -71,6 +71,7 @@ public class MainGui implements Listener {
         ItemStack itemStack = event.getCurrentItem();
         Inventory inventory = event.getInventory();
         Player player = (Player) event.getWhoClicked();
+
         if (itemStack == null) {
         } if(inventory.getName().equals("Configuration")){
             player.closeInventory();
