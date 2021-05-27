@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    implementation 'fr.minuskube:netherboard-bukkit:1.2.1'
 
 }
 

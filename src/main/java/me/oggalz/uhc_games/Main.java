@@ -9,18 +9,21 @@ import me.oggalz.uhc_games.utils.InventoryClass;
 import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.logging.Level;
+
 public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
 
+        getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
-        Item itemstack = new Item(null , 0);
+        Item itemstack = new Item(null , 0 , null);
         InventoryClass inventoryClass = new InventoryClass(0, null);
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, itemstack), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager), this);
         getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager, this, playerManager), this);
-        getServer().getPluginManager().registerEvents(new MainGui(inventoryClass , itemstack , stateManager) , this);
+       getServer().getPluginManager().registerEvents(new MainGui( stateManager) , this);
 
     }
 

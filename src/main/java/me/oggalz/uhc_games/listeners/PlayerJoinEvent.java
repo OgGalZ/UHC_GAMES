@@ -4,6 +4,7 @@ import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
+import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -19,18 +20,17 @@ public class PlayerJoinEvent implements Listener {
     private final Main main;
     private final PlayerManager playerManager;
     private final StateManager stateManager;
-    private final Item itemstack;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, Item itemstack) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
-        this.itemstack = itemstack;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerJoinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        ScoreboardCreator.createScoreboard(player);
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
@@ -44,16 +44,12 @@ public class PlayerJoinEvent implements Listener {
             player.setHealth(20);
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
-            if(player.isOp()){
+            if (player.isOp()) {
                 player.getInventory().clear();
-                ItemStack itemStack = this.itemstack.createItemstack(Material.COMPASS , 1);
-                ItemMeta itemMeta =  this.itemstack.getItemMeta(itemStack);
-                itemMeta.setDisplayName(ChatColor.RED + "Configuration");
-                itemStack.setItemMeta(itemMeta);
+              ItemStack itemStack =   Item.createItemstack(Material.COMPASS, 1, ChatColor.DARK_RED + "CONFIGURATION");
                 player.getInventory().setItem(4 , itemStack);
-
             }
-            } else {
+        } else {
             player.setGameMode(GameMode.SPECTATOR);
             player.sendMessage(ChatColor.DARK_AQUA + "La partie a déjà commencé :/");
         }

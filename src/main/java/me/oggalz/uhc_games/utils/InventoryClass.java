@@ -14,7 +14,7 @@ public class InventoryClass {
         this.label = label;
     }
 
-    public Inventory createdInventory(int size , String label){
+    public static Inventory createdInventory(int size , String label){
         return Bukkit.createInventory(null , size , label  );
     }
 }

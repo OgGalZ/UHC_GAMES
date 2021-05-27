@@ -8,19 +8,22 @@ public class Item {
 
     private final Material material;
     private final int number;
+    private String name;
 
-    public Item(Material material, int number) {
+    public Item(Material material, int number, String name) {
         this.material = material;
         this.number = number;
+        this.name = name;
     }
 
-    public ItemStack createItemstack(Material material, int number) {
+    public static  ItemStack createItemstack(Material material, int number , String name) {
         ItemStack itemstack = new ItemStack(material, number);
+        ItemMeta itemMeta = itemstack.getItemMeta();
+        itemMeta.setDisplayName(name);
+        itemstack.setItemMeta(itemMeta);
         return itemstack;
+
     }
 
-    public ItemMeta getItemMeta(ItemStack itemStack){
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        return itemMeta;
-    }
+
 }

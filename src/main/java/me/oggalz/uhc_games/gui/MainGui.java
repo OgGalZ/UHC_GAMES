@@ -16,17 +16,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import javax.swing.*;
 
 public class MainGui implements Listener {
-    private final InventoryClass inventory;
-    private final Item item;
+
     private final StateManager stateManager;
 
 
-    public MainGui(InventoryClass inventory, Item item, StateManager stateManager) {
-        this.inventory = inventory;
-        this.item = item;
+    public MainGui(StateManager stateManager) {
         this.stateManager = stateManager;
     }
 
@@ -35,16 +31,32 @@ public class MainGui implements Listener {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
         Action action = event.getAction();
-        if (stateManager.hasNotStarted() && player.isOp()) {
-            if (itemStack.getType() == Material.COMPASS && itemStack.hasItemMeta()) {
 
-                Inventory inventory = this.inventory.createdInventory(9 * 6, ChatColor.DARK_BLUE + "Configuration");
-                inventory.setItem(22, item.createItemstack(Material.COMMAND_MINECART, 1));
+
+        if (itemStack == null) {
+            return;
+        }
+
+        if (itemStack.getType() == Material.COMPASS && itemStack.getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "CONFIGURATION") ) {
+
+                Inventory inventory = InventoryClass.createdInventory(9 * 6, ChatColor.DARK_BLUE + "Configuration");
+                inventory.setItem(21, Item.createItemstack(Material.DIRT, 1, ChatColor.DARK_AQUA + "Scénario"));
                 player.openInventory(inventory);
-
-            }
 
         }
 
     }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onClick(InventoryClickEvent event) {
+        ItemStack itemStack = event.getCurrentItem();
+        Inventory inventory = event.getInventory();
+        Player player = (Player) event.getWhoClicked();
+        if (itemStack == null) {
+        } else if(inventory.getName().equals(ChatColor.DARK_BLUE + "Configuration")) {
+            player.closeInventory();
+        }
+    }
+
 }
+
