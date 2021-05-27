@@ -33,7 +33,7 @@ public class MainGui implements Listener {
         this.stateManager = stateManager;
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scénarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.WOOL, 1, ChatColor.YELLOW + "Bordure", null));
-        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND_SWORD, 1, ChatColor.DARK_BLUE + "PVP", null));
+        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.ARROW, 1, ChatColor.DARK_BLUE + "PVP", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.CHEST, 1, ChatColor.GRAY + "Inventaire", null));
@@ -63,21 +63,22 @@ public class MainGui implements Listener {
             inventory.setItem(31, item.get(4));
             inventory.setItem(32, item.get(5));
             player.openInventory(inventory);
-
         }
-
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onClick(InventoryClickEvent event) throws IOException {
+    public void onClick(InventoryClickEvent event) {
         ItemStack itemStack = event.getCurrentItem();
-        Inventory inventory = event.getInventory();
+        Inventory inventory = event.getClickedInventory();
         Player player = (Player) event.getWhoClicked();
 
         if (itemStack == null) {
-        } if(inventory.getName().equals("Configuration")){
+        } else if (inventory.contains(item.get(0)) && stateManager.hasNotStarted() && itemStack.hasItemMeta()) {
             player.closeInventory();
         }
+
     }
 }
+
+
 
