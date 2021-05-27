@@ -53,6 +53,7 @@ public class MainGui implements Listener {
         }
 
         if (itemStack.getType() == Material.COMPASS && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
+
             Inventory inventory = InventoryClass.createdInventory(9 * 6, "Configuration");
 
             inventory.setItem(21, item.get(0));
