@@ -11,26 +11,29 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
+import java.util.logging.Level;
 
 public class PlayerJoinEvent implements Listener {
     private final Main main;
     private final PlayerManager playerManager;
     private final StateManager stateManager;
+    private final ScoreboardCreator scoreboardCreator;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
+        this.scoreboardCreator = scoreboardCreator;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerJoinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        ScoreboardCreator.createScoreboard(player);
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
@@ -40,6 +43,8 @@ public class PlayerJoinEvent implements Listener {
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
+            scoreboardCreator.createScoreboard(player);
+            System.out.println(playerManager.getPlayers());
             player.setFoodLevel(20);
             player.setHealth(20);
             player.getInventory().clear();
@@ -55,5 +60,7 @@ public class PlayerJoinEvent implements Listener {
         }
 
     }
+
+
 
 }

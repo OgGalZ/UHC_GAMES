@@ -1,6 +1,7 @@
 package me.oggalz.uhc_games.player;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 
 import java.util.HashMap;

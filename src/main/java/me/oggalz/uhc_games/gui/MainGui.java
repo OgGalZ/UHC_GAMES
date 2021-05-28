@@ -12,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -77,6 +78,14 @@ public class MainGui implements Listener {
             player.closeInventory();
         }
 
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerDropItem(PlayerDropItemEvent event){
+        ItemStack itemStack = event.getItemDrop().getItemStack();
+        if(itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")){
+            event.setCancelled(true);
+        }
     }
 }
 

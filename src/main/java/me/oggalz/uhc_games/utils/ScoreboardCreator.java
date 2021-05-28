@@ -2,19 +2,36 @@ package me.oggalz.uhc_games.utils;
 
 import fr.minuskube.netherboard.Netherboard;
 import fr.minuskube.netherboard.bukkit.BPlayerBoard;
+import me.oggalz.uhc_games.player.PlayerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.Collection;
+import java.util.List;
+
 
 public class ScoreboardCreator {
 
 
-    public static void createScoreboard(Player player) {
-        BPlayerBoard board = Netherboard.instance().createBoard(player, "Mon Serveur");
+    private final PlayerManager playerManager;
 
-        int money = 12;
-        board.set("Argent : " + money, 3);
-        board.set("" , 2);
-        board.set(ChatColor.RED + "mc.monserveur.com", 1);
+    public ScoreboardCreator(PlayerManager playerManager) {
+        this.playerManager = playerManager;
+    }
+
+    public   void createScoreboard(Player player) {
+
+        BPlayerBoard board = Netherboard.instance().createBoard(player,   ChatColor.DARK_AQUA +  "{Hobbit UHC}" );
+
+        board.set( "          "  , 15);
+        board.set(ChatColor.AQUA + "Waiting players :)" , 14);
+        board.set("" , 12);
+        board.set( ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/20", 11);
+
 
     }
+
+
+
 }
