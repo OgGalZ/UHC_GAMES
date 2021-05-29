@@ -2,21 +2,24 @@ me/oggalz/uhc_games/player/PlayerManager.java
  me.oggalz.uhc_games.player.PlayerManager
 me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
-me/oggalz/uhc_games/utils/InventoryClass.java
- me.oggalz.uhc_games.utils.InventoryClass
-me/oggalz/uhc_games/state/State.java
- me.oggalz.uhc_games.state.State
-me/oggalz/uhc_games/player/Player.java
- me.oggalz.uhc_games.player.Player
 me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
  me.oggalz.uhc_games.listeners.PlayerJoinEvent
-me/oggalz/uhc_games/utils/Item.java
- me.oggalz.uhc_games.utils.Item
-me/oggalz/uhc_games/listeners/UtilsListeners.java
- me.oggalz.uhc_games.listeners.UtilsListeners
+me/oggalz/uhc_games/utils/InventoryClass.java
+ me.oggalz.uhc_games.utils.InventoryClass
 me/oggalz/uhc_games/utils/ScoreboardCreator.java
  me.oggalz.uhc_games.utils.ScoreboardCreator
+me/oggalz/uhc_games/player/Player.java
+ me.oggalz.uhc_games.player.Player
 me/oggalz/uhc_games/gui/MainGui.java
  me.oggalz.uhc_games.gui.MainGui
+me/oggalz/uhc_games/listeners/UtilsListeners.java
+ me.oggalz.uhc_games.listeners.UtilsListeners
+me/oggalz/uhc_games/utils/Item.java
+ me.oggalz.uhc_games.utils.Item
+me/oggalz/uhc_games/state/State.java
+ me.oggalz.uhc_games.state.State
+me/oggalz/uhc_games/listeners/scenarios/CutClean.java
+ me.oggalz.uhc_games.listeners.scenarios.CutClean
+ me.oggalz.uhc_games.listeners.scenarios.CutClean$1
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main

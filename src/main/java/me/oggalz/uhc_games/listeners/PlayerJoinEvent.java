@@ -1,5 +1,7 @@
 package me.oggalz.uhc_games.listeners;
 
+import fr.minuskube.netherboard.Netherboard;
+import fr.minuskube.netherboard.bukkit.BPlayerBoard;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
@@ -12,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -44,7 +47,7 @@ public class PlayerJoinEvent implements Listener {
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
             scoreboardCreator.createScoreboard(player);
-            System.out.println(playerManager.getPlayers());
+            scoreboardCreator.refresh();
             player.setFoodLevel(20);
             player.setHealth(20);
             player.getInventory().clear();
@@ -59,6 +62,12 @@ public class PlayerJoinEvent implements Listener {
             player.sendMessage(ChatColor.DARK_AQUA + "La partie a déjà commencé :/");
         }
 
+    }
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void playerQuitEvent(PlayerQuitEvent event){
+        Player player = event.getPlayer();
+        playerManager.removePlayer(player.getUniqueId());
+        scoreboardCreator.refresh();
     }
 
 

@@ -34,13 +34,14 @@ public class UtilsListeners implements Listener {
             event.setCancelled(false);
         }
     }
-    @EventHandler(priority = EventPriority.NORMAL)
+  /*  @EventHandler(priority = EventPriority.NORMAL)
     public void PlayerDeathEvent(PlayerDeathEvent event) {
+
         Player player = event.getEntity();
         World world = player.getWorld();
         playerManager.removePlayer(player.getUniqueId());
         player.setGameMode(GameMode.ADVENTURE);
 
-    }
+    }*/
 
 }

@@ -5,6 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Item {
@@ -22,7 +23,7 @@ public class Item {
     }
 
     public static  ItemStack createItemstack(Material material, int number , String name , String lore )  {
-        List<String> list = Arrays.asList(lore) ;
+        List<String> list = Collections.singletonList(lore);
         ItemStack itemstack = new ItemStack(material, number);
         ItemMeta itemMeta = itemstack.getItemMeta();
         itemMeta.setDisplayName(name);
