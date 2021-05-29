@@ -24,7 +24,6 @@ public class CutClean implements Listener {
 
     @EventHandler
     private void onBlockBreak(BlockBreakEvent event , boolean enable) {
-        enable = false;
         event.setCancelled(enable);
         Material material = event.getBlock().getType();
         Block block = event.getBlock();
