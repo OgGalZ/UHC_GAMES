@@ -1,6 +1,7 @@
 package me.oggalz.uhc_games;
 
 import me.oggalz.uhc_games.gui.MainGui;
+import me.oggalz.uhc_games.gui.scenarios;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.UtilsListeners;
 import me.oggalz.uhc_games.listeners.scenarios.CutClean;
@@ -14,6 +15,7 @@ import org.bukkit.block.Block;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.*;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.*;
@@ -46,7 +48,8 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager , scoreboardCreator), this);
         getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager, this, playerManager), this);
         getServer().getPluginManager().registerEvents(new MainGui( stateManager) , this);
-        getServer().getPluginManager().registerEvents(new CutClean(), this);
+        getServer().getPluginManager().registerEvents(new scenarios(), this);
+
 
     }
 

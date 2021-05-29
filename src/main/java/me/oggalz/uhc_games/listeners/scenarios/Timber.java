@@ -1,20 +1,6 @@
 package me.oggalz.uhc_games.listeners.scenarios;
 
-import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.utils.UniversalMaterial;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Timber {
+/*public class Timber implements Listener {
 
     private final Main main;
 
@@ -22,8 +8,9 @@ public class Timber {
         this.main = main;
     }
 
-    public void onBreak(BlockBreakEvent event) {
 
+    @EventHandler
+    public void onBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Material mat = event.getBlock().getType();
         if (UniversalMaterial.isLog(mat)) {
@@ -56,7 +43,7 @@ public class Timber {
                         this.cancel();
                     }
                 }
-            }.runTaskTimer((Plugin) main, 1L, 1L);
+            }.runTaskTimer(main, 1L, 1L);
         }
     }
-}
+}*/

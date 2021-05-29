@@ -12,6 +12,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
@@ -32,7 +33,7 @@ public class MainGui implements Listener {
 
     public MainGui(StateManager stateManager) {
         this.stateManager = stateManager;
-        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scénarios", null));
+        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.WOOL, 1, ChatColor.YELLOW + "Bordure", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.ARROW, 1, ChatColor.DARK_BLUE + "PVP", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
@@ -47,6 +48,7 @@ public class MainGui implements Listener {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
         Action action = event.getAction();
+
 
 
         if (itemStack == null) {
@@ -74,18 +76,21 @@ public class MainGui implements Listener {
         Player player = (Player) event.getWhoClicked();
 
         if (itemStack == null) {
-        } else if (inventory.contains(item.get(0)) && stateManager.hasNotStarted() && itemStack.hasItemMeta()) {
-            player.closeInventory();
         }
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+  @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDropItem(PlayerDropItemEvent event){
         ItemStack itemStack = event.getItemDrop().getItemStack();
         if(itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")){
             event.setCancelled(true);
         }
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void InventoryDragEvent(InventoryDragEvent event){
+        event.setCancelled(true);
     }
 }
 
