@@ -13,12 +13,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 
 public class PlayerJoinEvent implements Listener {
@@ -43,6 +48,7 @@ public class PlayerJoinEvent implements Listener {
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2));
 
         if (stateManager.hasNotStarted()) {
+            player.removePotionEffect(PotionEffectType.INVISIBILITY);
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
@@ -52,10 +58,11 @@ public class PlayerJoinEvent implements Listener {
             player.setHealth(20);
             player.getInventory().clear();
             player.setGameMode(GameMode.ADVENTURE);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 9));
             if (player.isOp()) {
                 player.getInventory().clear();
-              ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS , 1 , ChatColor.BLUE + "Config" , null);
-                player.getInventory().setItem(4 , itemStack);
+                ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
+                player.getInventory().setItem(4, itemStack);
             }
         } else {
             player.setGameMode(GameMode.SPECTATOR);
@@ -63,13 +70,22 @@ public class PlayerJoinEvent implements Listener {
         }
 
     }
+
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void playerQuitEvent(PlayerQuitEvent event){
+
+    public void playerQuitEvent(PlayerQuitEvent event) {
         Player player = event.getPlayer();
         playerManager.removePlayer(player.getUniqueId());
         scoreboardCreator.refresh();
     }
 
-
-
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onTestEntityDamage(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player) {
+            if (event.getEntity() instanceof Player && stateManager.hasNotStarted()) {
+                event.setCancelled(true);
+            }
+        }
+    }
 }
+

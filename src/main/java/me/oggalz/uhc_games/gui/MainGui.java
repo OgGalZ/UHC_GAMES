@@ -2,8 +2,7 @@ package me.oggalz.uhc_games.gui;
 
 
 import me.oggalz.uhc_games.state.StateManager;
-import me.oggalz.uhc_games.utils.InventoryClass;
-import me.oggalz.uhc_games.utils.Item;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,15 +11,12 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -48,7 +44,14 @@ public class MainGui implements Listener {
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
         Action action = event.getAction();
+        Inventory inventory = Bukkit.createInventory(null, 9 * 4, "Config");
 
+        inventory.setItem(12, item.get(0));
+        inventory.setItem(13, item.get(1));
+        inventory.setItem(14, item.get(2));
+        inventory.setItem(21, item.get(3));
+        inventory.setItem(22, item.get(4));
+        inventory.setItem(23, item.get(5));
 
 
         if (itemStack == null) {
@@ -57,14 +60,6 @@ public class MainGui implements Listener {
 
         if (itemStack.getType() == Material.COMPASS && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
 
-            Inventory inventory = InventoryClass.createdInventory(9 * 6, "Configuration");
-
-            inventory.setItem(21, item.get(0));
-            inventory.setItem(22, item.get(1));
-            inventory.setItem(23, item.get(2));
-            inventory.setItem(30, item.get(3));
-            inventory.setItem(31, item.get(4));
-            inventory.setItem(32, item.get(5));
             player.openInventory(inventory);
         }
     }
@@ -80,18 +75,15 @@ public class MainGui implements Listener {
 
     }
 
-  @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerDropItem(PlayerDropItemEvent event){
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack itemStack = event.getItemDrop().getItemStack();
-        if(itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")){
+        if (itemStack.hasItemMeta()) {
             event.setCancelled(true);
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void InventoryDragEvent(InventoryDragEvent event){
-        event.setCancelled(true);
-    }
+
 }
 
 
