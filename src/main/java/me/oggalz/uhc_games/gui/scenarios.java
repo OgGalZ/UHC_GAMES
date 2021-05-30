@@ -34,20 +34,17 @@ public class scenarios implements Listener {
         InventoryAction action = event.getAction();
         Inventory gui = Bukkit.createInventory(null , 9*4 , ChatColor.DARK_AQUA + "Scenarios");
         gui.setItem(11  , Item.createItemstack(Material.IRON_INGOT , 1 , ChatColor.RED + "Cut Clean" , null));
-        gui.setItem(16  ,  Item.createItemstack(Material.APPLE , 1 , ChatColor.BLUE + "Vanilla+" , null));
+        gui.setItem(15  ,  Item.createItemstack(Material.APPLE , 1 , ChatColor.BLUE + "Vanilla+" , null));
         gui.setItem(21, Item.createItemstack(Material.DIAMOND_ORE , 1 , ChatColor.DARK_BLUE + "Diamond Limite " , null));
         gui.setItem(23 , Item.createItemstack(Material.DIAMOND_PICKAXE , 1 , ChatColor.GREEN + "Hasty Boy" , null) );
-       gui.setItem(30 , Item.createItemstack(Material.POTION , 1 , ChatColor.WHITE + "Final HEal" , null));
+       gui.setItem(31 , Item.createItemstack(Material.POTION , 1 , ChatColor.WHITE + "Final HEal" , null));
         if (itemStack == null) {
         }
         else if(itemStack.getType() == Material.DIAMOND && itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED + "Scenarios")){
 
             player.openInventory(gui);
             }
-
         }
-
-
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onBlockBreak(BlockBreakEvent event) {

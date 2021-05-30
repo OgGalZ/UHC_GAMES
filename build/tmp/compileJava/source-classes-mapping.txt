@@ -12,12 +12,12 @@ me/oggalz/uhc_games/utils/Item.java
  me.oggalz.uhc_games.utils.Item
 me/oggalz/uhc_games/state/State.java
  me.oggalz.uhc_games.state.State
-me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
- me.oggalz.uhc_games.listeners.PlayerJoinEvent
-me/oggalz/uhc_games/listeners/UtilsListeners.java
- me.oggalz.uhc_games.listeners.UtilsListeners
 me/oggalz/uhc_games/gui/MainGui.java
  me.oggalz.uhc_games.gui.MainGui
+me/oggalz/uhc_games/listeners/UtilsListeners.java
+ me.oggalz.uhc_games.listeners.UtilsListeners
+me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
+ me.oggalz.uhc_games.listeners.PlayerJoinEvent
 me/oggalz/uhc_games/gui/scenarios.java
  me.oggalz.uhc_games.gui.scenarios
  me.oggalz.uhc_games.gui.scenarios$1

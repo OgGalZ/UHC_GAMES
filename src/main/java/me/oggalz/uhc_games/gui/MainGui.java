@@ -23,8 +23,6 @@ import java.util.List;
 public class MainGui implements Listener {
 
     private final StateManager stateManager;
-
-
     private final List<ItemStack> item = new ArrayList<>();
 
     public MainGui(StateManager stateManager) {
@@ -35,8 +33,6 @@ public class MainGui implements Listener {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.CHEST, 1, ChatColor.GRAY + "Inventaire", null));
-
-
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
