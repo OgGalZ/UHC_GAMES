@@ -1,7 +1,7 @@
 package me.oggalz.uhc_games;
 
 import me.oggalz.uhc_games.gui.MainGui;
-import me.oggalz.uhc_games.gui.scenarios;
+import me.oggalz.uhc_games.gui.scenarios.CutClean;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.UtilsListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
@@ -23,7 +23,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager , scoreboardCreator), this);
         getServer().getPluginManager().registerEvents(new UtilsListeners(stateManager, this, playerManager), this);
         getServer().getPluginManager().registerEvents(new MainGui( stateManager) , this);
-        getServer().getPluginManager().registerEvents(new scenarios(), this);
+        getServer().getPluginManager().registerEvents(new CutClean(), this);
         saveDefaultConfig();
 
 

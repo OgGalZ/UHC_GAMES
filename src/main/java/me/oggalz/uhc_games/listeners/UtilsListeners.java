@@ -18,7 +18,8 @@ public class UtilsListeners implements Listener {
 
     private StateManager stateManager;
     private final Main main;
-     private final PlayerManager playerManager ;
+    private final PlayerManager playerManager;
+
     public UtilsListeners(StateManager stateManager, Main main, PlayerManager playerManager) {
 
         this.stateManager = stateManager;
@@ -26,7 +27,7 @@ public class UtilsListeners implements Listener {
         this.playerManager = playerManager;
     }
 
- @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.NORMAL)
     public void onFoodLevelChange(FoodLevelChangeEvent event) {
         if (stateManager.hasNotStarted()) {
             event.setCancelled(true);
@@ -34,14 +35,6 @@ public class UtilsListeners implements Listener {
             event.setCancelled(false);
         }
     }
-  /*  @EventHandler(priority = EventPriority.NORMAL)
-    public void PlayerDeathEvent(PlayerDeathEvent event) {
 
-        Player player = event.getEntity();
-        World world = player.getWorld();
-        playerManager.removePlayer(player.getUniqueId());
-        player.setGameMode(GameMode.ADVENTURE);
-
-    }*/
 
 }
