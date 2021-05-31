@@ -1,6 +1,8 @@
 package me.oggalz.uhc_games.gui;
 
 
+import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.state.StateManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -15,6 +17,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +27,10 @@ public class MainGui implements Listener {
 
     private final StateManager stateManager;
     private final List<ItemStack> item = new ArrayList<>();
+    private final Main main;
 
-    public MainGui(StateManager stateManager) {
+
+    public MainGui(StateManager stateManager, Main main) {
         this.stateManager = stateManager;
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.WOOL, 1, ChatColor.YELLOW + "Bordure", null));
@@ -33,6 +38,7 @@ public class MainGui implements Listener {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.CHEST, 1, ChatColor.GRAY + "Inventaire", null));
+        this.main = main;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -60,16 +66,6 @@ public class MainGui implements Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onClick(InventoryClickEvent event) {
-        ItemStack itemStack = event.getCurrentItem();
-        Inventory inventory = event.getClickedInventory();
-        Player player = (Player) event.getWhoClicked();
-
-        if (itemStack == null) {
-        }
-
-    }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
