@@ -1,6 +1,11 @@
 package me.oggalz.uhc_games.gui;
 
 
+import fr.minuskube.inv.ClickableItem;
+import fr.minuskube.inv.SmartInventory;
+import fr.minuskube.inv.content.InventoryContents;
+import fr.minuskube.inv.content.InventoryProvider;
+import fr.minuskube.inv.content.SlotIterator;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.state.StateManager;
@@ -23,60 +28,51 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainGui implements Listener {
+public class MainGui implements InventoryProvider {
 
-    private final StateManager stateManager;
     private final List<ItemStack> item = new ArrayList<>();
-    private final Main main;
 
-
-    public MainGui(StateManager stateManager, Main main) {
-        this.stateManager = stateManager;
+    public MainGui() {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.WOOL, 1, ChatColor.YELLOW + "Bordure", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.ARROW, 1, ChatColor.DARK_BLUE + "PVP", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.CHEST, 1, ChatColor.GRAY + "Inventaire", null));
-        this.main = main;
-    }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerClickEvent(PlayerInteractEvent event) {
-        Player player = event.getPlayer();
-        ItemStack itemStack = event.getItem();
-        Action action = event.getAction();
-        Inventory inventory = Bukkit.createInventory(null, 9 * 4, "Config");
-
-        inventory.setItem(12, item.get(0));
-        inventory.setItem(13, item.get(1));
-        inventory.setItem(14, item.get(2));
-        inventory.setItem(21, item.get(3));
-        inventory.setItem(22, item.get(4));
-        inventory.setItem(23, item.get(5));
-
-
-        if (itemStack == null) {
-            return;
-        }
-
-        if (itemStack.getType() == Material.COMPASS && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
-
-            player.openInventory(inventory);
-        }
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerDropItem(PlayerDropItemEvent event) {
-        ItemStack itemStack = event.getItemDrop().getItemStack();
-        if (itemStack.hasItemMeta()) {
-            event.setCancelled(true);
-        }
+    public static final SmartInventory MainGUi = SmartInventory.builder()
+            .id("MainGui")
+            .provider(new MainGui())
+            .size(4, 9)
+            .title(ChatColor.RED + "Configuration")
+            .closeable(true)
+            .build();
+
+
+    @Override
+    public void init(Player player, InventoryContents contents) {
+
+        contents.set(1, 3, ClickableItem.empty(item.get(0)));
+        contents.set(1, 4, ClickableItem.empty(item.get(1)));
+        contents.set(1, 5, ClickableItem.empty(item.get(2)));
+        contents.set(2, 3, ClickableItem.empty(item.get(3)));
+        contents.set(2, 4, ClickableItem.empty(item.get(4)));
+        contents.set(2, 5, ClickableItem.empty(item.get(5)));
+
+    }
+
+    @Override
+    public void update(Player player, InventoryContents contents) {
+
     }
 
 
 }
+
+
 
 
 

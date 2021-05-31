@@ -1,6 +1,8 @@
 package me.oggalz.uhc_games.listeners;
 
+import fr.minuskube.inv.SmartInventory;
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import org.bukkit.*;
@@ -11,20 +13,36 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class UtilsListeners implements Listener {
+public class SecondaryListeners implements Listener {
 
     private StateManager stateManager;
-    private final Main main;
-    private final PlayerManager playerManager;
 
-    public UtilsListeners(StateManager stateManager, Main main, PlayerManager playerManager) {
+    public SecondaryListeners(StateManager stateManager) {
 
         this.stateManager = stateManager;
-        this.main = main;
-        this.playerManager = playerManager;
+
+    }
+
+
+    @EventHandler(priority = EventPriority.HIGH)
+
+    public void playerInteractEvent(PlayerInteractEvent event) {
+
+        Player player = event.getPlayer();
+        ItemStack itemStack = event.getItem();
+        if (itemStack == null) {
+            return;
+        }
+       else if (itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() &&    itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")){
+           MainGui.MainGUi.open(player);
+        }
+
+
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -34,6 +52,8 @@ public class UtilsListeners implements Listener {
         } else {
             event.setCancelled(false);
         }
+
+
     }
 
 

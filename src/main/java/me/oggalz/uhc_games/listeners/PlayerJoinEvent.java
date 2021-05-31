@@ -71,7 +71,7 @@ public class PlayerJoinEvent implements Listener {
 
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
 
     public void playerQuitEvent(PlayerQuitEvent event) {
         Player player = event.getPlayer();
@@ -79,7 +79,7 @@ public class PlayerJoinEvent implements Listener {
         scoreboardCreator.refresh();
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.HIGH)
     public void onTestEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
             if (event.getEntity() instanceof Player && stateManager.hasNotStarted()) {
