@@ -24,6 +24,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import javax.persistence.GeneratedValue;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class CutClean implements Listener {
 
@@ -86,16 +87,14 @@ public class CutClean implements Listener {
         EntityType entityType = event.getEntityType();
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
-
-
         switch (entityType) {
-
             case COW:
-                int size = (int) loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).count();
-                entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, size, null, null));
+                int size = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.COOKED_BEEF, size, null, null));
                 break;
         }
 
+        loots.clear();
 
     }
 

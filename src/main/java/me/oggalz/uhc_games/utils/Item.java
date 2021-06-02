@@ -31,10 +31,12 @@ public class Item {
         if(list.get(0 ) != null){
             itemMeta.setLore(list);
         }
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         itemstack.setItemMeta(itemMeta);
         return itemstack;
 
     }
+
 
 
 }
