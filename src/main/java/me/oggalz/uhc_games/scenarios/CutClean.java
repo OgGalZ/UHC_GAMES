@@ -19,9 +19,11 @@ import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.persistence.GeneratedValue;
 import java.util.List;
+import java.util.Random;
 
 public class CutClean implements Listener {
 
@@ -43,9 +45,11 @@ public class CutClean implements Listener {
                 if (!currentItemType.equals(Material.DIAMOND_PICKAXE) && !currentItemType.equals(Material.IRON_PICKAXE) && !currentItemType.equals(Material.STONE_PICKAXE)) {
                     return;
                 }
+
                 block.setType(Material.AIR);
                 block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
                 block.getWorld().dropItem(location, Item.createItemstack(Material.GOLD_INGOT, 1, null, null));
+
                 break;
 
             case IRON_ORE:
@@ -59,6 +63,7 @@ public class CutClean implements Listener {
                 break;
 
             case COAL_ORE:
+
                 if (!currentItemType.equals(Material.DIAMOND_PICKAXE) && !currentItemType.equals(Material.IRON_PICKAXE) && !currentItemType.equals(Material.STONE_PICKAXE)) {
                     return;
                 }
@@ -66,6 +71,7 @@ public class CutClean implements Listener {
                 block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
                 block.getWorld().dropItem(location, Item.createItemstack(Material.TORCH, 4, null, null));
                 break;
+
             default:
                 break;
         }
@@ -80,56 +86,25 @@ public class CutClean implements Listener {
         EntityType entityType = event.getEntityType();
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
-        int random = 1 + (int) (Math.random() * ((3 - 1) + 1));
-        int ramdomutils = 0 + (int) (Math.random() * ((3 - 0)) + 0);
 
 
-        for (int i = loots.size() - 1; i >= 0; --i) {
-            ItemStack is = loots.get(i);
-            if (is == null) {
-                return;
-            }
+        switch (entityType) {
 
-            try {
-                switch (entityType) {
-                    case COW:
-
-                        loots.remove(i);
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_BEEF, random, null, null));
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.LEATHER, ramdomutils, null, null));
-
-                        break;
-
-                    case PIG:
-                        loots.remove(i);
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, random, null, null));
-                        break;
-
-                    case CHICKEN:
-                        loots.remove(i);
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_CHICKEN, random, null, null));
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.FEATHER, ramdomutils, null, null));
-                        break;
-
-                    case SHEEP:
-                        loots.remove(i);
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_MUTTON, random, null, null));
-                        break;
-
-                    case RABBIT:
-                        loots.remove(i);
-                        entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_RABBIT, random, null, null));
-                        break;
-                    default:
-
-
-                }
-            } catch (IllegalArgumentException e) {
-                System.out.println("");
-            }
+            case COW:
+                int size = (int) loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).count();
+                entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, size, null, null));
+                break;
         }
+
 
     }
 
 }
+
+
+
+
+
+
+
 

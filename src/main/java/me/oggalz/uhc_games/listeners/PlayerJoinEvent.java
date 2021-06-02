@@ -45,7 +45,7 @@ public class PlayerJoinEvent implements Listener {
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
-        Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2));
+        Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2), 1, 1);
 
         if (stateManager.hasNotStarted()) {
             player.removePotionEffect(PotionEffectType.INVISIBILITY);

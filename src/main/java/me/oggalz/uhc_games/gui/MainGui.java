@@ -34,7 +34,7 @@ public class MainGui implements InventoryProvider {
 
     public MainGui() {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
-        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.WOOL, 1, ChatColor.YELLOW + "Bordure", null));
+        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BARRIER, 1, ChatColor.YELLOW + "Bordure", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.ARROW, 1, ChatColor.DARK_BLUE + "PVP", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
@@ -55,12 +55,26 @@ public class MainGui implements InventoryProvider {
     @Override
     public void init(Player player, InventoryContents contents) {
 
-        contents.set(1, 3, ClickableItem.empty(item.get(0)));
-        contents.set(1, 4, ClickableItem.empty(item.get(1)));
-        contents.set(1, 5, ClickableItem.empty(item.get(2)));
-        contents.set(2, 3, ClickableItem.empty(item.get(3)));
-        contents.set(2, 4, ClickableItem.empty(item.get(4)));
-        contents.set(2, 5, ClickableItem.empty(item.get(5)));
+        contents.set(1, 3, ClickableItem.of(item.get(0),
+                e -> GCutClean.scenarios.open(player)));
+
+        contents.set(1, 4, ClickableItem.of(item.get(1),
+                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+
+
+        contents.set(1, 5, ClickableItem.of(item.get(2),
+                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+
+
+        contents.set(2, 3, ClickableItem.of(item.get(3),
+                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+
+        contents.set(2, 4, ClickableItem.of(item.get(4),
+                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+
+
+        contents.set(2, 5, ClickableItem.of(item.get(5),
+                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
 
     }
 

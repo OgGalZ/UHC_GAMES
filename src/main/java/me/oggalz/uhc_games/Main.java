@@ -4,6 +4,7 @@ import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -22,6 +23,7 @@ public class Main extends JavaPlugin {
         ScoreboardCreator scoreboardCreator = new ScoreboardCreator(playerManager);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
+        getServer().getPluginManager().registerEvents(new CutClean() , this);
         saveDefaultConfig();
     }
 

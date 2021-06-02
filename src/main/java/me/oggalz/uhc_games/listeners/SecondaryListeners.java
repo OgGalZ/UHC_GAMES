@@ -37,9 +37,8 @@ public class SecondaryListeners implements Listener {
         ItemStack itemStack = event.getItem();
         if (itemStack == null) {
             return;
-        }
-       else if (itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() &&    itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")){
-           MainGui.MainGUi.open(player);
+        } else if (itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
+            MainGui.MainGUi.open(player);
         }
 
 
