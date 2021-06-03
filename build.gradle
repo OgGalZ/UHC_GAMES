@@ -27,5 +27,5 @@ dependencies {
 
 
 shadowJar {
-    destinationDirectory = file("/home/oggalz/Bureau/local-server/plugins/")
+    destinationDirectory = file("/home/oggalz/Bureau/local-server2/plugins/")
 }

@@ -22,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.persistence.GeneratedValue;
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -63,15 +64,6 @@ public class CutClean implements Listener {
                 block.getWorld().dropItem(location, Item.createItemstack(Material.IRON_INGOT, 1, null, null));
                 break;
 
-            case COAL_ORE:
-
-                if (!currentItemType.equals(Material.DIAMOND_PICKAXE) && !currentItemType.equals(Material.IRON_PICKAXE) && !currentItemType.equals(Material.STONE_PICKAXE)) {
-                    return;
-                }
-                block.setType(Material.AIR);
-                block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
-                block.getWorld().dropItem(location, Item.createItemstack(Material.TORCH, 4, null, null));
-                break;
 
             default:
                 break;
@@ -87,49 +79,65 @@ public class CutClean implements Listener {
         EntityType entityType = event.getEntityType();
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
-        switch (entityType) {
+        try {
+            switch (entityType) {
+                case COW:
+                    int sizeBeef = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).collect(Collectors.toList()).get(0).getAmount();
+                    entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_BEEF, sizeBeef, null, null));
+                    break;
 
-            case COW:
-                int sizeBeef = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.COOKED_BEEF, sizeBeef, null, null));
-                int sizeLeather = loots.stream().filter(itemStack -> itemStack.getType() == Material.LEATHER).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.LEATHER, sizeLeather, null, null));
-                break;
+                case PIG:
 
-            case PIG:
-                int sizePig = loots.stream().filter(itemStack -> itemStack.getType() == Material.PORK).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, sizePig, null, null));
-                break;
+                    int sizePig = loots.stream().filter(itemStack -> itemStack.getType() == Material.PORK).collect(Collectors.toList()).get(0).getAmount();
+                    List<ItemStack> listPig = loots.stream().filter(itemStack -> itemStack.getType() == Material.PORK).collect(Collectors.toList());
+                    for (ItemStack x : listPig) {
+                        loots.remove(x);
+                    }
+                    entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, sizePig, null, null));
+                    break;
 
 
-            case CHICKEN:
-                int sizeChicken = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_CHICKEN).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.COOKED_CHICKEN, sizeChicken, null, null));
-                int sizeFeather = loots.stream().filter(itemStack -> itemStack.getType() == Material.FEATHER).collect(Collectors.toList()).get(0).getAmount();
-                break;
+                case CHICKEN:
+                    int sizeChicken = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_CHICKEN).collect(Collectors.toList()).get(0).getAmount();
+                    List<ItemStack> listChicken = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_CHICKEN).collect(Collectors.toList());
+                    for (ItemStack x : listChicken) {
+                        loots.remove(x);
+                    }
+                    entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_CHICKEN, sizeChicken, null, null));
+                    break;
 
-            case SHEEP:
+                case SHEEP:
 
-                int sizeSheep = loots.stream().filter(itemStack -> itemStack.getType() == Material.MUTTON).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_MUTTON, sizeSheep, null, null));
-                break;
+                    int sizeSheep = loots.stream().filter(itemStack -> itemStack.getType() == Material.MUTTON).collect(Collectors.toList()).get(0).getAmount();
+                    List<ItemStack> listSheep = loots.stream().filter(itemStack -> itemStack.getType() == Material.MUTTON).collect(Collectors.toList());
+                    for (ItemStack x : listSheep) {
+                        loots.remove(x);
+                    }
+                    entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_MUTTON, sizeSheep, null, null));
 
-            case RABBIT:
-                int sizeRabbit = loots.stream().filter(itemStack -> itemStack.getType() == Material.RABBIT).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_RABBIT, sizeRabbit, null, null));
+                    break;
+
+                case RABBIT:
+                    int sizeRabbit = loots.stream().filter(itemStack -> itemStack.getType() == Material.RABBIT).collect(Collectors.toList()).get(0).getAmount();
+                    List<ItemStack> listRabbit = loots.stream().filter(itemStack -> itemStack.getType() == Material.RABBIT).collect(Collectors.toList());
+                    for (ItemStack x : listRabbit) {
+                        loots.remove(x);
+                    }
+                    entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_RABBIT, sizeRabbit, null, null));
+                    break;
+
+                default:
+                    break;
+
+
+            }
+        } catch (IndexOutOfBoundsException e) {
 
         }
-
-        loots.clear();
-
     }
 
+
 }
-
-
-
-
-
 
 
 

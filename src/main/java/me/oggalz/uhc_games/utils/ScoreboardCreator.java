@@ -8,7 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 
-public class ScoreboardCreator  {
+public class ScoreboardCreator {
 
 
     private final PlayerManager playerManager;
@@ -30,17 +30,16 @@ public class ScoreboardCreator  {
 
     }
 
-    public void refresh (){
-        for(Player x : Bukkit.getOnlinePlayers()){
+    public void refresh() {
+        for (Player x : Bukkit.getOnlinePlayers()) {
             BPlayerBoard board = Netherboard.instance().getBoard(x);
-            if(playerManager.getPlayers() != 0) {
+            if (board != null) {
                 board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/20", 11);
             }
+
         }
 
     }
-
-
 
 
 }
