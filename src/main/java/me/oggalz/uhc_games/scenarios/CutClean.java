@@ -88,10 +88,36 @@ public class CutClean implements Listener {
         Entity entity = event.getEntity();
         Location location = entity.getLocation();
         switch (entityType) {
+
             case COW:
-                int size = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).collect(Collectors.toList()).get(0).getAmount();
-                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.COOKED_BEEF, size, null, null));
+                int sizeBeef = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_BEEF).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.COOKED_BEEF, sizeBeef, null, null));
+                int sizeLeather = loots.stream().filter(itemStack -> itemStack.getType() == Material.LEATHER).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.LEATHER, sizeLeather, null, null));
                 break;
+
+            case PIG:
+                int sizePig = loots.stream().filter(itemStack -> itemStack.getType() == Material.PORK).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, sizePig, null, null));
+                break;
+
+
+            case CHICKEN:
+                int sizeChicken = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_CHICKEN).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItemNaturally(location, Item.createItemstack(Material.COOKED_CHICKEN, sizeChicken, null, null));
+                int sizeFeather = loots.stream().filter(itemStack -> itemStack.getType() == Material.FEATHER).collect(Collectors.toList()).get(0).getAmount();
+                break;
+
+            case SHEEP:
+
+                int sizeSheep = loots.stream().filter(itemStack -> itemStack.getType() == Material.MUTTON).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_MUTTON, sizeSheep, null, null));
+                break;
+
+            case RABBIT:
+                int sizeRabbit = loots.stream().filter(itemStack -> itemStack.getType() == Material.RABBIT).collect(Collectors.toList()).get(0).getAmount();
+                entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_RABBIT, sizeRabbit, null, null));
+
         }
 
         loots.clear();

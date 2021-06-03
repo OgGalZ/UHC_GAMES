@@ -31,7 +31,10 @@ public class Item {
         if(list.get(0 ) != null){
             itemMeta.setLore(list);
         }
+
+
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemstack.setItemMeta(itemMeta);
         return itemstack;
 
