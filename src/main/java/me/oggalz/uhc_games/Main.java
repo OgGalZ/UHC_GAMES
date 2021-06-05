@@ -7,6 +7,7 @@ import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.scenarios.HastyBoy;
 import me.oggalz.uhc_games.scenarios.Timber;
+import me.oggalz.uhc_games.scenarios.VanillaPlus;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.block.Block;
@@ -29,6 +30,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CutClean() , this);
         getServer().getPluginManager().registerEvents(new Timber() , this);
         getServer().getPluginManager().registerEvents(new HastyBoy() , this);
+        getServer().getPluginManager().registerEvents(new VanillaPlus(), this);
         saveDefaultConfig();
     }
 
