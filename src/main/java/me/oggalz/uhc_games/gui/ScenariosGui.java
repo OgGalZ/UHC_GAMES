@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ScenariosGui implements InventoryProvider {
 
-    private int x = 1;
+    private static int x = 1;
     private final List<ItemStack> itemStacks = new ArrayList<>();
 
     public ScenariosGui() {
@@ -88,7 +88,7 @@ public class ScenariosGui implements InventoryProvider {
 
     }
 
-    public int getX() {
+    public static int getX() {
         return x;
     }
 }

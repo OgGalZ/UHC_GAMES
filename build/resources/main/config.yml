@@ -1,5 +1,19 @@
-#coordinates for the spawn
+#In this file you can find all changeable configurations to enhance your enjoyment :)
+#Important! you must reload your server for your changes to take into account !
+
+
+
+#Here , they are the coordinates when  players connect to the server
 coordinatespawn:
   - 425
   - 64
   - 114
+
+
+#If you want increase the rate of Flints , you can change the value below !
+rateFlints:
+  - 50
+
+#If you want increase the rate of Apples , you can change the value below !
+rateApples:
+  - 50

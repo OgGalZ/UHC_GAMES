@@ -20,25 +20,26 @@ import org.bukkit.inventory.ItemStack;
 
 public class DiamondLimite implements Listener {
 
-    private final ScenariosGui scenariosGui;
-
-    public DiamondLimite(ScenariosGui scenariosGui) {
-        this.scenariosGui = scenariosGui;
-    }
-
     @EventHandler
     public void BlockBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
-        Location location = event.getPlayer().getLocation();
+        Location location = block.getLocation();
         Inventory playerInv = event.getPlayer().getInventory();
 
-        if (block.getType() == Material.DIAMOND_ORE) {
-            if (playerInv.contains(Material.DIAMOND, scenariosGui.getX())) {
-                block.setType(Material.AIR);
-                block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
-                block.getWorld().dropItem(location, Item.createItemstack(Material.GOLD_INGOT, 1, null, null));
+
+        for (ItemStack x : playerInv) {
+            if (x != null) {
+                if (x.getType() == Material.DIAMOND) {
+                    int sizeDiamond = x.getAmount();
+                    if (block.getType() == Material.DIAMOND_ORE) {
+                        if (sizeDiamond >= ScenariosGui.getX()) {
+                            block.setType(Material.AIR);
+                            block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
+                            block.getWorld().dropItem(location, Item.createItemstack(Material.GOLD_INGOT, 1, null, null));
+                        }
+                    }
+                }
             }
         }
     }
-
 }

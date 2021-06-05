@@ -22,7 +22,6 @@ public class Main extends JavaPlugin {
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
-        ScenariosGui scenariosGui =  new  ScenariosGui();
         ScoreboardCreator scoreboardCreator = new ScoreboardCreator(playerManager);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
@@ -30,7 +29,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Timber() , this);
         getServer().getPluginManager().registerEvents(new HastyBoy() , this);
         getServer().getPluginManager().registerEvents(new VanillaPlus(this), this);
-        getServer().getPluginManager().registerEvents(new DiamondLimite(scenariosGui) , this);
+        getServer().getPluginManager().registerEvents(new DiamondLimite() , this);
         saveDefaultConfig();
     }
 
