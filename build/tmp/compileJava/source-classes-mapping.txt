@@ -16,9 +16,9 @@ me/oggalz/uhc_games/gui/MainGui.java
  me.oggalz.uhc_games.gui.MainGui
 me/oggalz/uhc_games/utils/Item.java
  me.oggalz.uhc_games.utils.Item
-me/oggalz/uhc_games/scenarios/CutClean.java
- me.oggalz.uhc_games.scenarios.CutClean
- me.oggalz.uhc_games.scenarios.CutClean$1
+me/oggalz/uhc_games/utils/UniversalMaterial.java
+ me.oggalz.uhc_games.utils.UniversalMaterial
+ me.oggalz.uhc_games.utils.UniversalMaterial$1
 me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
  me.oggalz.uhc_games.listeners.PlayerJoinEvent
 me/oggalz/uhc_games/scenarios/HastyBoy.java
@@ -26,8 +26,8 @@ me/oggalz/uhc_games/scenarios/HastyBoy.java
 me/oggalz/uhc_games/scenarios/Timber.java
  me.oggalz.uhc_games.scenarios.Timber
  me.oggalz.uhc_games.scenarios.Timber$1
-me/oggalz/uhc_games/utils/UniversalMaterial.java
- me.oggalz.uhc_games.utils.UniversalMaterial
- me.oggalz.uhc_games.utils.UniversalMaterial$1
+me/oggalz/uhc_games/scenarios/CutClean.java
+ me.oggalz.uhc_games.scenarios.CutClean
+ me.oggalz.uhc_games.scenarios.CutClean$1
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main
