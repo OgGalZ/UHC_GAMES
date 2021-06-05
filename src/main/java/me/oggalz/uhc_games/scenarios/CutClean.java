@@ -6,10 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.ExperienceOrb;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -89,40 +86,24 @@ public class CutClean implements Listener {
                 case PIG:
 
                     int sizePig = loots.stream().filter(itemStack -> itemStack.getType() == Material.PORK).collect(Collectors.toList()).get(0).getAmount();
-                    List<ItemStack> listPig = loots.stream().filter(itemStack -> itemStack.getType() == Material.PORK).collect(Collectors.toList());
-                    for (ItemStack x : listPig) {
-                        loots.remove(x);
-                    }
                     entity.getWorld().dropItem(location, Item.createItemstack(Material.GRILLED_PORK, sizePig, null, null));
                     break;
 
 
                 case CHICKEN:
                     int sizeChicken = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_CHICKEN).collect(Collectors.toList()).get(0).getAmount();
-                    List<ItemStack> listChicken = loots.stream().filter(itemStack -> itemStack.getType() == Material.RAW_CHICKEN).collect(Collectors.toList());
-                    for (ItemStack x : listChicken) {
-                        loots.remove(x);
-                    }
                     entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_CHICKEN, sizeChicken, null, null));
                     break;
 
                 case SHEEP:
 
                     int sizeSheep = loots.stream().filter(itemStack -> itemStack.getType() == Material.MUTTON).collect(Collectors.toList()).get(0).getAmount();
-                    List<ItemStack> listSheep = loots.stream().filter(itemStack -> itemStack.getType() == Material.MUTTON).collect(Collectors.toList());
-                    for (ItemStack x : listSheep) {
-                        loots.remove(x);
-                    }
                     entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_MUTTON, sizeSheep, null, null));
 
                     break;
 
                 case RABBIT:
                     int sizeRabbit = loots.stream().filter(itemStack -> itemStack.getType() == Material.RABBIT).collect(Collectors.toList()).get(0).getAmount();
-                    List<ItemStack> listRabbit = loots.stream().filter(itemStack -> itemStack.getType() == Material.RABBIT).collect(Collectors.toList());
-                    for (ItemStack x : listRabbit) {
-                        loots.remove(x);
-                    }
                     entity.getWorld().dropItem(location, Item.createItemstack(Material.COOKED_RABBIT, sizeRabbit, null, null));
                     break;
 
@@ -130,7 +111,7 @@ public class CutClean implements Listener {
                     break;
 
 
-            }
+            }loots.clear();
         } catch (IndexOutOfBoundsException e) {
 
         }
