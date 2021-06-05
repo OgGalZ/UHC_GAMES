@@ -27,8 +27,7 @@ import java.util.stream.Collectors;
 
 public class CutClean implements Listener {
 
-
-    @EventHandler(priority = EventPriority.NORMAL)
+        @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
         Material material = event.getBlock().getType();
@@ -36,40 +35,34 @@ public class CutClean implements Listener {
         Location location = block.getLocation();
         Player player = event.getPlayer();
         Material currentItemType = player.getInventory().getItemInHand().getType();
+        if (!currentItemType.equals(Material.DIAMOND_PICKAXE) && !currentItemType.equals(Material.IRON_PICKAXE) && !currentItemType.equals(Material.STONE_PICKAXE)) {
+            return;
+        } else {
+            switch (material) {
 
-        switch (material) {
+                case GOLD_ORE:
 
+                    block.setType(Material.AIR);
+                    block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
+                    block.getWorld().dropItem(location, Item.createItemstack(Material.GOLD_INGOT, 1, null, null));
+                    break;
 
-            case GOLD_ORE:
+                case IRON_ORE:
 
-                if (!currentItemType.equals(Material.DIAMOND_PICKAXE) && !currentItemType.equals(Material.IRON_PICKAXE) && !currentItemType.equals(Material.STONE_PICKAXE)) {
-                    return;
-                }
+                    block.setType(Material.AIR);
+                    block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
+                    block.getWorld().dropItem(location, Item.createItemstack(Material.IRON_INGOT, 1, null, null));
+                    break;
 
-                block.setType(Material.AIR);
-                block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
-                block.getWorld().dropItem(location, Item.createItemstack(Material.GOLD_INGOT, 1, null, null));
-
-                break;
-
-            case IRON_ORE:
-
-                if (!currentItemType.equals(Material.DIAMOND_PICKAXE) && !currentItemType.equals(Material.IRON_PICKAXE) && !currentItemType.equals(Material.STONE_PICKAXE)) {
-                    return;
-                }
-                block.setType(Material.AIR);
-                block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
-                block.getWorld().dropItem(location, Item.createItemstack(Material.IRON_INGOT, 1, null, null));
-                break;
-
-
-            default:
-                break;
+                default:
+                    break;
+            }
         }
+
 
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler
 
     public void onEntityDeath(EntityDeathEvent event) {
 

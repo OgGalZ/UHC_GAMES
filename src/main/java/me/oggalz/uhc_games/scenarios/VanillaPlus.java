@@ -1,20 +1,32 @@
 package me.oggalz.uhc_games.scenarios;
 
+import me.oggalz.uhc_games.Main;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.List;
+
 public class VanillaPlus implements Listener {
+
+
+    private final Main main;
+
+    public VanillaPlus(Main main) {
+        this.main = main;
+    }
 
     @EventHandler
     private void onGravelBreak(BlockBreakEvent event) {
 
-
+        FileConfiguration configuration = main.getConfig();
+        List<Integer> rateFlints = configuration.getIntegerList("rateFlints");
         Block block = event.getBlock();
         Location loc = new Location(block.getWorld(),
                 block.getLocation().getBlockX() + 0.5,
@@ -23,7 +35,7 @@ public class VanillaPlus implements Listener {
 
         if (block.getType().equals(Material.GRAVEL)) {
             block.setType(Material.AIR);
-            if (Math.random() * 100 < 120) {
+            if (Math.random() * 100 < rateFlints.get(0)) {
                 block.getWorld().dropItem(loc, new ItemStack(Material.FLINT, 1));
             } else
                 event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
@@ -33,9 +45,11 @@ public class VanillaPlus implements Listener {
 
     @EventHandler
     public void onLeaveDecay(LeavesDecayEvent event) {
+        FileConfiguration configuration = main.getConfig();
+        List<Integer> rateApples = configuration.getIntegerList("rateApples");
 
         event.getBlock().setType(Material.AIR);
-        if (Math.random() * 100 < 120) {
+        if (Math.random() * 100 < rateApples.get(0)) {
             event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
                     new ItemStack(Material.APPLE));
         }

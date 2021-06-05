@@ -5,24 +5,10 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
-import fr.minuskube.inv.content.SlotIterator;
-import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.scenarios.CutClean;
-import me.oggalz.uhc_games.state.StateManager;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +42,7 @@ public class MainGui implements InventoryProvider {
     public void init(Player player, InventoryContents contents) {
 
         contents.set(1, 3, ClickableItem.of(item.get(0),
-                e -> GCutClean.scenarios.open(player)));
+                e -> ScenariosGui.scenarios.open(player)));
 
         contents.set(1, 4, ClickableItem.of(item.get(1),
                 e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
