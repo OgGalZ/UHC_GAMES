@@ -5,6 +5,7 @@ import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.CutClean;
+import me.oggalz.uhc_games.scenarios.HastyBoy;
 import me.oggalz.uhc_games.scenarios.Timber;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
@@ -27,6 +28,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
         getServer().getPluginManager().registerEvents(new CutClean() , this);
         getServer().getPluginManager().registerEvents(new Timber() , this);
+        getServer().getPluginManager().registerEvents(new HastyBoy() , this);
         saveDefaultConfig();
     }
 

@@ -1,6 +1,7 @@
 package me.oggalz.uhc_games.scenarios;
 
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.utils.UniversalMaterial;
 import org.bukkit.Effect;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -23,25 +24,43 @@ public class Timber implements Listener {
 
 
     @EventHandler
-    public static void onBlockBreak(BlockBreakEvent e) {
-            breakBlock(e.getBlock());
-    }
+    public void onBlockBreak(BlockBreakEvent event) {
 
-    static void breakBlock(Block b) {
-        if (b.getType() != Material.LOG && b.getType() != Material.LOG_2)
-            return;
+        Player player = event.getPlayer();
+        Material mat = event.getBlock().getType();
+        if (UniversalMaterial.isLog(mat)) {
+            List<Block> bList = new ArrayList<>();
+            List<ItemStack> finalItems = new ArrayList<>();
+            bList.add(event.getBlock());
+            new BukkitRunnable() {
+                public void run() {
+                    for (int i = 0; i < bList.size(); ++i) {
+                        Block block = bList.get(i);
 
-        b.getWorld().playSound(b.getLocation(), Sound.DIG_WOOD, 20, 1);
+                        if (UniversalMaterial.isLog(block.getType())) {
+                            List<ItemStack> items = new ArrayList<>(block.getDrops());
+                            block.setType(Material.AIR);
+                            finalItems.addAll(items);
+                        }
+                        BlockFace[] values;
+                        for (int length = (values = BlockFace.values()).length, j = 0; j < length; ++j) {
+                            BlockFace face = values[j];
+                            if (UniversalMaterial.isLog(block.getRelative(face).getType())) {
+                                bList.add(block.getRelative(face));
+                            }
+                        }
+                        bList.remove(block);
+                    }
+                    if (bList.size() == 0) {
+                        for (ItemStack item2 : finalItems) {
+                            player.getWorld().dropItemNaturally(event.getBlock().getLocation(), item2);
+                        }
+                        this.cancel();
+                    }
+                }
+            }.runTaskTimer(JavaPlugin.getPlugin(Main.class), 1L, 1L);
+        }
 
-        b.breakNaturally();
-
-        breakBlock(b.getLocation().add(0, 1, 0).getBlock());
-        breakBlock(b.getLocation().add(1, 0, 0).getBlock());
-        breakBlock(b.getLocation().add(0, 0, 1).getBlock());
-
-        breakBlock(b.getLocation().subtract(0, 1, 0).getBlock());
-        breakBlock(b.getLocation().subtract(1, 0, 0).getBlock());
-        breakBlock(b.getLocation().subtract(0, 0, 1).getBlock());
     }
 }
 
