@@ -58,22 +58,7 @@ public class RegisterUnRegister implements Listener {
                     case IRON_INGOT:
                         main.getServer().getPluginManager().registerEvents(cutClean, main);
                 }
-            }/* else if (action == ClickType.RIGHT  ) {
-                player.sendMessage(ChatColor.RED + "Désactivé ");
-                switch (material) {
-                    case WOOD_AXE:
-                    case DIAMOND_ORE:
-                      //  DiamondLimite.unregisterAll();
-                    case APPLE:
-                      //  VanillaPlus.unregisterAll();
-                    case DIAMOND_PICKAXE:
-                 //       HastyBoy.unregisterAll();
-                    case IRON_INGOT:
-                 //       CutClean.unregisterAll();
-                }
             }
-        }
-    }*/
 
 
         }

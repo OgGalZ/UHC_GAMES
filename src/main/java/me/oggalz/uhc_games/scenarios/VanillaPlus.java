@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class VanillaPlus extends HandlerList implements Listener {
+public class VanillaPlus implements Listener {
 
     private final Main main;
 

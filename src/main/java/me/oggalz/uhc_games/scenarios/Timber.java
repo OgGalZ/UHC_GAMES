@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Timber extends HandlerList implements Listener {
+public class Timber  implements Listener {
 
 
     @EventHandler
