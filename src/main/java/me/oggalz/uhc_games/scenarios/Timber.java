@@ -2,16 +2,17 @@ package me.oggalz.uhc_games.scenarios;
 
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.utils.UniversalMaterial;
-import org.bukkit.Effect;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,8 +21,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Timber implements Listener {
+public class Timber extends RegisterUnRegister {
 
+    public Timber(Main main) {
+        super(main);
+    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -61,6 +65,23 @@ public class Timber implements Listener {
             }.runTaskTimer(JavaPlugin.getPlugin(Main.class), 1L, 1L);
         }
 
+    }
+    @EventHandler
+    @Override
+    public void Register(InventoryClickEvent event, Listener listener) {
+        Inventory inventory = event.getInventory();
+        ClickType action = event.getClick();
+
+
+        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
+            if (action == ClickType.RIGHT) {
+                HandlerList.unregisterAll(this);
+            } else if (action == ClickType.LEFT) {
+                main.getServer().getPluginManager().registerEvents(this, main);
+            }
+
+
+        }
     }
 }
 

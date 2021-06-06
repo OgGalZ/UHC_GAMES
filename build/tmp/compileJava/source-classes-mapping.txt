@@ -1,37 +1,39 @@
-me/oggalz/uhc_games/player/PlayerManager.java
- me.oggalz.uhc_games.player.PlayerManager
 me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
-me/oggalz/uhc_games/state/State.java
- me.oggalz.uhc_games.state.State
 me/oggalz/uhc_games/utils/ScoreboardCreator.java
  me.oggalz.uhc_games.utils.ScoreboardCreator
 me/oggalz/uhc_games/player/Player.java
  me.oggalz.uhc_games.player.Player
 me/oggalz/uhc_games/scenarios/HastyBoy.java
  me.oggalz.uhc_games.scenarios.HastyBoy
-me/oggalz/uhc_games/utils/Item.java
- me.oggalz.uhc_games.utils.Item
+me/oggalz/uhc_games/scenarios/DiamondLimite.java
+ me.oggalz.uhc_games.scenarios.DiamondLimite
+me/oggalz/uhc_games/scenarios/Timber.java
+ me.oggalz.uhc_games.scenarios.Timber
+ me.oggalz.uhc_games.scenarios.Timber$1
 me/oggalz/uhc_games/utils/UniversalMaterial.java
  me.oggalz.uhc_games.utils.UniversalMaterial
  me.oggalz.uhc_games.utils.UniversalMaterial$1
 me/oggalz/uhc_games/scenarios/CutClean.java
  me.oggalz.uhc_games.scenarios.CutClean
  me.oggalz.uhc_games.scenarios.CutClean$1
-me/oggalz/uhc_games/listeners/SecondaryListeners.java
- me.oggalz.uhc_games.listeners.SecondaryListeners
-me/oggalz/uhc_games/scenarios/Timber.java
- me.oggalz.uhc_games.scenarios.Timber
- me.oggalz.uhc_games.scenarios.Timber$1
+me/oggalz/uhc_games/gui/ScenariosGui.java
+ me.oggalz.uhc_games.gui.ScenariosGui
 me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
  me.oggalz.uhc_games.listeners.PlayerJoinEvent
 me/oggalz/uhc_games/scenarios/VanillaPlus.java
  me.oggalz.uhc_games.scenarios.VanillaPlus
+me/oggalz/uhc_games/player/PlayerManager.java
+ me.oggalz.uhc_games.player.PlayerManager
+me/oggalz/uhc_games/listeners/SecondaryListeners.java
+ me.oggalz.uhc_games.listeners.SecondaryListeners
 me/oggalz/uhc_games/gui/MainGui.java
  me.oggalz.uhc_games.gui.MainGui
-me/oggalz/uhc_games/gui/ScenariosGui.java
- me.oggalz.uhc_games.gui.ScenariosGui
-me/oggalz/uhc_games/scenarios/DiamondLimite.java
- me.oggalz.uhc_games.scenarios.DiamondLimite
+me/oggalz/uhc_games/state/State.java
+ me.oggalz.uhc_games.state.State
+me/oggalz/uhc_games/utils/Item.java
+ me.oggalz.uhc_games.utils.Item
+me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
+ me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main

@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games.scenarios;
 
+import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.UniversalMaterial;
 import org.bukkit.Bukkit;
@@ -10,9 +11,11 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -25,9 +28,13 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CutClean implements Listener {
+public class CutClean extends RegisterUnRegister {
 
-        @EventHandler
+    public CutClean(Main main) {
+        super(main);
+    }
+
+    @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
         Material material = event.getBlock().getType();
@@ -108,6 +115,24 @@ public class CutClean implements Listener {
 
         }
 
+    }
+    @EventHandler
+    @Override
+    public void Register(InventoryClickEvent event, Listener listener) {
+
+        Inventory inventory = event.getInventory();
+        ClickType action = event.getClick();
+
+
+        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
+            if (action == ClickType.RIGHT) {
+                HandlerList.unregisterAll(this);
+            } else if (action == ClickType.LEFT) {
+                main.getServer().getPluginManager().registerEvents(this, main);
+            }
+
+
+        }
     }
 }
 

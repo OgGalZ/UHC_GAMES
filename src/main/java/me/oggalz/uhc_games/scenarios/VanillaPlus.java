@@ -9,24 +9,25 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class VanillaPlus implements Listener {
+public class VanillaPlus extends RegisterUnRegister {
 
-
-    private final Main main;
 
     public VanillaPlus(Main main) {
-        this.main = main;
+
+        super(main);
+
     }
 
     @EventHandler
     private void onGravelBreak(BlockBreakEvent event) {
 
-        FileConfiguration configuration = main.getConfig();
-        List<Integer> rateFlints = configuration.getIntegerList("rateFlints");
+
+        List<Integer> rateFlints = main.getConfig().getIntegerList("rateFlints");
         Block block = event.getBlock();
         Location loc = new Location(block.getWorld(),
                 block.getLocation().getBlockX() + 0.5,
@@ -53,6 +54,12 @@ public class VanillaPlus implements Listener {
             event.getBlock().getWorld().dropItemNaturally(event.getBlock().getLocation(),
                     new ItemStack(Material.APPLE));
         }
+    }
+
+    @EventHandler
+    @Override
+    public void Register(InventoryClickEvent event, Listener listener) {
+
     }
 }
 
