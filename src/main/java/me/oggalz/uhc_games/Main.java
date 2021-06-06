@@ -10,6 +10,7 @@ import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
@@ -24,9 +25,11 @@ public class Main extends JavaPlugin {
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
+        RegisterUnRegister registerUnRegister = new RegisterUnRegister(this);
         ScoreboardCreator scoreboardCreator = new ScoreboardCreator(playerManager);
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator , registerUnRegister), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
+        getServer().getPluginManager().registerEvents(new RegisterUnRegister(this) , this);
         saveDefaultConfig();
     }
 

@@ -21,11 +21,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 
-public class DiamondLimite extends RegisterUnRegister {
+public class DiamondLimite implements Listener  {
 
-    public DiamondLimite(Main main) {
-        super(main);
-    }
 
     @EventHandler
     public void BlockBreak(BlockBreakEvent event) {
@@ -49,21 +46,5 @@ public class DiamondLimite extends RegisterUnRegister {
             }
         }
     }
-    @EventHandler
-    @Override
-    public void Register(InventoryClickEvent event, Listener listener) {
-        Inventory inventory = event.getInventory();
-        ClickType action = event.getClick();
 
-
-        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
-            if (action == ClickType.RIGHT) {
-                HandlerList.unregisterAll(this);
-            } else if (action == ClickType.LEFT) {
-                main.getServer().getPluginManager().registerEvents(this, main);
-            }
-
-
-        }
-    }
 }

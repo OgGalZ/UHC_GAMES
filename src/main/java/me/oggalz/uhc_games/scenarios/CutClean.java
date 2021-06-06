@@ -28,11 +28,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CutClean extends RegisterUnRegister {
+public class CutClean  implements  Listener {
 
-    public CutClean(Main main) {
-        super(main);
-    }
+
+
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -116,23 +115,7 @@ public class CutClean extends RegisterUnRegister {
         }
 
     }
-    @EventHandler
-    @Override
-    public void Register(InventoryClickEvent event, Listener listener) {
-
-        Inventory inventory = event.getInventory();
-        ClickType action = event.getClick();
 
 
-        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
-            if (action == ClickType.RIGHT) {
-                HandlerList.unregisterAll(this);
-            } else if (action == ClickType.LEFT) {
-                main.getServer().getPluginManager().registerEvents(this, main);
-            }
-
-
-        }
-    }
 }
 

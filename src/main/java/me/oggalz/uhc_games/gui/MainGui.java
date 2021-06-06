@@ -5,6 +5,8 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
+import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.scenarios.VanillaPlus;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -17,6 +19,7 @@ import java.util.List;
 public class MainGui implements InventoryProvider {
 
     private final List<ItemStack> item = new ArrayList<>();
+
 
     public MainGui() {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));

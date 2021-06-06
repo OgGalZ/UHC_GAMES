@@ -4,6 +4,7 @@ import fr.minuskube.netherboard.Netherboard;
 import fr.minuskube.netherboard.bukkit.BPlayerBoard;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.scenarios.RegisterUnRegister;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
@@ -32,12 +33,14 @@ public class PlayerJoinEvent implements Listener {
     private final PlayerManager playerManager;
     private final StateManager stateManager;
     private final ScoreboardCreator scoreboardCreator;
+    private final RegisterUnRegister unRegister;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator, RegisterUnRegister unRegister) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
         this.scoreboardCreator = scoreboardCreator;
+        this.unRegister = unRegister;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -49,6 +52,7 @@ public class PlayerJoinEvent implements Listener {
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2), 1, 1);
 
         if (stateManager.hasNotStarted()) {
+
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
