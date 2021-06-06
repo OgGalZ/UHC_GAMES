@@ -22,7 +22,6 @@ import java.util.Arrays;
 public class RegisterUnRegister implements Listener {
 
     private final Main main;
-
     public RegisterUnRegister(Main main) {
         this.main = main;
     }
