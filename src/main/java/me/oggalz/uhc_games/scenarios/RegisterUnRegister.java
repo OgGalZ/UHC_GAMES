@@ -10,18 +10,23 @@ import org.bukkit.event.EventHandler;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class RegisterUnRegister implements Listener {
 
     private final Main main;
+
     public RegisterUnRegister(Main main) {
         this.main = main;
     }
@@ -32,49 +37,48 @@ public class RegisterUnRegister implements Listener {
         Player player = (Player) event.getWhoClicked();
         Material material = event.getCurrentItem().getType();
         ClickType action = event.getClick();
+        DiamondLimite diamondLimite = new DiamondLimite();
+        Timber timber = new Timber();
+        VanillaPlus vanillaPlus = new VanillaPlus(main);
+        HastyBoy hastyBoy = new HastyBoy();
+        CutClean cutClean = new CutClean();
 
         if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
             if (action == ClickType.LEFT) {
                 player.sendMessage(ChatColor.GREEN + "Activé ");
                 switch (material) {
                     case WOOD_AXE:
-                        Register(new Timber());
+                        main.getServer().getPluginManager().registerEvents(timber, main);
                     case DIAMOND_ORE:
-                        Register(new DiamondLimite());
+                        main.getServer().getPluginManager().registerEvents(diamondLimite, main);
                     case APPLE:
-                        Register(new VanillaPlus(main));
+                        main.getServer().getPluginManager().registerEvents(vanillaPlus, main);
                     case DIAMOND_PICKAXE:
-                        Register(new HastyBoy());
+                        main.getServer().getPluginManager().registerEvents(hastyBoy, main);
                     case IRON_INGOT:
-                        Register(new CutClean());
+                        main.getServer().getPluginManager().registerEvents(cutClean, main);
                 }
-            } else if (action == ClickType.RIGHT) {
+            }/* else if (action == ClickType.RIGHT  ) {
                 player.sendMessage(ChatColor.RED + "Désactivé ");
                 switch (material) {
                     case WOOD_AXE:
-                        UnRegister(new Timber());
                     case DIAMOND_ORE:
-                        UnRegister(new DiamondLimite());
+                      //  DiamondLimite.unregisterAll();
                     case APPLE:
-                        UnRegister(new VanillaPlus(main));
+                      //  VanillaPlus.unregisterAll();
                     case DIAMOND_PICKAXE:
-                        UnRegister(new HastyBoy());
+                 //       HastyBoy.unregisterAll();
                     case IRON_INGOT:
-                        UnRegister(new CutClean());
+                 //       CutClean.unregisterAll();
                 }
             }
         }
+    }*/
+
+
+        }
+
+
     }
 
-    public void Register(Listener listener) {
-        main.getServer().getPluginManager().registerEvents(listener, main);
-    }
-
-    public void UnRegister(Listener listener) {
-        HandlerList.unregisterAll(listener);
-    }
 }
-
-
-
-

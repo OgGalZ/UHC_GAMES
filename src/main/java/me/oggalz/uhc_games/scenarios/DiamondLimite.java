@@ -21,7 +21,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 
-public class DiamondLimite implements Listener  {
+public class DiamondLimite extends HandlerList implements Listener {
 
 
     @EventHandler

@@ -24,7 +24,6 @@ import java.util.List;
 public class Timber extends HandlerList implements Listener {
 
 
-
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
@@ -64,7 +63,6 @@ public class Timber extends HandlerList implements Listener {
         }
 
     }
-
 
 
 }

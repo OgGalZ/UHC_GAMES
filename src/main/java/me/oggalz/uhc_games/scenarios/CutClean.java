@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CutClean  implements  Listener {
+public class CutClean extends HandlerList implements  Listener {
 
 
 
@@ -71,7 +71,6 @@ public class CutClean  implements  Listener {
     @EventHandler
 
     public void onEntityDeath(EntityDeathEvent event) {
-
         List<ItemStack> loots = event.getDrops();
 
         for (int i = loots.size() - 1; i >= 0; --i) {

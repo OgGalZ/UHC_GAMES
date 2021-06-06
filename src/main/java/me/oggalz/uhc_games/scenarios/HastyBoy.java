@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HastyBoy implements Listener{
+public class HastyBoy extends HandlerList implements Listener {
 
 
     @EventHandler

@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
-public class VanillaPlus implements Listener {
+public class VanillaPlus extends HandlerList implements Listener {
 
     private final Main main;
 
@@ -59,8 +59,6 @@ public class VanillaPlus implements Listener {
                     new ItemStack(Material.APPLE));
         }
     }
-
-
 
 
 }
