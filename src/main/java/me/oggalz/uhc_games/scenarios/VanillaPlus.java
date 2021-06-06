@@ -19,13 +19,13 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public class VanillaPlus implements Listener {
-
     private final Main main;
 
-    public VanillaPlus(Main main) {
+    public VanillaPlus(Main main1) {
 
-        this.main = main;
+        this.main = main1;
     }
+
 
     @EventHandler
     private void onGravelBreak(BlockBreakEvent event) {
@@ -59,6 +59,8 @@ public class VanillaPlus implements Listener {
                     new ItemStack(Material.APPLE));
         }
     }
+
+
 
 
 }

@@ -4,7 +4,7 @@ import fr.minuskube.netherboard.Netherboard;
 import fr.minuskube.netherboard.bukkit.BPlayerBoard;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.scenarios.RegisterUnRegister;
+import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
@@ -13,6 +13,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -33,14 +34,12 @@ public class PlayerJoinEvent implements Listener {
     private final PlayerManager playerManager;
     private final StateManager stateManager;
     private final ScoreboardCreator scoreboardCreator;
-    private final RegisterUnRegister unRegister;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator, RegisterUnRegister unRegister) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
         this.scoreboardCreator = scoreboardCreator;
-        this.unRegister = unRegister;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

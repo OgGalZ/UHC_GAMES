@@ -1,6 +1,7 @@
 package me.oggalz.uhc_games.scenarios;
 
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.gui.ScenariosGui;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.UniversalMaterial;
 import org.bukkit.Bukkit;
@@ -28,13 +29,15 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class CutClean  implements  Listener {
+public class CutClean implements Listener {
 
 
-
+    public CutClean() {
+    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
+
 
         Material material = event.getBlock().getType();
         Block block = event.getBlock();
@@ -114,6 +117,7 @@ public class CutClean  implements  Listener {
         }
 
     }
+
 
 
 }

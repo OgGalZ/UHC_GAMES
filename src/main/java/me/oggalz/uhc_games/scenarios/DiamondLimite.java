@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 public class DiamondLimite  implements Listener {
 
 
+
     @EventHandler
     public void BlockBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
@@ -46,5 +47,6 @@ public class DiamondLimite  implements Listener {
             }
         }
     }
+
 
 }

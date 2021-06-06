@@ -10,6 +10,7 @@ import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -23,13 +24,8 @@ public class Main extends JavaPlugin {
     public void onEnable() {
 
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
-        PlayerManager playerManager = new PlayerManager();
-        StateManager stateManager = new StateManager();
-        RegisterUnRegister registerUnRegister = new RegisterUnRegister(this);
-        ScoreboardCreator scoreboardCreator = new ScoreboardCreator(playerManager);
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator , registerUnRegister), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
-        getServer().getPluginManager().registerEvents(new RegisterUnRegister(this) , this);
+        registersEvents();
+
         saveDefaultConfig();
     }
 
@@ -39,6 +35,19 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
     }
 
+    public void registersEvents() {
+        PlayerManager playerManager = new PlayerManager();
+        StateManager stateManager = new StateManager();
+        ScoreboardCreator scoreboardCreator = new ScoreboardCreator(playerManager);
+        CutClean cutClean = new CutClean();
+        DiamondLimite diamondLimite = new DiamondLimite();
+        HastyBoy hastyBoy = new HastyBoy();
+        Timber timber = new Timber();
+        VanillaPlus vanillaPlus = new VanillaPlus(this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
+        getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
 
+    }
 
 }

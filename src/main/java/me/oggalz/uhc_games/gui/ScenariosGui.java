@@ -4,7 +4,6 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
-import me.oggalz.uhc_games.scenarios.RegisterUnRegister;
 import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
