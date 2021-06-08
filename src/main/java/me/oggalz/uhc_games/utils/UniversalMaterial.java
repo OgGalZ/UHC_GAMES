@@ -160,12 +160,15 @@ public enum UniversalMaterial {
     RAW_RABBIT("RABBIT", "RABBIT"),
     RAW_PORK("PORK", "PORKCHOP");
 
+
+
+
     private final String name8;
     private final String name13;
     private final short id8;
-
     private boolean loaded;
     private Material material;
+
 
     UniversalMaterial(String name8, String name13, short id8) {
         this.name8 = name8;

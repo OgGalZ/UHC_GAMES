@@ -25,10 +25,10 @@ me/oggalz/uhc_games/player/PlayerManager.java
  me.oggalz.uhc_games.player.PlayerManager
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main
-me/oggalz/uhc_games/listeners/SecondaryListeners.java
- me.oggalz.uhc_games.listeners.SecondaryListeners
-me/oggalz/uhc_games/gui/MainGui.java
- me.oggalz.uhc_games.gui.MainGui
+me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
+ me.oggalz.uhc_games.listeners.PlayerJoinEvent
+me/oggalz/uhc_games/gui/ScenariosGui.java
+ me.oggalz.uhc_games.gui.ScenariosGui
 me/oggalz/uhc_games/utils/Item.java
  me.oggalz.uhc_games.utils.Item
 me/oggalz/uhc_games/scenarios/DiamondLimite.java
@@ -36,7 +36,7 @@ me/oggalz/uhc_games/scenarios/DiamondLimite.java
 me/oggalz/uhc_games/scenarios/CutClean.java
  me.oggalz.uhc_games.scenarios.CutClean
  me.oggalz.uhc_games.scenarios.CutClean$1
-me/oggalz/uhc_games/gui/ScenariosGui.java
- me.oggalz.uhc_games.gui.ScenariosGui
-me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
- me.oggalz.uhc_games.listeners.PlayerJoinEvent
+me/oggalz/uhc_games/listeners/SecondaryListeners.java
+ me.oggalz.uhc_games.listeners.SecondaryListeners
+me/oggalz/uhc_games/gui/MainGui.java
+ me.oggalz.uhc_games.gui.MainGui

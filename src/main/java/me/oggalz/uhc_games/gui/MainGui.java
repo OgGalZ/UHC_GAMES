@@ -77,7 +77,6 @@ public class MainGui implements InventoryProvider {
                 }
         ));
 
-        contents.set(3 , 2 , ClickableItem.empty(Item.getCustomTextureHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhYTNjN2NiYmIwZGE3OWU3ODFhMWEyZTBjNDNiNWQyOTI1OGMwMmUxZWQ0NTJkYWE3ZDIxZTUzYWZhODJkMiJ9fX0=" , ChatColor.DARK_GRAY + "Sauron")));
 
     }
 
