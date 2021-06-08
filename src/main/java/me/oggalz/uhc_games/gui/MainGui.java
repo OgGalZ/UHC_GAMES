@@ -7,6 +7,7 @@ import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.scenarios.VanillaPlus;
+import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -75,6 +76,8 @@ public class MainGui implements InventoryProvider {
 
                 }
         ));
+
+        contents.set(3 , 2 , ClickableItem.empty(Item.getCustomTextureHead("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjJhYTNjN2NiYmIwZGE3OWU3ODFhMWEyZTBjNDNiNWQyOTI1OGMwMmUxZWQ0NTJkYWE3ZDIxZTUzYWZhODJkMiJ9fX0=" , ChatColor.DARK_GRAY + "Sauron")));
 
     }
 

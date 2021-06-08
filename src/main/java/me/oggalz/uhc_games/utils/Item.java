@@ -1,6 +1,9 @@
 package me.oggalz.uhc_games.utils;
 
-import javafx.beans.property.Property;
+import com.mojang.authlib.GameProfile;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import me.oggalz.uhc_games.player.Player;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -8,6 +11,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import com.mojang.authlib.properties.Property;
+
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -39,7 +44,26 @@ public class Item {
         itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemstack.setItemMeta(itemMeta);
         return itemstack;
+
     }
 
 
+
+    public  static  ItemStack getCustomTextureHead(String value , String name) {
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+        SkullMeta meta = (SkullMeta) head.getItemMeta();
+        meta.setDisplayName(name);
+        GameProfile profile = new GameProfile(UUID.randomUUID(), "");
+        profile.getProperties().put("textures", new Property("textures", value));
+        Field profileField = null;
+        try {
+            profileField = meta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(meta, profile);
+        } catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+            e.printStackTrace();
+        }
+        head.setItemMeta(meta);
+        return head;
+    }
 }

@@ -9,6 +9,7 @@ public class Player {
 
     public Player(UUID uuid) {
         this.uuid = uuid;
+        
     }
 
     public UUID getUniqueId() {
