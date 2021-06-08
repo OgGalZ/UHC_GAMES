@@ -48,8 +48,6 @@ public class ScenariosGui implements InventoryProvider {
     public void init(Player player, InventoryContents contents) {
 
 
-
-
         contents.set(1, 3, ClickableItem.of(itemStacks.get(0), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
 

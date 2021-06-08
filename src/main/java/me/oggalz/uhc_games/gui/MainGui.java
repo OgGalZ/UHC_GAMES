@@ -11,6 +11,7 @@ import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -47,12 +48,17 @@ public class MainGui implements InventoryProvider {
     public void init(Player player, InventoryContents contents) {
 
         contents.set(1, 3, ClickableItem.of(item.get(0), e -> {
-                    ScenariosGui.scenarios.open(player);
+            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+            ScenariosGui.scenarios.open(player);
+
                 }
 
         ));
 
         contents.set(1, 4, ClickableItem.of(item.get(1), e -> {
+            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+            WorldBorderGui.bordure.open(player);
+
         }));
 
 
@@ -86,7 +92,7 @@ public class MainGui implements InventoryProvider {
     }
 
 
-    }
+}
 
 
 

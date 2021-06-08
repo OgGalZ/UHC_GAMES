@@ -43,27 +43,37 @@ public class RegisterUnRegister implements Listener {
         Material material = event.getCurrentItem().getType();
         ClickType action = event.getClick();
         ItemStack itemStack = event.getCurrentItem();
+        String enable = ChatColor.GREEN + "Vous venez d'activer ";
+        String disable = ChatColor.RED + "Vous venez de désactiver";
 
-        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios") && material != null) {
+        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
             if (action == ClickType.LEFT) {
-                player.sendMessage(ChatColor.GREEN + "Activé ");
-                itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
+
                 switch (material) {
                     case WOOD_AXE:
                         register((Listener) instances.get(0));
+                        player.sendMessage(enable + "Timber");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
                     case DIAMOND_ORE:
                         register((Listener) instances.get(1));
+                        player.sendMessage(enable + "Diamond Limite");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
                     case APPLE:
                         register((Listener) instances.get(2));
+                        player.sendMessage(enable + "Vanilla");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
                     case DIAMOND_PICKAXE:
                         register((Listener) instances.get(3));
+                        player.sendMessage(enable + "Hasty Boy");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
                     case IRON_INGOT:
                         register((Listener) instances.get(4));
-
+                        player.sendMessage(enable + "Cut Clean");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
 
                     default:
@@ -72,25 +82,33 @@ public class RegisterUnRegister implements Listener {
 
             }
             if (action == ClickType.RIGHT) {
-                player.sendMessage(ChatColor.RED + "Désactivé ");
-                itemStack.removeEnchantment(Enchantment.DAMAGE_UNDEAD );
                 switch (material) {
                     case WOOD_AXE:
                         HandlerList.unregisterAll((Listener) instances.get(0));
+                        player.sendMessage(disable + " Timber");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
                     case DIAMOND_ORE:
                         HandlerList.unregisterAll((Listener) instances.get(1));
+                        player.sendMessage(disable + " Diamond Limite");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
 
                         break;
                     case APPLE:
                         HandlerList.unregisterAll((Listener) instances.get(2));
+                        player.sendMessage(disable + " Vanilla");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
 
                         break;
                     case DIAMOND_PICKAXE:
                         HandlerList.unregisterAll((Listener) instances.get(3));
-
+                        player.sendMessage(disable + " Hasty Boy");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
+                        break;
                     case IRON_INGOT:
                         HandlerList.unregisterAll((Listener) instances.get(4));
+                        player.sendMessage(disable + " Cut Clean");
+                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                         break;
 
                     default:
