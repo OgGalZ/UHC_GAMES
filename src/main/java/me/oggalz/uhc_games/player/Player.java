@@ -1,7 +1,9 @@
 package me.oggalz.uhc_games.player;
+
 import java.util.UUID;
 
 public class Player {
+
 
     private final UUID uuid;
 
@@ -12,5 +14,4 @@ public class Player {
     public UUID getUniqueId() {
         return uuid;
     }
-
 }

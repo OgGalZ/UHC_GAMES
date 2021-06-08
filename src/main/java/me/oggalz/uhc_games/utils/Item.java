@@ -1,13 +1,16 @@
 package me.oggalz.uhc_games.utils;
 
+import javafx.beans.property.Property;
+import me.oggalz.uhc_games.player.Player;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.lang.reflect.Field;
+import java.util.*;
 
 public class Item {
 
@@ -23,23 +26,20 @@ public class Item {
         this.lore = lore;
     }
 
-    public static  ItemStack createItemstack(Material material, int number , String name , String lore )  {
+    public static ItemStack createItemstack(Material material, int number, String name, String lore) {
         List<String> list = Collections.singletonList(lore);
         ItemStack itemstack = new ItemStack(material, number);
         ItemMeta itemMeta = itemstack.getItemMeta();
         itemMeta.setDisplayName(name);
-        if(list.get(0 ) != null){
+        if (list.get(0) != null) {
             itemMeta.setLore(list);
         }
-
-
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         itemstack.setItemMeta(itemMeta);
         return itemstack;
-
     }
-
 
 
 }

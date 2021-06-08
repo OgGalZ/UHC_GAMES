@@ -19,6 +19,7 @@ public class PlayerManager {
     public int getPlayers() {
         return players.size();
     }
+
     public void addPlayer(UUID uuid) {
         Player Player = new Player(uuid);
         players.put(uuid, Player);

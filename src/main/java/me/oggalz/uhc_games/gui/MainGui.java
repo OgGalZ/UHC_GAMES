@@ -7,6 +7,7 @@ import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.scenarios.VanillaPlus;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -44,26 +45,36 @@ public class MainGui implements InventoryProvider {
     @Override
     public void init(Player player, InventoryContents contents) {
 
-        contents.set(1, 3, ClickableItem.of(item.get(0),
-                e -> ScenariosGui.scenarios.open(player)));
+        contents.set(1, 3, ClickableItem.of(item.get(0), e -> {
+                    ScenariosGui.scenarios.open(player);
+                }
 
-        contents.set(1, 4, ClickableItem.of(item.get(1),
-                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+        ));
 
-
-        contents.set(1, 5, ClickableItem.of(item.get(2),
-                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
-
-
-        contents.set(2, 3, ClickableItem.of(item.get(3),
-                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
-
-        contents.set(2, 4, ClickableItem.of(item.get(4),
-                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+        contents.set(1, 4, ClickableItem.of(item.get(1), e -> {
+        }));
 
 
-        contents.set(2, 5, ClickableItem.of(item.get(5),
-                e -> player.sendMessage(ChatColor.GOLD + "You clicked on a potato.")));
+        contents.set(1, 5, ClickableItem.of(item.get(2), e -> {
+
+        }));
+
+
+        contents.set(2, 3, ClickableItem.of(item.get(3), e -> {
+
+                }
+
+        ));
+
+        contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
+
+        }));
+
+
+        contents.set(2, 5, ClickableItem.of(item.get(5), e -> {
+
+                }
+        ));
 
     }
 
@@ -73,7 +84,9 @@ public class MainGui implements InventoryProvider {
     }
 
 
-}
+    }
+
+
 
 
 

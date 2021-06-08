@@ -16,4 +16,4 @@ rateFlints:
 
 #If you want increase the rate of Apples , you can change the value below !
 rateApples:
-  - 50
+  - 20

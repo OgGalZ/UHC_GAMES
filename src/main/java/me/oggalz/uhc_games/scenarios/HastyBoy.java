@@ -1,25 +1,12 @@
 package me.oggalz.uhc_games.scenarios;
 
-import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.player.Player;
-import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.UniversalMaterial;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class HastyBoy  implements Listener {
 

@@ -1,9 +1,13 @@
 package me.oggalz.uhc_games.scenarios;
 
+import fr.minuskube.inv.content.InventoryContents;
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.gui.MainGui;
+import me.oggalz.uhc_games.gui.ScenariosGui;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 
@@ -19,25 +23,16 @@ import java.util.List;
 
 public class RegisterUnRegister implements Listener {
     private final Main main;
-    private final CutClean cutClean;
-    private final DiamondLimite diamondLimite;
-    private final HastyBoy hastyBoy;
-    private final Timber timber;
-    private final VanillaPlus vanillaPlus;
     private final List<Object> instances = new ArrayList<>();
 
     public RegisterUnRegister(Main main, CutClean cutClean, DiamondLimite diamondLimite, HastyBoy hastyBoy, Timber timber, VanillaPlus vanillaPlus) {
         this.main = main;
-        this.cutClean = cutClean;
-        this.diamondLimite = diamondLimite;
-        this.hastyBoy = hastyBoy;
-        this.timber = timber;
-        this.vanillaPlus = vanillaPlus;
-        instances.add(cutClean);
-        instances.add(diamondLimite);
-        instances.add(hastyBoy);
         instances.add(timber);
+        instances.add(diamondLimite);
         instances.add(vanillaPlus);
+        instances.add(hastyBoy);
+        instances.add(cutClean);
+
 
     }
 
@@ -47,11 +42,12 @@ public class RegisterUnRegister implements Listener {
         Player player = (Player) event.getWhoClicked();
         Material material = event.getCurrentItem().getType();
         ClickType action = event.getClick();
-
+        ItemStack itemStack = event.getCurrentItem();
 
         if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios") && material != null) {
             if (action == ClickType.LEFT) {
                 player.sendMessage(ChatColor.GREEN + "Activé ");
+                itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
                 switch (material) {
                     case WOOD_AXE:
                         register((Listener) instances.get(0));
@@ -77,6 +73,7 @@ public class RegisterUnRegister implements Listener {
             }
             if (action == ClickType.RIGHT) {
                 player.sendMessage(ChatColor.RED + "Désactivé ");
+                itemStack.removeEnchantment(Enchantment.DAMAGE_UNDEAD );
                 switch (material) {
                     case WOOD_AXE:
                         HandlerList.unregisterAll((Listener) instances.get(0));
@@ -94,7 +91,6 @@ public class RegisterUnRegister implements Listener {
 
                     case IRON_INGOT:
                         HandlerList.unregisterAll((Listener) instances.get(4));
-
                         break;
 
                     default:
@@ -108,7 +104,7 @@ public class RegisterUnRegister implements Listener {
     }
 
     public void register(Listener listener) {
-        Bukkit.getPluginManager().registerEvents(listener, main);
+        main.getServer().getPluginManager().registerEvents(listener, main);
     }
 }
 

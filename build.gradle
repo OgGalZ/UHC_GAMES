@@ -8,6 +8,7 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven {
         url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/'
     } content {
@@ -19,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
     implementation 'fr.minuskube:netherboard-bukkit:1.2.1'
     compileOnly 'fr.minuskube.inv:smart-invs:1.2.7'
 
@@ -27,5 +28,5 @@ dependencies {
 
 
 shadowJar {
-    destinationDirectory = file("/home/oggalz/Bureau/local-server2/plugins/")
+    destinationDirectory = file("/home/oggalz/Bureau/serverdelamort/plugins/")
 }

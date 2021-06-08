@@ -21,6 +21,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.material.Skull;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
@@ -49,7 +51,6 @@ public class PlayerJoinEvent implements Listener {
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2), 1, 1);
-
         if (stateManager.hasNotStarted()) {
 
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
@@ -102,6 +103,9 @@ public class PlayerJoinEvent implements Listener {
         }
 
     }
+
+
+
 
 
 }

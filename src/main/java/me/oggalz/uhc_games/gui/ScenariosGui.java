@@ -4,7 +4,9 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
+import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.utils.Item;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -23,7 +25,7 @@ public class ScenariosGui implements InventoryProvider {
 
 
     public ScenariosGui() {
-        itemStacks.add(Item.createItemstack(Material.WOOD_AXE, 1, ChatColor.GREEN + "Timber", null));
+        itemStacks.add(Item.createItemstack(Material.WOOD_AXE, x, ChatColor.GREEN + "Timber", null));
         itemStacks.add(Item.createItemstack(Material.DIAMOND_ORE, 1, ChatColor.BLUE + "Diamond limite", null));
         itemStacks.add(Item.createItemstack(Material.APPLE, 1, ChatColor.GOLD + "Vanilla+", null));
         itemStacks.add(Item.createItemstack(Material.DIAMOND_PICKAXE, 1, ChatColor.GRAY + "Hasty Boy", null));
@@ -46,11 +48,10 @@ public class ScenariosGui implements InventoryProvider {
     public void init(Player player, InventoryContents contents) {
 
 
+
+
         contents.set(1, 3, ClickableItem.of(itemStacks.get(0), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-                    if(e.isLeftClick() ){
-
-                    }
 
                 }
         ));
@@ -83,7 +84,7 @@ public class ScenariosGui implements InventoryProvider {
         contents.set(1, 4, ClickableItem.of(itemStacks.get(1), e -> {
 
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            if (e.isRightClick()) {
+            if (e.isLeftClick()) {
                 x += 1;
                 if (x >= 0) {
                     contents.set(1, 4, ClickableItem.empty(Item.createItemstack(Material.DIAMOND_ORE, x, null, null)));
@@ -97,6 +98,7 @@ public class ScenariosGui implements InventoryProvider {
             }
         }));
 
+
     }
 
     public static int getX() {
@@ -104,7 +106,4 @@ public class ScenariosGui implements InventoryProvider {
     }
 
 
-    public void test() {
-
-    }
 }
