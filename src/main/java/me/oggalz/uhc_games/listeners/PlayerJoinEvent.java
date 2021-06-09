@@ -27,6 +27,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.potion.PotionType;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -80,9 +81,13 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
 
     public void playerQuitEvent(PlayerQuitEvent event) {
+        try {
         Player player = event.getPlayer();
         playerManager.removePlayer(player.getUniqueId());
         scoreboardCreator.refresh();
+        }catch (NullPointerException ignored){
+
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGH)

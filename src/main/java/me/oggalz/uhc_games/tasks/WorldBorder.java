@@ -30,10 +30,14 @@ public class WorldBorder extends BukkitRunnable {
         org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
         worldBorder.setCenter(0, 0);
         if (WorldBorderGui.getBorderSize() == 0) {
-            worldBorder.setSize(1000);
-        } else if (stateManager.hasStarted()) {
-            worldBorder.setSize(WorldBorderGui.getBorderSize());
+            worldBorder.setSize(1000 - 1);
 
+        } else {
+            worldBorder.setSize(WorldBorderGui.getBorderSize() - 1);
+        }
+
+        if (worldBorder.getSize() == 125) {
+            cancel();
         }
 
     }
@@ -41,6 +45,6 @@ public class WorldBorder extends BukkitRunnable {
     public void runtask() {
         WorldBorder worldBorder = new WorldBorder(main, stateManager);
 
-        worldBorder.runTaskTimer(main, 20, 20);
+        worldBorder.runTaskTimer(main, 20L * WorldBorderGui.getTimeBorder(), 20);
     }
 }

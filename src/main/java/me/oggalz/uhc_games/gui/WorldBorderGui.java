@@ -65,7 +65,7 @@ public class WorldBorderGui implements InventoryProvider {
         ));
         contents.set(2, 2, ClickableItem.of(Item.getCustomTextureHead((ItemsId.ReduceRed.getId()), ChatColor.RED + "Reduce of 200 blocks"), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-
+                    timeBorder -= 200;
                 }
 
         ));
@@ -73,16 +73,14 @@ public class WorldBorderGui implements InventoryProvider {
 
         contents.set(2, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceOrange.getId(), ChatColor.GOLD + " Reduce of 50 blocks"), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+            timeBorder -= 50;
 
         }));
 
-        contents.set(2, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.TimeBorderReduction.getId(), ChatColor.GREEN + ""), e -> {
-            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
 
-
-        }));
         contents.set(2, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseGreen.getId(), ChatColor.GREEN + "Increase of 50 blocks"), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+            timeBorder += 50;
 
 
         }));
@@ -90,7 +88,7 @@ public class WorldBorderGui implements InventoryProvider {
 
         contents.set(2, 6, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "Increase of 200 blocks"), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-
+                timeBorder += 200;
 
                 }
 
@@ -101,21 +99,31 @@ public class WorldBorderGui implements InventoryProvider {
     @Override
     public void update(Player player, InventoryContents contents) {
         if(getBorderSize() < 0 ){
-            player.sendMessage(ChatColor.DARK_AQUA + "Vous ne pouvez pas mettre la taille de la bordure à moins de 0 block");
+            player.sendMessage(ChatColor.DARK_AQUA + "Vous ne pouvez pas mettre la taille de la bordure à moins de 0 block!");
            borderSize = 0;
+        }
+        if(getTimeBorder() < 0 ){
+            player.sendMessage(ChatColor.DARK_AQUA + "Vous ne pouvez pas mettre un temps négatif!");
+            timeBorder = 0;
         }
         contents.set(1, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.InitialBorder.getId(),  ChatColor.GREEN + "Initial Border" + ChatColor.WHITE + " : " +  getBorderSize()), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
 
 
         }));
+        contents.set(2, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.TimeBorderReduction.getId(), ChatColor.DARK_GRAY + "TimeReduction" + " : " + getTimeBorder()), e -> {
+            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+
+
+        }));
+
     }
 
     public static int getBorderSize() {
         return borderSize;
     }
 
-    public  int getTimeBorder() {
+    public static int getTimeBorder() {
         return timeBorder ;
     }
 }

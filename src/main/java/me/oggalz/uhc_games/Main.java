@@ -32,7 +32,11 @@ public class Main extends JavaPlugin {
         registersEvents();
         saveDefaultConfig();
         WorldBorder worldBorder = new WorldBorder(this, stateManager);
-        worldBorder.runtask();
+
+
+        if (stateManager.hasStarted()) {
+            worldBorder.runtask();
+        }
     }
 
 
