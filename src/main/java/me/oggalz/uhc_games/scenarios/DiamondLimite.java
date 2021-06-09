@@ -37,7 +37,7 @@ public class DiamondLimite  implements Listener {
                 if (x.getType() == Material.DIAMOND) {
                     int sizeDiamond = x.getAmount();
                     if (block.getType() == Material.DIAMOND_ORE) {
-                        if (sizeDiamond >= ScenariosGui.getX()) {
+                        if (sizeDiamond >= ScenariosGui.getX() && ScenariosGui.getX() != 0 ) {
                             block.setType(Material.AIR);
                             block.getWorld().spawn(location, ExperienceOrb.class).setExperience(event.getExpToDrop());
                             block.getWorld().dropItem(location, Item.createItemstack(Material.GOLD_INGOT, 1, null, null));

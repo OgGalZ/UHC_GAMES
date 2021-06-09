@@ -7,14 +7,18 @@ import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
+import me.oggalz.uhc_games.tasks.WorldBorder;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.List;
+import java.util.TimerTask;
 import java.util.logging.Level;
 
 public class Main extends JavaPlugin {
@@ -22,11 +26,13 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        StateManager stateManager = new StateManager();
 
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         registersEvents();
-
         saveDefaultConfig();
+        WorldBorder worldBorder = new WorldBorder(this, stateManager);
+        worldBorder.runtask();
     }
 
 
