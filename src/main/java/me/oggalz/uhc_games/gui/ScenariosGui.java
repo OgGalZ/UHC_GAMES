@@ -50,11 +50,12 @@ public class ScenariosGui implements InventoryProvider {
 
     @Override
     public void update(Player player, InventoryContents contents) {
-        ItemStack item = Item.createItemstack(Material.DIAMOND_ORE, getX(), ChatColor.BLUE + "Diamond limite",  null);
+        ItemStack item = Item.createItemstack(Material.DIAMOND_ORE, getX(), ChatColor.BLUE + "Diamond limite", null);
 
         contents.set(1, 3, ClickableItem.of(itemStacks.get(0), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
                     if (e.isLeftClick()) {
+
                         itemStacks.get(0).addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
 
                     } else if (e.isRightClick()) {
