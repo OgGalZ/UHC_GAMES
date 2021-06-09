@@ -1,22 +1,15 @@
 package me.oggalz.uhc_games.scenarios;
 
-import fr.minuskube.inv.content.InventoryContents;
 import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.gui.MainGui;
-import me.oggalz.uhc_games.gui.ScenariosGui;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +34,6 @@ public class RegisterUnRegister implements Listener {
         Inventory inventory = event.getInventory();
         Player player = (Player) event.getWhoClicked();
         Material material = event.getCurrentItem().getType();
-        ItemStack itemStack = event.getCurrentItem();
         ClickType action = event.getClick();
         String enable = ChatColor.GREEN + "Vous venez d'activer ";
         String disable = ChatColor.RED + "Vous venez de désactiver";
@@ -57,7 +49,6 @@ public class RegisterUnRegister implements Listener {
                     case DIAMOND_ORE:
                         register((Listener) instances.get(1));
                         player.sendMessage(enable + "Diamond Limite");
-                        itemStack.addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD , 1 );
                         break;
                     case APPLE:
                         register((Listener) instances.get(2));
@@ -86,7 +77,6 @@ public class RegisterUnRegister implements Listener {
                     case DIAMOND_ORE:
                         HandlerList.unregisterAll((Listener) instances.get(1));
                         player.sendMessage(disable + " Diamond Limite");
-                        itemStack.removeEnchantment(Enchantment.DAMAGE_UNDEAD);
 
                         break;
                     case APPLE:

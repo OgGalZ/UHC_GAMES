@@ -8,6 +8,7 @@ import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.scenarios.VanillaPlus;
 import me.oggalz.uhc_games.utils.Item;
+import me.oggalz.uhc_games.utils.ItemsId;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,7 +28,7 @@ public class MainGui implements InventoryProvider {
     public MainGui() {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BARRIER, 1, ChatColor.YELLOW + "Bordure", null));
-        item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.ARROW, 1, ChatColor.DARK_BLUE + "PVP", null));
+        item.add(Item.getCustomTextureHead(ItemsId.SauronEye.getId(), ChatColor.DARK_AQUA + "PVP"));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.CHEST, 1, ChatColor.GRAY + "Inventaire", null));
