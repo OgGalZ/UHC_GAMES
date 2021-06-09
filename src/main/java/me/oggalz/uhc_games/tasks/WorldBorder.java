@@ -29,6 +29,7 @@ public class WorldBorder extends BukkitRunnable {
         World world = Bukkit.getWorld("world");
         org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
         worldBorder.setSize(WorldBorderGui.getBorderSize() - 1);
+
         if (worldBorder.getSize() == 125) {
             cancel();
         }

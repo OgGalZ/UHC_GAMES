@@ -57,7 +57,6 @@ public class MainGui implements InventoryProvider {
         contents.set(1, 4, ClickableItem.of(item.get(1), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             WorldBorderGui.bordure.open(player);
-
         }));
 
 

@@ -105,7 +105,7 @@ public class WorldBorderGui implements InventoryProvider {
             timeBorder = 0;
         }
         contents.set(1, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.InitialBorder.getId(), ChatColor.GREEN + "Initial Border" + ChatColor.WHITE + " : " + getBorderSize()), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)));
-        contents.set(2, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.TimeBorderReduction.getId(), ChatColor.DARK_GRAY + "TimeReduction" + " : " + getTimeBorder() + "minute(s)"), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)));
+        contents.set(2, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.TimeBorderReduction.getId(), ChatColor.DARK_GRAY + "TimeReduction" + " : " + getTimeBorder() + " minute(s)"), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)));
 
     }
 

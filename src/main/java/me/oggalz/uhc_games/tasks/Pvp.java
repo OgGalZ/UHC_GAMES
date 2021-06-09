@@ -29,6 +29,7 @@ public class Pvp extends BukkitRunnable {
             int result = timePvp + this.test;
             if (result == 0) {
                 enablePvp = true;
+                cancel();
             }
         }
         this.i += 1;

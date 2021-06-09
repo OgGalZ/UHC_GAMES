@@ -70,7 +70,6 @@ public class SecondaryListeners implements Listener {
         Player test = event.getEntity().getKiller();
         World world = event.getEntity().getWorld();
         if (test instanceof Player && PvpGui.getNumbersGaps() != 0) {
-            Player player = event.getEntity().getKiller();
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
         }
 

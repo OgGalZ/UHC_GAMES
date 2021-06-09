@@ -36,10 +36,6 @@ public class Main extends JavaPlugin {
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         registersEvents();
         saveDefaultConfig();
-        World world = Bukkit.getWorld("world");
-        org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
-        worldBorder.setCenter(0, 0);
-        worldBorder.setSize(WorldBorderGui.getBorderSize());
         WorldBorder worldBorderClass = new WorldBorder(this, stateManager);
         Pvp pvp = new Pvp(this);
         if (stateManager.hasStarted()) {
