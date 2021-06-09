@@ -6,6 +6,7 @@ import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
+import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -55,18 +56,22 @@ public class SecondaryListeners implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onTestEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
-            if (event.getEntity() instanceof Player && stateManager.hasNotStarted()) {
+            if (event.getEntity() instanceof Player ) {
                 event.setCancelled(true);
             }
+        }else if(Pvp.isEnablePvp()){
+            event.setCancelled(false);
         }
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void playerDeath(PlayerDeathEvent event) {
+        Location location = event.getEntity().getLocation();
         Player test = event.getEntity().getKiller();
-        if (test instanceof Player && PvpGui.getNumbersGaps() != 0)  {
+        World world = event.getEntity().getWorld();
+        if (test instanceof Player && PvpGui.getNumbersGaps() != 0) {
             Player player = event.getEntity().getKiller();
-            player.getInventory().addItem(Item.createItemstack(Material.GOLDEN_APPLE , PvpGui.getNumbersGaps() , null ,null));
+            world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
         }
 
     }

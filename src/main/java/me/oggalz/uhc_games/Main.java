@@ -1,15 +1,20 @@
 package me.oggalz.uhc_games;
 
 import me.oggalz.uhc_games.gui.MainGui;
+import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.ScenariosGui;
+import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
+
+import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.tasks.WorldBorder;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.HandlerList;
@@ -31,9 +36,15 @@ public class Main extends JavaPlugin {
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         registersEvents();
         saveDefaultConfig();
-        WorldBorder worldBorder = new WorldBorder(this, stateManager);
+        World world = Bukkit.getWorld("world");
+        org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
+        worldBorder.setCenter(0, 0);
+        worldBorder.setSize(WorldBorderGui.getBorderSize());
+        WorldBorder worldBorderClass = new WorldBorder(this, stateManager);
+        Pvp pvp = new Pvp(this);
         if (stateManager.hasStarted()) {
-            worldBorder.runtask();
+            worldBorderClass.runBorder();
+            pvp.runPvp();
         }
     }
 
