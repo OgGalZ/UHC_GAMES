@@ -91,15 +91,6 @@ public class PlayerJoinEvent implements Listener {
     }
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onTestEntityDamage(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player) {
-            if (event.getEntity() instanceof Player && stateManager.hasNotStarted()) {
-                event.setCancelled(true);
-            }
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack itemStack = event.getItemDrop().getItemStack();
         if (itemStack == null) {

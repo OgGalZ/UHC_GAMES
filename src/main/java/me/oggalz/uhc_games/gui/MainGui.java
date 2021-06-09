@@ -5,11 +5,9 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
-import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.scenarios.VanillaPlus;
+
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -64,7 +62,8 @@ public class MainGui implements InventoryProvider {
 
 
         contents.set(1, 5, ClickableItem.of(item.get(2), e -> {
-
+            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+            PvpGui.PvpGui.open(player);
         }));
 
 
