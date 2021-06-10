@@ -54,8 +54,7 @@ public class PlayerJoinEvent implements Listener {
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2), 1, 1);
         if (stateManager.hasNotStarted()) {
-
-            player.removePotionEffect(PotionEffectType.INVISIBILITY);
+            player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
@@ -64,6 +63,7 @@ public class PlayerJoinEvent implements Listener {
             player.setFoodLevel(20);
             player.setHealth(20);
             player.getInventory().clear();
+            clearArmor(player);
             player.setGameMode(GameMode.ADVENTURE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 9));
             if (player.isOp()) {
@@ -82,10 +82,10 @@ public class PlayerJoinEvent implements Listener {
 
     public void playerQuitEvent(PlayerQuitEvent event) {
         try {
-        Player player = event.getPlayer();
-        playerManager.removePlayer(player.getUniqueId());
-        scoreboardCreator.refresh();
-        }catch (NullPointerException ignored){
+            Player player = event.getPlayer();
+            playerManager.removePlayer(player.getUniqueId());
+            scoreboardCreator.refresh();
+        } catch (NullPointerException ignored) {
 
         }
     }
@@ -99,6 +99,13 @@ public class PlayerJoinEvent implements Listener {
             event.setCancelled(true);
         }
 
+    }
+
+    private static void clearArmor(Player player) {
+        player.getInventory().setHelmet(null);
+        player.getInventory().setChestplate(null);
+        player.getInventory().setLeggings(null);
+        player.getInventory().setBoots(null);
     }
 
 }

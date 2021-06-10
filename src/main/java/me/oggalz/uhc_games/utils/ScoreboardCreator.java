@@ -26,7 +26,7 @@ public class ScoreboardCreator {
         board.set("          ", 15);
         board.set(ChatColor.AQUA + "Waiting players :)", 14);
         board.set("", 12);
-        board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/20", 11);
+        board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers()  + "/" + playerManager.getPlayers(),  11);
 
     }
 
@@ -34,7 +34,7 @@ public class ScoreboardCreator {
         for (Player x : Bukkit.getOnlinePlayers()) {
             BPlayerBoard board = Netherboard.instance().getBoard(x);
             if (board != null) {
-                board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/20", 11);
+                board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/" + playerManager.getPlayers(), 11);
             }
 
         }

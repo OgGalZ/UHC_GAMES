@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games;
 
+import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.ScenariosGui;
@@ -32,7 +33,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         StateManager stateManager = new StateManager();
-
+        getCommand("finish").setExecutor(new Finish());
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         registersEvents();
         saveDefaultConfig();

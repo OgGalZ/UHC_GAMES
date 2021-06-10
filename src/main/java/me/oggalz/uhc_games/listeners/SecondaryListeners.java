@@ -56,10 +56,10 @@ public class SecondaryListeners implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onTestEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof Player) {
-            if (event.getEntity() instanceof Player ) {
+            if (event.getEntity() instanceof Player) {
                 event.setCancelled(true);
             }
-        }else if(Pvp.isEnablePvp()){
+        } else if (Pvp.isEnablePvp()) {
             event.setCancelled(false);
         }
     }
@@ -67,11 +67,13 @@ public class SecondaryListeners implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void playerDeath(PlayerDeathEvent event) {
         Location location = event.getEntity().getLocation();
-        Player test = event.getEntity().getKiller();
         World world = event.getEntity().getWorld();
-        if (test instanceof Player && PvpGui.getNumbersGaps() != 0) {
+        Player player = event.getEntity();
+        player.getInventory().clear();
+        if (PvpGui.getNumbersGaps() != 0) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
         }
+        player.getInventory().clear();
 
     }
 

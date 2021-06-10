@@ -9,6 +9,7 @@ import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -78,7 +79,10 @@ public class MainGui implements InventoryProvider {
 
 
         contents.set(2, 5, ClickableItem.of(item.get(5), e -> {
-
+                    player.sendMessage(ChatColor.DARK_PURPLE + "Vous pouvez créer un inventaire de départ qui sera commun à tous les joueurs lors du lancement de la partie !" );
+                    player.sendMessage(ChatColor.GOLD + "/finish quand l'inventaire est complet :) ");
+                    player.setGameMode(GameMode.CREATIVE);
+                    player.getInventory().clear();
                 }
         ));
 

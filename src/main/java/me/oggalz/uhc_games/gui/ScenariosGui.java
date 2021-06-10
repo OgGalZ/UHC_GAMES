@@ -67,7 +67,6 @@ public class ScenariosGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 x += 1;
-
             } else if (e.isRightClick()) {
 
                 if (!(x <= 0)) {
