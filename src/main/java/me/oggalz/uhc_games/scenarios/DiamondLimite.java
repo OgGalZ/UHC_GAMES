@@ -23,15 +23,11 @@ import org.bukkit.inventory.ItemStack;
 
 public class DiamondLimite  implements Listener {
 
-
-
     @EventHandler
     public void BlockBreak(BlockBreakEvent event) {
         Block block = event.getBlock();
         Location location = block.getLocation();
         Inventory playerInv = event.getPlayer().getInventory();
-
-
         for (ItemStack x : playerInv) {
             if (x != null) {
                 if (x.getType() == Material.DIAMOND) {
