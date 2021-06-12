@@ -1,6 +1,7 @@
 package me.oggalz.uhc_games.scenarios;
 
 import me.oggalz.uhc_games.utils.UniversalMaterial;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
@@ -44,6 +45,8 @@ public class HastyBoy  implements Listener {
 
     }
 
-
-
+    @Override
+    public String toString() {
+        return ChatColor.WHITE + "Hasty Boy";
+    }
 }

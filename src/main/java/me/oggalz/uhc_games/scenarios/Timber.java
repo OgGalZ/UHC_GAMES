@@ -64,6 +64,10 @@ public class Timber implements Listener {
 
     }
 
+    @Override
+    public String toString() {
+        return ChatColor.BOLD + "Timber";
+    }
 }
 
 

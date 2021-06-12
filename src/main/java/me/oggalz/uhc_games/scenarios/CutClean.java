@@ -24,6 +24,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.persistence.GeneratedValue;
+import javax.print.DocFlavor;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -104,6 +105,9 @@ public class CutClean implements Listener {
 
     }
 
-
+    @Override
+    public String toString() {
+        return ChatColor.BLACK + "Cut Clean";
+    }
 }
 

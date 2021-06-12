@@ -56,7 +56,10 @@ public class VanillaPlus implements Listener {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return ChatColor.GREEN + "Vanilla +";
+    }
 }
 
 

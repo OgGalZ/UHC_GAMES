@@ -35,7 +35,7 @@ public class DiamondLimite  implements Listener {
         for (ItemStack x : playerInv) {
             if (x != null) {
                 if (x.getType() == Material.DIAMOND) {
-                    int sizeDiamond = x.getAmount() + 1 ;
+                    int sizeDiamond = x.getAmount()  ;
                     if (block.getType() == Material.DIAMOND_ORE) {
                         if (sizeDiamond > ScenariosGui.getX()   && ScenariosGui.getX() != 0 ) {
                             block.setType(Material.AIR);
@@ -48,5 +48,8 @@ public class DiamondLimite  implements Listener {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return ChatColor.BLUE + "Diamond Limite";
+    }
 }

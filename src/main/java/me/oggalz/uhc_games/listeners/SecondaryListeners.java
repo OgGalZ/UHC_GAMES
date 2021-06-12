@@ -20,7 +20,9 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class SecondaryListeners implements Listener {
 
@@ -39,8 +41,11 @@ public class SecondaryListeners implements Listener {
 
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
-        if ( itemStack != null && itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
+        if (itemStack != null && itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             MainGui.MainGUi.open(player);
+        }
+        if (!(player.getInventory().contains(Material.COMPASS))) {
+        player.getInventory().addItem(Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null));
         }
     }
 
