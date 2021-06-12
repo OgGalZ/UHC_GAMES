@@ -29,7 +29,6 @@ public class SecondaryListeners implements Listener {
     public SecondaryListeners(StateManager stateManager) {
 
         this.stateManager = stateManager;
-
     }
 
 
@@ -39,13 +38,9 @@ public class SecondaryListeners implements Listener {
 
         Player player = event.getPlayer();
         ItemStack itemStack = event.getItem();
-        if (itemStack == null) {
-            return;
-        } else if (itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
-            MainGui.MainGUi.open(player);
+        if (itemStack != null && itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
+          MainGui.MainGUi.open(player);
         }
-
-
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

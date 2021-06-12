@@ -81,21 +81,18 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
 
     public void playerQuitEvent(PlayerQuitEvent event) {
-        try {
-            Player player = event.getPlayer();
-            playerManager.removePlayer(player.getUniqueId());
-            scoreboardCreator.refresh();
-        } catch (NullPointerException ignored) {
 
-        }
+        Player player = event.getPlayer();
+        playerManager.removePlayer(player.getUniqueId());
+        scoreboardCreator.refresh();
+
     }
 
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack itemStack = event.getItemDrop().getItemStack();
-        if (itemStack == null) {
 
-        } else if (stateManager.hasNotStarted() && itemStack.hasItemMeta() && itemStack.getType() == Material.COMPASS) {
+        if (stateManager.hasNotStarted() && itemStack.hasItemMeta() && itemStack.getType() == Material.COMPASS) {
             event.setCancelled(true);
         }
 

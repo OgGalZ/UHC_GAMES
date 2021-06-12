@@ -25,7 +25,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import javax.persistence.GeneratedValue;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -84,40 +86,23 @@ public class CutClean implements Listener {
             UniversalMaterial material = UniversalMaterial.ofType(is.getType());
             if (material == null) return;
 
-            switch (material) {
-                case RAW_BEEF:
-                    loots.remove(i);
-                    loots.add(new ItemStack(UniversalMaterial.COOKED_BEEF.getType()));
-                    break;
+            Map<UniversalMaterial, UniversalMaterial> food = new HashMap<>();
+            food.put(UniversalMaterial.RAW_BEEF, UniversalMaterial.COOKED_BEEF);
+            food.put(UniversalMaterial.RAW_PORK, UniversalMaterial.COOKED_PORKCHOP);
+            food.put(UniversalMaterial.RAW_CHICKEN, UniversalMaterial.COOKED_CHICKEN);
+            food.put(UniversalMaterial.RAW_MUTTON, UniversalMaterial.COOKED_MUTTON);
+            food.put(UniversalMaterial.RAW_RABBIT, UniversalMaterial.COOKED_RABBIT);
 
-                case RAW_PORK:
-                    loots.remove(i);
-                    loots.add(new ItemStack(UniversalMaterial.COOKED_PORKCHOP.getType()));
-                    break;
-
-                case RAW_CHICKEN:
-                    loots.remove(i);
-                    loots.add(new ItemStack(UniversalMaterial.COOKED_CHICKEN.getType()));
-                    break;
-
-                case RAW_MUTTON:
-                    loots.remove(i);
-                    loots.add(new ItemStack(UniversalMaterial.COOKED_MUTTON.getType()));
-                    break;
-
-                case RAW_RABBIT:
-                    loots.remove(i);
-                    loots.add(new ItemStack(UniversalMaterial.COOKED_RABBIT.getType()));
-                    break;
-                default:
-
-
+            if (food.containsKey(material)) {
+                UniversalMaterial cookedFood = food.get(material);
+                loots.remove(i);
+                loots.add(new ItemStack(cookedFood.getType()));
             }
+
 
         }
 
     }
-
 
 
 }

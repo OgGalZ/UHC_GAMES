@@ -22,8 +22,6 @@ import java.util.List;
 public class MainGui implements InventoryProvider {
 
     private final List<ItemStack> item = new ArrayList<>();
-
-
     public MainGui() {
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BARRIER, 1, ChatColor.YELLOW + "Bordure", null));
@@ -35,7 +33,7 @@ public class MainGui implements InventoryProvider {
     }
 
 
-    public static final SmartInventory MainGUi = SmartInventory.builder()
+    public  static final SmartInventory MainGUi = SmartInventory.builder()
             .id("MainGui")
             .provider(new MainGui())
             .size(4, 9)
@@ -49,8 +47,7 @@ public class MainGui implements InventoryProvider {
 
         contents.set(1, 3, ClickableItem.of(item.get(0), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            ScenariosGui.scenarios.open(player);
-
+                ScenariosGui.scenarios.open(player);
                 }
 
         ));

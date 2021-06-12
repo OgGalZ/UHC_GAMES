@@ -19,19 +19,16 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public class VanillaPlus implements Listener {
-    private final Main main;
+    private final FileConfiguration fileConfiguration;
 
-    public VanillaPlus(Main main1) {
-
-        this.main = main1;
+    public VanillaPlus(FileConfiguration fileConfiguration) {
+        this.fileConfiguration = fileConfiguration;
     }
-
 
     @EventHandler
     private void onGravelBreak(BlockBreakEvent event) {
 
-
-        List<Integer> rateFlints = main.getConfig().getIntegerList("rateFlints");
+        List<Integer> rateFlints = fileConfiguration.getIntegerList("rateFlints");
         Block block = event.getBlock();
         Location loc = new Location(block.getWorld(),
                 block.getLocation().getBlockX() + 0.5,
@@ -50,8 +47,7 @@ public class VanillaPlus implements Listener {
 
     @EventHandler
     public void onLeaveDecay(LeavesDecayEvent event) {
-        FileConfiguration configuration = main.getConfig();
-        List<Integer> rateApples = configuration.getIntegerList("rateApples");
+        List<Integer> rateApples = fileConfiguration.getIntegerList("rateApples");
 
         event.getBlock().setType(Material.AIR);
         if (Math.random() * 100 < rateApples.get(0)) {
@@ -59,8 +55,6 @@ public class VanillaPlus implements Listener {
                     new ItemStack(Material.APPLE));
         }
     }
-
-
 
 
 }

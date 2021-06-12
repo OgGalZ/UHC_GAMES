@@ -38,7 +38,7 @@ public class WorldBorder extends BukkitRunnable {
 
     public void runBorder() {
         WorldBorder worldBorder = new WorldBorder(main, stateManager);
-        int secondes = WorldBorderGui.getTimeBorder() * 60;
-        worldBorder.runTaskTimer(main, secondes * 20L, 20);
+      //  int secondes = WorldBorderGui.getTimeBorder() * 60;
+     //   worldBorder.runTaskTimer(main, secondes * 20L, 20);
     }
 }
