@@ -39,17 +39,17 @@ me/oggalz/uhc_games/tasks/Teleportation.java
  me.oggalz.uhc_games.tasks.Teleportation
 me/oggalz/uhc_games/scenarios/VanillaPlus.java
  me.oggalz.uhc_games.scenarios.VanillaPlus
-me/oggalz/uhc_games/scenarios/HastyBoy.java
- me.oggalz.uhc_games.scenarios.HastyBoy
-me/oggalz/uhc_games/scenarios/DiamondLimite.java
- me.oggalz.uhc_games.scenarios.DiamondLimite
-me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
- me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/scenarios/Timber.java
  me.oggalz.uhc_games.scenarios.Timber
  me.oggalz.uhc_games.scenarios.Timber$1
+me/oggalz/uhc_games/scenarios/DiamondLimite.java
+ me.oggalz.uhc_games.scenarios.DiamondLimite
 me/oggalz/uhc_games/scenarios/CutClean.java
  me.oggalz.uhc_games.scenarios.CutClean
  me.oggalz.uhc_games.scenarios.CutClean$1
+me/oggalz/uhc_games/scenarios/HastyBoy.java
+ me.oggalz.uhc_games.scenarios.HastyBoy
+me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
+ me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main
