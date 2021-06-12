@@ -22,6 +22,7 @@ public class ScenariosGui implements InventoryProvider {
 
 
     private final List<ItemStack> itemStacks = new ArrayList<>();
+    private static int x;
 
     public ScenariosGui() {
         itemStacks.add(Item.createItemstack(Material.WOOD_AXE, 1, ChatColor.GREEN + "Timber", null));
@@ -49,7 +50,7 @@ public class ScenariosGui implements InventoryProvider {
 
     @Override
     public void update(Player player, InventoryContents contents) {
-        ItemStack item = Item.createItemstack(Material.DIAMOND_ORE, getX(), ChatColor.BLUE + "Diamond limite", null);
+        ItemStack item = Item.createItemstack(Material.DIAMOND_ORE, x, ChatColor.BLUE + "Diamond limite", null);
 
         contents.set(1, 3, ClickableItem.of(itemStacks.get(0), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
@@ -62,6 +63,13 @@ public class ScenariosGui implements InventoryProvider {
         ));
         contents.set(1, 4, ClickableItem.of(item, e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+            if (x < 0) {
+                x = 0;
+            } else if (e.isLeftClick()) {
+                x += 1;
+            } else if (e.isRightClick()) {
+                x -= 1;
+            }
 
         }));
 
@@ -104,6 +112,10 @@ public class ScenariosGui implements InventoryProvider {
                 itemStacks.get(4).removeEnchantment(Enchantment.DAMAGE_UNDEAD);
             }
         }));
+    }
+
+    public static int getX() {
+        return x;
     }
 
 }
