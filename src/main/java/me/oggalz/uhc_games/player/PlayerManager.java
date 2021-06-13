@@ -33,6 +33,9 @@ public class PlayerManager {
         players.remove(uuid);
     }
 
+    public boolean containsplayers(UUID uuid){
+        return players.containsKey(uuid);
+    }
 
 }
 

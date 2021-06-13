@@ -18,6 +18,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
@@ -28,12 +29,11 @@ public class SecondaryListeners implements Listener {
 
     private StateManager stateManager;
 
-    public SecondaryListeners(StateManager stateManager) {
 
+    public SecondaryListeners(StateManager stateManager) {
         this.stateManager = stateManager;
 
     }
-
 
     @EventHandler(priority = EventPriority.HIGH)
 
@@ -44,8 +44,8 @@ public class SecondaryListeners implements Listener {
         if (itemStack != null && itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             MainGui.MainGUi.open(player);
         }
-        if (!(player.getInventory().contains(Material.COMPASS))) {
-        player.getInventory().addItem(Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null));
+        if (!(player.getInventory().contains(Material.COMPASS)) && player.getGameMode() != GameMode.CREATIVE) {
+            player.getInventory().addItem(Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null));
         }
     }
 
@@ -78,5 +78,8 @@ public class SecondaryListeners implements Listener {
 
     }
 
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void freezePlayerMove(PlayerMoveEvent event) {
+    }
 
 }

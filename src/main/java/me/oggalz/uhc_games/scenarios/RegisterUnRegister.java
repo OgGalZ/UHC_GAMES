@@ -14,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,36 +37,38 @@ public class RegisterUnRegister implements Listener {
 
     @EventHandler
     public void Onclick(InventoryClickEvent event) {
-
+        if(event.getCurrentItem() == null){
+        }
         Inventory inventory = event.getInventory();
         Player player = (Player) event.getWhoClicked();
-        Material material = event.getCurrentItem().getType();
+        ItemStack itemStack = event.getCurrentItem();
         ClickType action = event.getClick();
         String enable = ChatColor.GREEN + "Vous venez d'activer ";
         String disable = ChatColor.RED + "Vous venez de désactiver";
 
 
-        if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
-            if (action == ClickType.LEFT && material != null) {
+            if (inventory.contains(Material.DIAMOND_ORE) && inventory.getTitle().equalsIgnoreCase(ChatColor.BLUE + "Scenarios")) {
+                if (action == ClickType.LEFT) {
 
-                if (scenarios.containsKey(material)) {
-                    Object object = scenarios.get(material);
-                    register((Listener) object);
-                    player.sendMessage(enable + object.toString());
+                    if (scenarios.containsKey(itemStack.getType() )) {
+                        Object object = scenarios.get(itemStack.getType() );
+                        register((Listener) object);
+                        player.sendMessage(enable + object.toString());
+                    }
+
                 }
+                if (action == ClickType.RIGHT) {
+                    if (scenarios.containsKey(itemStack.getType() )) {
+                        Object object = scenarios.get(itemStack.getType() );
+                        HandlerList.unregisterAll((Listener) object);
+                        player.sendMessage(disable + object.toString());
+                    }
 
-            }
-            if (action == ClickType.RIGHT && material != null) {
-                if (scenarios.containsKey(material)) {
-                    Object object = scenarios.get(material);
-                    HandlerList.unregisterAll((Listener) object);
-                    player.sendMessage(disable + object.toString());
                 }
-
             }
+
         }
 
-    }
 
     public void register(Listener listener) {
         main.getServer().getPluginManager().registerEvents(listener, main);

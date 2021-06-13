@@ -9,6 +9,7 @@ import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -104,6 +105,7 @@ public class PlayerJoinEvent implements Listener {
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
     }
+
 
 }
 

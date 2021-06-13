@@ -10,10 +10,17 @@ import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
 
 import me.oggalz.uhc_games.tasks.Pvp;
+import me.oggalz.uhc_games.tasks.Teleportation;
 import me.oggalz.uhc_games.tasks.WorldBorder;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 
 public class Main extends JavaPlugin {
@@ -32,6 +39,7 @@ public class Main extends JavaPlugin {
             pvp.runPvp();
         }
         saveDefaultConfig();
+
 
     }
 
