@@ -7,6 +7,7 @@ import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
+import me.oggalz.uhc_games.utils.NmsUtils;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -44,17 +45,20 @@ public class PlayerJoinEvent implements Listener {
     private final PlayerManager playerManager;
     private final StateManager stateManager;
     private final ScoreboardCreator scoreboardCreator;
+    private  final NmsUtils nmsUtils;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator, NmsUtils nmsUtils) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
         this.scoreboardCreator = scoreboardCreator;
+        this.nmsUtils = nmsUtils;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerJoinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        nmsUtils.sendActionBar(player , ChatColor.DARK_AQUA + " " + 99 );
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
@@ -97,7 +101,6 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack itemStack = event.getItemDrop().getItemStack();
-
         if (stateManager.hasNotStarted() && itemStack.hasItemMeta() && itemStack.getType() == Material.COMPASS) {
             event.setCancelled(true);
         }
@@ -110,12 +113,7 @@ public class PlayerJoinEvent implements Listener {
         player.getInventory().setLeggings(null);
         player.getInventory().setBoots(null);
     }
-    public void sendActionBar(Player p, String nachricht) {
-        CraftPlayer cp = (CraftPlayer) p;
-        IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + nachricht + "\"}");
-        PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc, (byte) 2);
-        cp.getHandle().playerConnection.sendPacket(ppoc);
-    }
+
 
 }
 

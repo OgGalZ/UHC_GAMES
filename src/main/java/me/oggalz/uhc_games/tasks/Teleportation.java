@@ -42,11 +42,9 @@ public class Teleportation extends BukkitRunnable {
                 uuidPlayers.add(p.getPlayer());
             }
         }
-        for(Player player : uuidPlayers){
-
-        }
 
     }
+
 
     public void runTp() {
         Teleportation teleportation = new Teleportation(playerManager, main);

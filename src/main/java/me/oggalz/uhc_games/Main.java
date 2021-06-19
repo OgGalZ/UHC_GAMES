@@ -13,6 +13,7 @@ import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.tasks.Teleportation;
 import me.oggalz.uhc_games.tasks.WorldBorder;
+import me.oggalz.uhc_games.utils.NmsUtils;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -62,8 +63,9 @@ public class Main extends JavaPlugin {
         DiamondLimite diamondLimite = new DiamondLimite();
         HastyBoy hastyBoy = new HastyBoy();
         Timber timber = new Timber();
+        NmsUtils nmsUtils = new NmsUtils();
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator , nmsUtils), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
 
