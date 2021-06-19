@@ -3,10 +3,8 @@ package me.oggalz.uhc_games.tasks;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.PlayerManager;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
+import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -30,6 +28,10 @@ public class Teleportation extends BukkitRunnable {
 
     @Override
     public void run() {
+
+    }
+    public void step1(){
+
         String startMessage = ChatColor.RED + "La partie ce lancera dans ";
         List<Player> uuidPlayers = new ArrayList<>();
 
@@ -40,10 +42,10 @@ public class Teleportation extends BukkitRunnable {
                 uuidPlayers.add(p.getPlayer());
             }
         }
-        start += 1;
-        if(start == 10 ){
-            cancel();
+        for(Player player : uuidPlayers){
+
         }
+
     }
 
     public void runTp() {

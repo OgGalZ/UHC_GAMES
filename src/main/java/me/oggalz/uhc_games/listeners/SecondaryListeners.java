@@ -19,10 +19,13 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 
+import javax.swing.text.html.Option;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class SecondaryListeners implements Listener {
@@ -40,8 +43,8 @@ public class SecondaryListeners implements Listener {
     public void playerInteractEvent(PlayerInteractEvent event) {
 
         Player player = event.getPlayer();
-        ItemStack itemStack = event.getItem();
-        if (itemStack != null && itemStack.getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
+        Optional<ItemStack> itemStack = Optional.ofNullable(event.getItem());
+        if ( itemStack.isPresent() && itemStack.get().getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.get().getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             MainGui.MainGUi.open(player);
         }
         if (!(player.getInventory().contains(Material.COMPASS)) && player.getGameMode() != GameMode.CREATIVE) {
@@ -78,8 +81,6 @@ public class SecondaryListeners implements Listener {
 
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void freezePlayerMove(PlayerMoveEvent event) {
-    }
+
 
 }

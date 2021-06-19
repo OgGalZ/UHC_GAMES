@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games.scenarios;
 
+import com.google.common.base.Optional;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.utils.UniversalMaterial;
 import org.apache.commons.lang.BooleanUtils;
@@ -16,10 +17,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import javax.swing.text.html.Option;
+import java.util.*;
 
 public class RegisterUnRegister implements Listener {
     private final Main main;
