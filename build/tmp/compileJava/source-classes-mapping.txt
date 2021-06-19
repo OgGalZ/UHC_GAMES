@@ -24,8 +24,8 @@ me/oggalz/uhc_games/scenarios/DiamondLimite.java
  me.oggalz.uhc_games.scenarios.DiamondLimite
 me/oggalz/uhc_games/scenarios/HastyBoy.java
  me.oggalz.uhc_games.scenarios.HastyBoy
-me/oggalz/uhc_games/listeners/SecondaryListeners.java
- me.oggalz.uhc_games.listeners.SecondaryListeners
+me/oggalz/uhc_games/gui/MainGui.java
+ me.oggalz.uhc_games.gui.MainGui
 me/oggalz/uhc_games/scenarios/VanillaPlus.java
  me.oggalz.uhc_games.scenarios.VanillaPlus
 me/oggalz/uhc_games/state/StateManager.java
@@ -34,8 +34,8 @@ me/oggalz/uhc_games/player/PlayerManager.java
  me.oggalz.uhc_games.player.PlayerManager
 me/oggalz/uhc_games/commands/Finish.java
  me.oggalz.uhc_games.commands.Finish
-me/oggalz/uhc_games/gui/MainGui.java
- me.oggalz.uhc_games.gui.MainGui
+me/oggalz/uhc_games/listeners/SecondaryListeners.java
+ me.oggalz.uhc_games.listeners.SecondaryListeners
 me/oggalz/uhc_games/tasks/Pvp.java
  me.oggalz.uhc_games.tasks.Pvp
 me/oggalz/uhc_games/tasks/Teleportation.java
