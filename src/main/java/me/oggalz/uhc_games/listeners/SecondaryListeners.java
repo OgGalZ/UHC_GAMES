@@ -73,13 +73,22 @@ public class SecondaryListeners implements Listener {
     public void playerDeath(PlayerDeathEvent event) {
         Location location = event.getEntity().getLocation();
         World world = event.getEntity().getWorld();
-        Player player = event.getEntity();
-        player.getInventory().clear();
+        if(stateManager.hasNotStarted()){
+            event.getDrops().clear();
+        }
         if (PvpGui.getNumbersGaps() != 0) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
         }
-        player.getInventory().clear();
+    }
 
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void playerRespawn(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        player.getInventory().clear();
+        if(player.isOp() && stateManager.hasNotStarted()){
+            ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
+            player.getInventory().addItem(itemStack);
+        }
     }
 
 }

@@ -7,12 +7,11 @@ import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
-import me.oggalz.uhc_games.tasks.Teleportation;
 import me.oggalz.uhc_games.tasks.WorldBorder;
 import me.oggalz.uhc_games.utils.NmsUtils;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import java.util.logging.Level;
 
 public class Main extends JavaPlugin {
@@ -22,10 +21,9 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         StateManager stateManager = new StateManager();
         PlayerManager playerManager = new PlayerManager();
+        Pvp pvp = new Pvp(this);
         WorldBorder worldBorderClass = new WorldBorder(this, stateManager);
-        Teleportation teleportation = new Teleportation(playerManager , this);
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
-        Pvp pvp = new Pvp(this) ;
         if (stateManager.hasStarted()) {
             worldBorderClass.runBorder();
             pvp.runPvp();
@@ -52,7 +50,7 @@ public class Main extends JavaPlugin {
         Timber timber = new Timber();
         NmsUtils nmsUtils = new NmsUtils();
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator , nmsUtils), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
 

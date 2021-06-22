@@ -17,3 +17,10 @@ rateFlints:
 #If you want increase the rate of Apples , you can change the value below !
 rateApples:
   - 20
+
+
+#You have the possibility to change the respawn location
+respawn:
+  - 50
+  - 50
+  - 50

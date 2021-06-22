@@ -37,9 +37,6 @@ public class PlayerManager {
     public boolean containsplayers(UUID uuid){
         return players.containsKey(uuid);
     }
-    public Map<UUID, Player> getList(){
-        return players;
-    }
 
 }
 

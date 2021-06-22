@@ -67,6 +67,7 @@ public class PlayerJoinEvent implements Listener {
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
+            Bukkit.broadcastMessage("" + playerManager.getPlayers());
             scoreboardCreator.createScoreboard(player);
             scoreboardCreator.refresh();
             player.setFoodLevel(20);

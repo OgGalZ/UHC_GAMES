@@ -30,14 +30,17 @@ me/oggalz/uhc_games/scenarios/VanillaPlus.java
  me.oggalz.uhc_games.scenarios.VanillaPlus
 me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
-me/oggalz/uhc_games/utils/ScoreboardCreator.java
- me.oggalz.uhc_games.utils.ScoreboardCreator
 me/oggalz/uhc_games/commands/Finish.java
  me.oggalz.uhc_games.commands.Finish
 me/oggalz/uhc_games/player/PlayerManager.java
  me.oggalz.uhc_games.player.PlayerManager
-me/oggalz/uhc_games/listeners/SecondaryListeners.java
- me.oggalz.uhc_games.listeners.SecondaryListeners
+me/oggalz/uhc_games/utils/ScoreboardCreator.java
+ me.oggalz.uhc_games.utils.ScoreboardCreator
+me/oggalz/uhc_games/scenarios/Timber.java
+ me.oggalz.uhc_games.scenarios.Timber
+ me.oggalz.uhc_games.scenarios.Timber$1
+me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
+ me.oggalz.uhc_games.listeners.PlayerJoinEvent
 me/oggalz/uhc_games/tasks/Pvp.java
  me.oggalz.uhc_games.tasks.Pvp
 me/oggalz/uhc_games/tasks/Teleportation.java
@@ -46,10 +49,9 @@ me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
  me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/tasks/WorldBorder.java
  me.oggalz.uhc_games.tasks.WorldBorder
-me/oggalz/uhc_games/scenarios/Timber.java
- me.oggalz.uhc_games.scenarios.Timber
- me.oggalz.uhc_games.scenarios.Timber$1
+me/oggalz/uhc_games/listeners/SecondaryListeners.java
+ me.oggalz.uhc_games.listeners.SecondaryListeners
+me/oggalz/uhc_games/tasks/TEst.java
+ me.oggalz.uhc_games.tasks.TEst
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main
-me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
- me.oggalz.uhc_games.listeners.PlayerJoinEvent
