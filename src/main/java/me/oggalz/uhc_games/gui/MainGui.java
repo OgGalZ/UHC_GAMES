@@ -71,6 +71,7 @@ public class MainGui implements InventoryProvider {
         ));
 
         contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
+            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
 
         }));
 
