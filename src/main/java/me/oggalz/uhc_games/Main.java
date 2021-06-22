@@ -33,7 +33,6 @@ public class Main extends JavaPlugin {
             worldBorderClass.runBorder();
             pvp.runPvp();
         }
-        World world = Bukkit.getWorld("world");
         registersEvents();
         registersCommands();
         saveDefaultConfig();

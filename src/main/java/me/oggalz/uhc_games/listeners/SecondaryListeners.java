@@ -48,9 +48,7 @@ public class SecondaryListeners implements Listener {
         if (itemStack.isPresent() && itemStack.get().getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.get().getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             MainGui.MainGUi.open(player);
         }
-        if (!(player.getInventory().contains(Material.COMPASS)) && player.getGameMode() != GameMode.CREATIVE) {
-            player.getInventory().addItem(Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null));
-        }
+
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
@@ -73,7 +71,7 @@ public class SecondaryListeners implements Listener {
     public void playerDeath(PlayerDeathEvent event) {
         Location location = event.getEntity().getLocation();
         World world = event.getEntity().getWorld();
-        if(stateManager.hasNotStarted()){
+        if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
         }
         if (PvpGui.getNumbersGaps() != 0) {
@@ -85,10 +83,10 @@ public class SecondaryListeners implements Listener {
     public void playerRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
         player.getInventory().clear();
-        if(player.isOp() && stateManager.hasNotStarted()){
+
+        if (player.isOp() && stateManager.hasNotStarted()) {
             ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
             player.getInventory().addItem(itemStack);
         }
     }
-
 }

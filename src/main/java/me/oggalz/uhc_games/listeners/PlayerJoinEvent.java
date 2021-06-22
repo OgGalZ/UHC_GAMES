@@ -72,7 +72,7 @@ public class PlayerJoinEvent implements Listener {
             player.setFoodLevel(20);
             player.setHealth(20);
             player.getInventory().clear();
-            clearArmor(player);
+            Item.clearArmor(player);
             player.setGameMode(GameMode.ADVENTURE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 9));
             List<Integer> respawn = configuration.getIntegerList("respawn");
@@ -107,12 +107,6 @@ public class PlayerJoinEvent implements Listener {
 
     }
 
-    private static void clearArmor(Player player) {
-        player.getInventory().setHelmet(null);
-        player.getInventory().setChestplate(null);
-        player.getInventory().setLeggings(null);
-        player.getInventory().setBoots(null);
-    }
 
 
 }
