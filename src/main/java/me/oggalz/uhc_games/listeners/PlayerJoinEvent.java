@@ -45,7 +45,7 @@ public class PlayerJoinEvent implements Listener {
     private final PlayerManager playerManager;
     private final StateManager stateManager;
     private final ScoreboardCreator scoreboardCreator;
-    private  final NmsUtils nmsUtils;
+    private final NmsUtils nmsUtils;
 
     public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ScoreboardCreator scoreboardCreator, NmsUtils nmsUtils) {
         this.main = main;
@@ -58,13 +58,12 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerJoinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        nmsUtils.sendActionBar(player , ChatColor.DARK_AQUA + " " + 99 );
+        nmsUtils.sendActionBar(player, player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");
         Location location = new Location(world, coordinate.get(0), coordinate.get(1), coordinate.get(2), 1, 1);
         if (stateManager.hasNotStarted()) {
-            player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
@@ -76,8 +75,9 @@ public class PlayerJoinEvent implements Listener {
             clearArmor(player);
             player.setGameMode(GameMode.ADVENTURE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 9));
+            List<Integer> respawn = configuration.getIntegerList("respawn");
+            Bukkit.getWorld(player.getWorld().getName()).setSpawnLocation(respawn.get(0), respawn.get(1), respawn.get(2));
             if (player.isOp()) {
-                player.getInventory().clear();
                 ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
                 player.getInventory().setItem(4, itemStack);
             }

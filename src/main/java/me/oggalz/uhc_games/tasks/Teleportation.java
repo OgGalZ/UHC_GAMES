@@ -1,25 +1,19 @@
 package me.oggalz.uhc_games.tasks;
 
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.gui.ScenariosGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import org.bukkit.*;
-import org.bukkit.block.Biome;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.util.Vector;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
 public class Teleportation extends BukkitRunnable {
 
     private final PlayerManager playerManager;
     private final Main main;
-    private int start = 0;
 
     public Teleportation(PlayerManager playerManager, Main main) {
         this.playerManager = playerManager;
@@ -28,21 +22,26 @@ public class Teleportation extends BukkitRunnable {
 
     @Override
     public void run() {
-
+        step1();
     }
     public void step1(){
 
         String startMessage = ChatColor.RED + "La partie ce lancera dans ";
-        List<Player> uuidPlayers = new ArrayList<>();
+         for(Player player : Bukkit.getOnlinePlayers()){
 
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            Bukkit.broadcastMessage(startMessage + start);
-            p.playSound(p.getLocation() , Sound.CHEST_CLOSE , 99 , 1);
-            if (playerManager.containsplayers(p.getUniqueId())) {
-                uuidPlayers.add(p.getPlayer());
+         }
+    }
+    public void step2(){
+
+        World world = Bukkit.getWorld("world");
+        for(int x = 100/2 ; x  > -100 ; x--){
+            for( int z  = 100/2  ; z > -100 ; z-- ){
+                Location location = new Location(world , x , 60 , z );
+                if(!(location.getChunk().isLoaded())){
+                    location.getChunk().load();
+                }
             }
         }
-
     }
 
 

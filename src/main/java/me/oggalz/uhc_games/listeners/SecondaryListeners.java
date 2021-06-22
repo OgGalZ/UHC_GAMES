@@ -19,6 +19,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -44,7 +45,7 @@ public class SecondaryListeners implements Listener {
 
         Player player = event.getPlayer();
         Optional<ItemStack> itemStack = Optional.ofNullable(event.getItem());
-        if ( itemStack.isPresent() && itemStack.get().getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.get().getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
+        if (itemStack.isPresent() && itemStack.get().getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.get().getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             MainGui.MainGUi.open(player);
         }
         if (!(player.getInventory().contains(Material.COMPASS)) && player.getGameMode() != GameMode.CREATIVE) {
@@ -80,7 +81,5 @@ public class SecondaryListeners implements Listener {
         player.getInventory().clear();
 
     }
-
-
 
 }

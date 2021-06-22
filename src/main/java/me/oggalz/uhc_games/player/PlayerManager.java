@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,6 +36,9 @@ public class PlayerManager {
 
     public boolean containsplayers(UUID uuid){
         return players.containsKey(uuid);
+    }
+    public Map<UUID, Player> getList(){
+        return players;
     }
 
 }
