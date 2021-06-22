@@ -2,7 +2,9 @@ package me.oggalz.uhc_games.tasks;
 
 import me.oggalz.uhc_games.Main;
 
+import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
+import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.NmsUtils;
 import org.bukkit.*;
@@ -16,10 +18,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
@@ -30,10 +35,12 @@ public class Teleportation extends BukkitRunnable implements Listener {
     private final Main main;
     private final NmsUtils nmsUtils;
     private double percentage = 0;
+    private final StateManager stateManager;
 
-    public Teleportation(Main main, NmsUtils nmsUtils) {
+    public Teleportation(Main main, NmsUtils nmsUtils, StateManager stateManager) {
         this.main = main;
         this.nmsUtils = nmsUtils;
+        this.stateManager = stateManager;
     }
 
     @Override
@@ -105,6 +112,9 @@ public class Teleportation extends BukkitRunnable implements Listener {
                 player.sendMessage(ChatColor.ITALIC + "Good Luck " + player.getName() + ChatColor.RED + "  :)");
                 Item.clearArmor(player);
                 player.getInventory().clear();
+                stateManager.startGame();
+            Arrays.stream(Finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
+            Arrays.stream(Finish.getArmor()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
         }
     }
 
@@ -128,7 +138,7 @@ public class Teleportation extends BukkitRunnable implements Listener {
     }
 
     private void runTp() {
-        Teleportation teleportation = new Teleportation(main, nmsUtils);
+        Teleportation teleportation = new Teleportation(main, nmsUtils , stateManager);
         teleportation.runTaskTimer(main, 0, 20);
     }
 

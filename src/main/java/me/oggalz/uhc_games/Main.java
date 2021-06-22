@@ -53,7 +53,7 @@ public class Main extends JavaPlugin {
         Timber timber = new Timber();
         NmsUtils nmsUtils = new NmsUtils();
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
-        getServer().getPluginManager().registerEvents(new Teleportation(this, nmsUtils), this);
+        getServer().getPluginManager().registerEvents(new Teleportation(this, nmsUtils , stateManager), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);

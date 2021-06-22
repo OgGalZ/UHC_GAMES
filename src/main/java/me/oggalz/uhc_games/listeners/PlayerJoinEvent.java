@@ -82,6 +82,7 @@ public class PlayerJoinEvent implements Listener {
                 player.getInventory().setItem(4, itemStack);
             }
         } else {
+            event.setJoinMessage("");
             player.setGameMode(GameMode.SPECTATOR);
             player.sendMessage(ChatColor.DARK_AQUA + "La partie a déjà commencé :/");
         }
