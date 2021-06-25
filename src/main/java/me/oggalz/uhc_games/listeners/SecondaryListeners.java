@@ -62,8 +62,9 @@ public class SecondaryListeners implements Listener {
             if (event.getEntity() instanceof Player) {
                 event.setCancelled(true);
             }
-        } else if (Pvp.isEnablePvp()) {
-            event.setCancelled(false);
+            if (Pvp.isEnablePvp()) {
+                event.setCancelled(false);
+            }
         }
     }
 

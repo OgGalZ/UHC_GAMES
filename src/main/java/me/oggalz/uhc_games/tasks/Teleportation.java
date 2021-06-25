@@ -19,6 +19,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
@@ -90,8 +92,8 @@ public class Teleportation extends BukkitRunnable implements Listener {
 
     public void step2() {
         World world = Bukkit.getWorld("world");
-        for (int x = WorldBorderGui.getBorderSize() / 2; x > -WorldBorderGui.getBorderSize() / 2; x--) {
-            for (int z = WorldBorderGui.getBorderSize() / 2; z > -WorldBorderGui.getBorderSize() / 2; z--) {
+        for (int x = WorldBorderGui.getBorderSize() / 2; x > -WorldBorderGui.getBorderSize() / 2 + 5; x--) {
+            for (int z = WorldBorderGui.getBorderSize() / 2; z > -WorldBorderGui.getBorderSize() / 2 + 5; z--) {
                 Location location = new Location(world, x, 60, z);
                 if (!(location.getChunk().isLoaded())) {
                     location.getChunk().load();
@@ -106,6 +108,7 @@ public class Teleportation extends BukkitRunnable implements Listener {
         int randomTP = generate(-WorldBorderGui.getBorderSize() / 2 - 5, WorldBorderGui.getBorderSize() / 2 - 5);
         for (Player player : Bukkit.getOnlinePlayers()) {
             Location location = new Location(world, randomTP, 120, randomTP);
+            player.teleport(location);
             player.setGameMode(GameMode.SURVIVAL);
             WorldBorder worldBorder = world.getWorldBorder();
             worldBorder.setCenter(0, 0);
@@ -113,15 +116,18 @@ public class Teleportation extends BukkitRunnable implements Listener {
             player.teleport(location);
             player.sendMessage(ChatColor.ITALIC + "Good Luck " + player.getName() + ChatColor.RED + "  :)");
             Item.clearArmor(player);
+            player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS ,100  , 999999999));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW ,100 , 999999999));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE ,100, 9));
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);
             scoreboardCreator.runScoreboardGame();
-            stateManager.startGame();
-            if(finish.getItemStacks() != null){
+            stateManager.startGame();if (finish.getItemStacks() != null) {
                 Arrays.stream(finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
             }
-            if(finish.getArmor() != null){
+            if (finish.getArmor() != null) {
                 Arrays.stream(finish.getArmor()).filter(Objects::nonNull).forEach(i -> player.getInventory().setArmorContents(finish.getArmor()));
             }
         }
@@ -147,7 +153,7 @@ public class Teleportation extends BukkitRunnable implements Listener {
     }
 
     private void runTp() {
-        Teleportation teleportation = new Teleportation(main, nmsUtils, stateManager, finish , scoreboardCreator);
+        Teleportation teleportation = new Teleportation(main, nmsUtils, stateManager, finish, scoreboardCreator);
         teleportation.runTaskTimer(main, 0, 20);
     }
 

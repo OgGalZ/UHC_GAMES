@@ -1,16 +1,16 @@
 package me.oggalz.uhc_games.tasks;
 
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.PvpGui;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Pvp extends BukkitRunnable {
     private final Main main;
     private int i = 0;
-    private int test = 0;
     private static boolean enablePvp = false;
-
     public Pvp(Main main) {
         this.main = main;
     }
@@ -21,18 +21,19 @@ public class Pvp extends BukkitRunnable {
         if (timePvp == 0) {
             cancel();
             enablePvp = true;
+            Bukkit.broadcastMessage(ChatColor.DARK_RED + "Le PVP est maintenant activé !!");
         }
 
         if (this.i == 60) {
             this.i = 0;
-            this.test -= 1;
-            int result = timePvp + this.test;
-            if (result == 0) {
+            timePvp--;
+            if (timePvp == 0) {
                 enablePvp = true;
+                Bukkit.broadcastMessage(ChatColor.DARK_RED + "Le PVP est maintenant activé !!");
                 cancel();
             }
         }
-        this.i += 1;
+        i++;
     }
 
     public void runPvp() {
@@ -43,4 +44,6 @@ public class Pvp extends BukkitRunnable {
     public static boolean isEnablePvp() {
         return enablePvp;
     }
+
+
 }

@@ -25,14 +25,10 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        StateManager stateManager = new StateManager();
+        StateManager stateManager = new StateManager(this);
         Pvp pvp = new Pvp(this);
         WorldBorder worldBorderClass = new WorldBorder(this, stateManager);
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
-        if (stateManager.hasStarted()) {
-            worldBorderClass.runBorder();
-            pvp.runPvp();
-        }
         registersEvents();
         registersCommands();
         saveDefaultConfig();
@@ -41,12 +37,11 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         saveDefaultConfig();
-        
     }
 
     public void registersEvents() {
         PlayerManager playerManager = new PlayerManager();
-        StateManager stateManager = new StateManager();
+        StateManager stateManager = new StateManager(this);
         ScoreboardCreator scoreboardCreator = new ScoreboardCreator( this, playerManager );
         CutClean cutClean = new CutClean();
         DiamondLimite diamondLimite = new DiamondLimite();

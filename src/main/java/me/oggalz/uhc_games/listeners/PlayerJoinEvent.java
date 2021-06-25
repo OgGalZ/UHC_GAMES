@@ -1,44 +1,25 @@
 package me.oggalz.uhc_games.listeners;
 
-import fr.minuskube.netherboard.Netherboard;
-import fr.minuskube.netherboard.bukkit.BPlayerBoard;
+
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.scenarios.CutClean;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.NmsUtils;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.material.Skull;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
-
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.logging.Level;
+
 
 public class PlayerJoinEvent implements Listener {
     private final Main main;
@@ -58,6 +39,11 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerJoinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
+        if(player.getActivePotionEffects() !=  null){
+            for(PotionEffect potionEffectType : player.getActivePotionEffects()){
+                player.removePotionEffect(potionEffectType.getType());
+            }
+        }
         nmsUtils.sendActionBar(player, player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
