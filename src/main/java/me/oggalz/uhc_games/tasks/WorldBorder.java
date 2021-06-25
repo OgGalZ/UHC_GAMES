@@ -1,18 +1,12 @@
 package me.oggalz.uhc_games.tasks;
 
-import javafx.concurrent.Task;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.state.StateManager;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.util.TimerTask;
 
 public class WorldBorder extends BukkitRunnable {
     private final Main main;

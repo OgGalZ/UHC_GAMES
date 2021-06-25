@@ -31,7 +31,7 @@ import java.util.stream.Stream;
 
 public class SecondaryListeners implements Listener {
 
-    private StateManager stateManager;
+    private final StateManager stateManager;
 
 
     public SecondaryListeners(StateManager stateManager) {

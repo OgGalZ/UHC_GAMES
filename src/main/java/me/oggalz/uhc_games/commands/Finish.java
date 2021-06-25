@@ -26,8 +26,8 @@ public class Finish implements CommandExecutor {
             Player player = (Player) commandSender;
             if (args.length == 0 && player.isOp() && player.getGameMode() == GameMode.CREATIVE) {
                 if(check){
-                    Arrays.stream(Finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> i.setType(Material.AIR));
-                    Arrays.stream(Finish.getArmor()).filter(Objects::nonNull).forEach(a -> a.setType(Material.AIR));
+                    Arrays.stream(this.getItemStacks()).filter(Objects::nonNull).forEach(i -> i.setType(Material.AIR));
+                    Arrays.stream(this.getArmor()).filter(Objects::nonNull).forEach(a -> a.setType(Material.AIR));
                 }
                 check = true;
                 player.sendMessage("C'est fait ! ");
@@ -46,11 +46,11 @@ public class Finish implements CommandExecutor {
         return false;
     }
 
-    public static ItemStack[] getItemStacks() {
+    public  ItemStack[] getItemStacks() {
         return itemStacks;
     }
 
-    public static ItemStack[] getArmor() {
+    public ItemStack[] getArmor() {
         return armor;
     }
 }

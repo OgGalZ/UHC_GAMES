@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games.tasks;
 
+import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.Main;
 
 import me.oggalz.uhc_games.commands.Finish;
@@ -7,6 +8,7 @@ import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.NmsUtils;
+import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.*;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Entity;
@@ -14,11 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -36,11 +34,15 @@ public class Teleportation extends BukkitRunnable implements Listener {
     private final NmsUtils nmsUtils;
     private double percentage = 0;
     private final StateManager stateManager;
+    private final Finish finish;
+    private final ScoreboardCreator scoreboardCreator;
 
-    public Teleportation(Main main, NmsUtils nmsUtils, StateManager stateManager) {
+    public Teleportation(Main main, NmsUtils nmsUtils, StateManager stateManager, Finish finish, ScoreboardCreator scoreboardCreator) {
         this.main = main;
         this.nmsUtils = nmsUtils;
         this.stateManager = stateManager;
+        this.finish = finish;
+        this.scoreboardCreator = scoreboardCreator;
     }
 
     @Override
@@ -101,7 +103,7 @@ public class Teleportation extends BukkitRunnable implements Listener {
 
     public void step3() {
         World world = Bukkit.getWorld("world");
-        int randomTP = generate(-WorldBorderGui.getBorderSize() / 2 - 5, WorldBorderGui.getBorderSize()/ 2 - 5);
+        int randomTP = generate(-WorldBorderGui.getBorderSize() / 2 - 5, WorldBorderGui.getBorderSize() / 2 - 5);
         for (Player player : Bukkit.getOnlinePlayers()) {
             Location location = new Location(world, randomTP, 120, randomTP);
             player.setGameMode(GameMode.SURVIVAL);
@@ -109,12 +111,19 @@ public class Teleportation extends BukkitRunnable implements Listener {
             worldBorder.setCenter(0, 0);
             worldBorder.setSize(WorldBorderGui.getBorderSize());
             player.teleport(location);
-                player.sendMessage(ChatColor.ITALIC + "Good Luck " + player.getName() + ChatColor.RED + "  :)");
-                Item.clearArmor(player);
-                player.getInventory().clear();
-                stateManager.startGame();
-            Arrays.stream(Finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
-            Arrays.stream(Finish.getArmor()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
+            player.sendMessage(ChatColor.ITALIC + "Good Luck " + player.getName() + ChatColor.RED + "  :)");
+            Item.clearArmor(player);
+            player.getInventory().clear();
+            scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
+            scoreboardCreator.createScoreboardGame(player);
+            scoreboardCreator.runScoreboardGame();
+            stateManager.startGame();
+            if(finish.getItemStacks() != null){
+                Arrays.stream(finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
+            }
+            if(finish.getArmor() != null){
+                Arrays.stream(finish.getArmor()).filter(Objects::nonNull).forEach(i -> player.getInventory().setArmorContents(finish.getArmor()));
+            }
         }
     }
 
@@ -138,7 +147,7 @@ public class Teleportation extends BukkitRunnable implements Listener {
     }
 
     private void runTp() {
-        Teleportation teleportation = new Teleportation(main, nmsUtils , stateManager);
+        Teleportation teleportation = new Teleportation(main, nmsUtils, stateManager, finish , scoreboardCreator);
         teleportation.runTaskTimer(main, 0, 20);
     }
 

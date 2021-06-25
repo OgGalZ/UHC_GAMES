@@ -41,19 +41,21 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         saveDefaultConfig();
+        
     }
 
     public void registersEvents() {
         PlayerManager playerManager = new PlayerManager();
         StateManager stateManager = new StateManager();
-        ScoreboardCreator scoreboardCreator = new ScoreboardCreator(playerManager);
+        ScoreboardCreator scoreboardCreator = new ScoreboardCreator( this, playerManager );
         CutClean cutClean = new CutClean();
         DiamondLimite diamondLimite = new DiamondLimite();
         HastyBoy hastyBoy = new HastyBoy();
         Timber timber = new Timber();
         NmsUtils nmsUtils = new NmsUtils();
+        Finish finish = new Finish();
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
-        getServer().getPluginManager().registerEvents(new Teleportation(this, nmsUtils , stateManager), this);
+        getServer().getPluginManager().registerEvents(new Teleportation(this, nmsUtils , stateManager , finish , scoreboardCreator), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);

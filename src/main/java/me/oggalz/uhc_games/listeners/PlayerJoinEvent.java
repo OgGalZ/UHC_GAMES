@@ -67,8 +67,8 @@ public class PlayerJoinEvent implements Listener {
             event.setJoinMessage(player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
             player.teleport(location);
             playerManager.addPlayer(player.getUniqueId());
-            scoreboardCreator.createScoreboard(player);
-            scoreboardCreator.refresh();
+            scoreboardCreator.createScoreboardLobby(player);
+            scoreboardCreator.refreshLobby();
             player.setFoodLevel(20);
             player.setHealth(20);
             player.getInventory().clear();
@@ -95,7 +95,7 @@ public class PlayerJoinEvent implements Listener {
 
         Player player = event.getPlayer();
         playerManager.removePlayer(player.getUniqueId());
-        scoreboardCreator.refresh();
+        scoreboardCreator.refreshLobby();
 
     }
 
