@@ -15,6 +15,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -89,5 +90,11 @@ public class SecondaryListeners implements Listener {
             ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
             player.getInventory().addItem(itemStack);
         }
+
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void uhcEnable(EntityRegainHealthEvent event) {
+        event.setAmount(0);
     }
 }

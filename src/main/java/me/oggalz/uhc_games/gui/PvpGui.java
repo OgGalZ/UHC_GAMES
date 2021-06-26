@@ -4,6 +4,7 @@ import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
+import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
 import org.bukkit.ChatColor;
@@ -87,6 +88,7 @@ public class PvpGui implements InventoryProvider {
     public static void setTimePvp(int value) {
         timePvp = value;
     }
+
 }
 
 

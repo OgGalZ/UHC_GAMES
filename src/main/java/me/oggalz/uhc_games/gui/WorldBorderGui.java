@@ -116,4 +116,12 @@ public class WorldBorderGui implements InventoryProvider {
     public static int getTimeBorder() {
         return timeBorder;
     }
+
+    public static void setBorderSize(int borderSize) {
+        WorldBorderGui.borderSize = borderSize;
+    }
+
+    public static void setTimeBorder(int timeBorder) {
+        WorldBorderGui.timeBorder = timeBorder;
+    }
 }

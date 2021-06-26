@@ -1,9 +1,7 @@
 package me.oggalz.uhc_games.tasks;
 
 import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.PvpGui;
-import me.oggalz.uhc_games.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -25,7 +23,7 @@ public class Pvp extends BukkitRunnable {
             cancel();
             enablePvp = true;
             for(Player player : Bukkit.getOnlinePlayers()){
-                player.playSound(player.getLocation() , Sound.WITHER_HURT, 99 , 2);
+                player.playSound(player.getLocation() , Sound.ENDERMAN_DEATH, 99 , 12);
             }
             Bukkit.broadcastMessage(ChatColor.DARK_RED + "Le PVP est maintenant activé !!");
         }
