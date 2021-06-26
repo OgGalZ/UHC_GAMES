@@ -37,6 +37,12 @@ public class ScoreboardCreator extends BukkitRunnable {
         if (seconds == 6) {
             numbersMinutes++;
             WorldBorderGui.setTimeBorder(WorldBorderGui.getTimeBorder() - 1);
+            if(WorldBorderGui.getTimeBorder() == 0){
+                Bukkit.broadcastMessage(ChatColor.GOLD + "Réduction de la bordure en cours ! ");
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.playSound(player.getLocation(), Sound.LAVA, 99, 12);
+                }
+            }
             this.numbersSeconds = 0;
             this.seconds = 0;
             if (numbersMinutes == 10) {
@@ -113,12 +119,8 @@ public class ScoreboardCreator extends BukkitRunnable {
                 } else {
                     board.set(ChatColor.RED + "PVP : " + ChatColor.WHITE + PvpGui.getTimePvp() + " minute(s)", 5);
                 }
-                if (WorldBorderGui.getTimeBorder() == 0) {
-                    Bukkit.broadcastMessage(ChatColor.GOLD + "Réduction de la bordure en cours ! ");
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.playSound(player.getLocation(), Sound.LAVA, 99, 12);
-                    }
-                    board.set(ChatColor.DARK_BLUE + "Border" + ChatColor.WHITE + "Réduction ", 4);
+                if (WorldBorderGui.getTimeBorder() <= 0) {
+                    board.set(ChatColor.DARK_BLUE + "Border" + ChatColor.WHITE + " Réduction ", 4);
                 } else {
                     board.set(ChatColor.DARK_BLUE + "Border : " + ChatColor.WHITE + WorldBorderGui.getTimeBorder() + " minute(s)", 4);
 

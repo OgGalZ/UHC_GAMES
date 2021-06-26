@@ -61,8 +61,6 @@ public class PlayerJoinEvent implements Listener {
             Item.clearArmor(player);
             player.setGameMode(GameMode.ADVENTURE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 9));
-            List<Integer> respawn = configuration.getIntegerList("respawn");
-            Bukkit.getWorld(player.getWorld().getName()).setSpawnLocation(respawn.get(0), respawn.get(1), respawn.get(2));
             if (player.isOp()) {
                 ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
                 player.getInventory().setItem(4, itemStack);

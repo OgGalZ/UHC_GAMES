@@ -23,7 +23,7 @@ public class Pvp extends BukkitRunnable {
             cancel();
             enablePvp = true;
             for(Player player : Bukkit.getOnlinePlayers()){
-                player.playSound(player.getLocation() , Sound.ENDERMAN_DEATH, 99 , 12);
+                player.playSound(player.getLocation() , Sound.FIREWORK_LARGE_BLAST,  99 , 12);
             }
             Bukkit.broadcastMessage(ChatColor.DARK_RED + "Le PVP est maintenant activé !!");
         }

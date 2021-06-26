@@ -1,15 +1,11 @@
 package me.oggalz.uhc_games.listeners;
 
-import fr.minuskube.inv.SmartInventory;
-import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.gui.PvpGui;
-import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.*;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,16 +15,11 @@ import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
-import javax.swing.text.html.Option;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class SecondaryListeners implements Listener {
 
@@ -72,12 +63,14 @@ public class SecondaryListeners implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void playerDeath(PlayerDeathEvent event) {
         Location location = event.getEntity().getLocation();
+        Player player = event.getEntity().getKiller();
         World world = event.getEntity().getWorld();
         if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
         }
-        if (PvpGui.getNumbersGaps() != 0 && stateManager.hasStarted()) {
+        if (PvpGui.getNumbersGaps() != 0 && stateManager.hasStarted() && player != null) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
+
         }
     }
 
@@ -95,6 +88,11 @@ public class SecondaryListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void uhcEnable(EntityRegainHealthEvent event) {
-        event.setAmount(0);
+        Optional<Player> player = Optional.ofNullable((Player) event.getEntity());
+        if(player.isPresent() && player.get().hasPotionEffect(PotionEffectType.REGENERATION)){
+            event.setCancelled(false);
+        }else{
+            event.setCancelled(true);
+        }
     }
 }

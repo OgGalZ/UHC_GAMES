@@ -6,18 +6,13 @@ import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
-import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.tasks.Teleportation;
-import me.oggalz.uhc_games.tasks.WorldBorder;
 import me.oggalz.uhc_games.utils.NmsUtils;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
 import java.util.logging.Level;
 
 public class Main extends JavaPlugin {
@@ -25,9 +20,8 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        StateManager stateManager = new StateManager(this);
-        Pvp pvp = new Pvp(this);
-        WorldBorder worldBorderClass = new WorldBorder(this, stateManager);
+        List<Integer> respawn = this.getConfig().getIntegerList("respawn");
+        Bukkit.getWorld("world").setSpawnLocation(respawn.get(0), respawn.get(1), respawn.get(2));
         getLogger().log(Level.INFO, "Le plugin s'est bien lancé");
         registersEvents();
         registersCommands();
