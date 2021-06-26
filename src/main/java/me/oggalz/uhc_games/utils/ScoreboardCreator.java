@@ -32,11 +32,15 @@ public class ScoreboardCreator extends BukkitRunnable {
     @Override
     public void run() {
         refreshGame();
+        if(numbersMinutes == 9 && minutes == 5){
+            numbersMinutes = 0;
+            minutes = 0;
+            hours++;
+        }
         numbersSeconds++;
-
-        if (seconds == 6) {
+        if (numbersSeconds == 9 && seconds == 5) {
             numbersMinutes++;
-            WorldBorderGui.setTimeBorder(WorldBorderGui.getTimeBorder() - 1);
+            WorldBorderGui.setTimeBorder(WorldBorderGui.getTimeBorder() - 1 );
             if(WorldBorderGui.getTimeBorder() == 0){
                 Bukkit.broadcastMessage(ChatColor.GOLD + "Réduction de la bordure en cours ! ");
                 for (Player player : Bukkit.getOnlinePlayers()) {
@@ -47,12 +51,7 @@ public class ScoreboardCreator extends BukkitRunnable {
             this.seconds = 0;
             if (numbersMinutes == 10) {
                 minutes++;
-                if (minutes == 6) {
-                    minutes = 0;
-                    hours++;
-                }
                 this.numbersMinutes = 0;
-
             }
         }
         if (numbersSeconds == 10) {
@@ -105,7 +104,10 @@ public class ScoreboardCreator extends BukkitRunnable {
     }
 
     public void deleteScoreboard(BPlayerBoard board) {
-        board.delete();
+        if(board!= null){
+            board.delete();
+        }
+
     }
 
     public void refreshGame() {
@@ -114,14 +116,14 @@ public class ScoreboardCreator extends BukkitRunnable {
             if (board != null) {
                 board.set(ChatColor.BLACK + "Time :  " + hours + ":" + minutes + numbersMinutes + ":" + seconds + numbersSeconds, 6);
                 board.set(ChatColor.WHITE + "Episode(s) : " + ChatColor.WHITE + episode, 10);
-                if (PvpGui.getTimePvp() == 0) {
+                if (PvpGui.getTimePvp() <= 0) {
                     board.set(ChatColor.RED + "PVP : " + ChatColor.GREEN + "Activé", 5);
-                } else {
+                } if(PvpGui.getTimePvp() > 0) {
                     board.set(ChatColor.RED + "PVP : " + ChatColor.WHITE + PvpGui.getTimePvp() + " minute(s)", 5);
                 }
                 if (WorldBorderGui.getTimeBorder() <= 0) {
-                    board.set(ChatColor.DARK_BLUE + "Border" + ChatColor.WHITE + " Réduction ", 4);
-                } else {
+                    board.set(ChatColor.DARK_BLUE + "Border" + ChatColor.WHITE + ": Réduction ", 4);
+                } if(WorldBorderGui.getTimeBorder() > 0){
                     board.set(ChatColor.DARK_BLUE + "Border : " + ChatColor.WHITE + WorldBorderGui.getTimeBorder() + " minute(s)", 4);
 
                 }

@@ -34,10 +34,10 @@ public class Teleportation extends BukkitRunnable implements Listener {
     private boolean test = false;
     private final Main main;
     private final NmsUtils nmsUtils;
-    private double percentage = 0;
     private final StateManager stateManager;
     private final Finish finish;
     private final ScoreboardCreator scoreboardCreator;
+    private final Random random;
 
 
     public Teleportation(Main main, NmsUtils nmsUtils, StateManager stateManager, Finish finish, ScoreboardCreator scoreboardCreator) {
@@ -46,16 +46,13 @@ public class Teleportation extends BukkitRunnable implements Listener {
         this.stateManager = stateManager;
         this.finish = finish;
         this.scoreboardCreator = scoreboardCreator;
+        random = new Random();
     }
 
     @Override
     public void run() {
         step1();
-        actionBarInfos();
-        if (start < 0) {
-            step3();
 
-        }
     }
 
 
@@ -81,14 +78,27 @@ public class Teleportation extends BukkitRunnable implements Listener {
     }
 
     public void step1() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            if (start == 0) {
-                cancel();
-            }
-            player.playSound(player.getLocation(), Sound.FIREWORK_LARGE_BLAST, 99, 2);
-            Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
-            start--;
+        if (start <= 0) {
+            cancel();
+            step3();
         }
+        if (start == 30) {
+            Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
+        }
+        if (start == 20) {
+            Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
+        }
+        if (start == 10) {
+            Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
+        }
+        if (start <= 5) {
+            Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
+        }
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player.getLocation(), Sound.FIREWORK_LARGE_BLAST, 99, 2);
+        }
+        start--;
+
     }
 
     public void step2() {
@@ -106,26 +116,28 @@ public class Teleportation extends BukkitRunnable implements Listener {
 
     public void step3() {
         World world = Bukkit.getWorld("world");
-        int randomTP = generate(-WorldBorderGui.getBorderSize() / 2 - 5, WorldBorderGui.getBorderSize() / 2 - 5);
+        int randomTP = generate(-WorldBorderGui.getBorderSize() / 2, WorldBorderGui.getBorderSize() / 2);
         for (Player player : Bukkit.getOnlinePlayers()) {
-            Location location = new Location(world, randomTP, 120, randomTP);
+            Location location = new Location(world, randomTP, 90, randomTP);
             player.teleport(location);
             player.setGameMode(GameMode.SURVIVAL);
             WorldBorder worldBorder = world.getWorldBorder();
             worldBorder.setCenter(0, 0);
+            worldBorder.setDamageAmount(2);
+            worldBorder.setDamageBuffer(0);
             worldBorder.setSize(WorldBorderGui.getBorderSize());
             player.teleport(location);
-            player.sendMessage(ChatColor.ITALIC + "Good Luck " + player.getName() + ChatColor.RED + "  :)");
             Item.clearArmor(player);
             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS ,100  , 999999999));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW ,100 , 999999999));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE ,100, 9));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 999999999));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 999999999));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 9));
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);
             scoreboardCreator.runScoreboardGame();
-            stateManager.startGame();if (finish.getItemStacks() != null) {
+            stateManager.startGame();
+            if (finish.getItemStacks() != null) {
                 Arrays.stream(finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
             }
             if (finish.getArmor() != null) {
@@ -134,21 +146,10 @@ public class Teleportation extends BukkitRunnable implements Listener {
         }
     }
 
-    public void actionBarInfos() {
-        percentage += 3.3;
-        int percentage1 = (int) percentage;
-        if (percentage1 > 100) {
-            percentage1 = 100;
-        }
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            nmsUtils.sendActionBar(player, percentage1 + "%");
-        }
-    }
 
-    public static int generate(int borneInf, int borneSup) {
-        Random random = new Random();
+    public int generate(int borneInf, int borneSup) {
         int nb;
-        nb = borneInf + random.nextInt(borneSup - borneInf);
+        nb = borneInf + this.random.nextInt(borneSup - borneInf);
         return nb;
 
     }

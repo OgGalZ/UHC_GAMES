@@ -46,7 +46,7 @@ public class Main extends JavaPlugin {
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
         getServer().getPluginManager().registerEvents(new Teleportation(this, nmsUtils , stateManager , finish , scoreboardCreator), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(stateManager , playerManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
 
     }

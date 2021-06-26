@@ -85,10 +85,9 @@ public class PvpGui implements InventoryProvider {
         return timePvp;
     }
 
-    public static void setTimePvp(int value) {
-        timePvp = value;
+    public static void setTimePvp(int timePvp) {
+        me.oggalz.uhc_games.gui.PvpGui.timePvp = timePvp;
     }
-
 }
 
 

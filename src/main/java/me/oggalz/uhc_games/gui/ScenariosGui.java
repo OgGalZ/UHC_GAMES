@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ScenariosGui implements InventoryProvider {
 
-
+    private  static boolean finalHeal = false;
     private final List<ItemStack> itemStacks = new ArrayList<>();
     private static int x = 0;
 
@@ -28,7 +28,7 @@ public class ScenariosGui implements InventoryProvider {
         itemStacks.add(Item.createItemstack(Material.WOOD_AXE, 1, ChatColor.GREEN + "Timber", null));
         itemStacks.add(Item.createItemstack(Material.APPLE, 1, ChatColor.GOLD + "Vanilla+", null));
         itemStacks.add(Item.createItemstack(Material.DIAMOND_PICKAXE, 1, ChatColor.GRAY + "Hasty Boy", null));
-        itemStacks.add(Item.createItemstack(Material.POTION, 1, ChatColor.RED + "Final Heal", null));
+        itemStacks.add(Item.createItemstack(Material.BLAZE_ROD, 1, ChatColor.RED + "Final Heal", null));
         itemStacks.add(Item.createItemstack(Material.IRON_INGOT, 1, ChatColor.DARK_AQUA + "Cut Clean", null));
 
 
@@ -97,8 +97,10 @@ public class ScenariosGui implements InventoryProvider {
         contents.set(2, 4, ClickableItem.of(itemStacks.get(3), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
+                finalHeal = true;
                 itemStacks.get(3).addUnsafeEnchantment(Enchantment.DAMAGE_UNDEAD, 1);
             } else if (e.isRightClick()) {
+                finalHeal = false;
                 itemStacks.get(3).removeEnchantment(Enchantment.DAMAGE_UNDEAD);
             }
         }));
@@ -118,4 +120,7 @@ public class ScenariosGui implements InventoryProvider {
         return x;
     }
 
+    public  static boolean isFinalHeal() {
+        return finalHeal;
+    }
 }

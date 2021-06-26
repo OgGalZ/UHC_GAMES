@@ -1,7 +1,9 @@
 package me.oggalz.uhc_games.listeners;
 
+import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.gui.PvpGui;
+import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.utils.Item;
@@ -24,11 +26,11 @@ import java.util.Optional;
 public class SecondaryListeners implements Listener {
 
     private final StateManager stateManager;
+    private final PlayerManager playerManager;
 
-
-    public SecondaryListeners(StateManager stateManager) {
+    public SecondaryListeners(StateManager stateManager, PlayerManager playerManager) {
         this.stateManager = stateManager;
-
+        this.playerManager = playerManager;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -64,13 +66,17 @@ public class SecondaryListeners implements Listener {
     public void playerDeath(PlayerDeathEvent event) {
         Location location = event.getEntity().getLocation();
         Player player = event.getEntity().getKiller();
+        Player playerDeath = event.getEntity();
         World world = event.getEntity().getWorld();
         if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
         }
-        if (PvpGui.getNumbersGaps() != 0 && stateManager.hasStarted() && player != null) {
+        if (PvpGui.getNumbersGaps() != 0 && stateManager.hasStarted()) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
-
+        }
+        if (player != null && playerDeath != null) {
+            playerManager.getPlayer(player.getUniqueId()).addKill(1);
+            Netherboard.instance().getBoard(player).set(ChatColor.RED + "Kill(s) : " + playerManager.getPlayer(player.getUniqueId()).getKill(), 11);
         }
     }
 
