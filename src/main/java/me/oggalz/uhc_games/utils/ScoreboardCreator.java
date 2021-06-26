@@ -20,6 +20,7 @@ public class ScoreboardCreator extends BukkitRunnable {
     private int seconds = 0;
     private int numbersMinutes = 0;
     private int minutes = 0;
+    private int episode = 1;
     private int hours = 0;
 
     public ScoreboardCreator(Main main, PlayerManager playerManager) {
@@ -30,20 +31,30 @@ public class ScoreboardCreator extends BukkitRunnable {
     @Override
     public void run() {
         refreshGame();
-
         numbersSeconds++;
+
         if (seconds == 6) {
             numbersMinutes++;
             this.numbersSeconds = 0;
             this.seconds = 0;
             if (numbersMinutes == 10) {
                 minutes++;
+                if(minutes == 6){
+                    minutes = 0;
+                    hours++;
+                }
                 this.numbersMinutes = 0;
+                if(minutes == 2){
+                    hours++;
+                }
             }
         }
         if (numbersSeconds == 10) {
             this.numbersSeconds = 0;
             seconds++;
+        }
+        if(minutes == 2){
+            episode++;
         }
 
 
@@ -75,14 +86,14 @@ public class ScoreboardCreator extends BukkitRunnable {
         board.set(ChatColor.DARK_RED + "{INFORMATIONS} ", 14);
         board.set("", 13);
         board.set(ChatColor.DARK_GRAY + "Role : ", 12);
-        board.set(ChatColor.RED+ "Kill : ", 11);
+        board.set(ChatColor.RED + "Kill(s) : ", 11);
         board.set(ChatColor.WHITE + "Episode : ", 10);
-        board.set(ChatColor.BLUE + "Joueurs : ", 9);
+        board.set(ChatColor.BLUE + "Joueurs : " +ChatColor.WHITE +  playerManager.getPlayers(), 9);
         board.set("", 8);
         board.set(ChatColor.DARK_RED + "{TIMERS} ", 7);
         board.set(ChatColor.BLACK + "Time : ", 6);
-        board.set(ChatColor.RED + "PVP : " , 5);
-        board.set(ChatColor.RED + "Border" , 4);
+        board.set(ChatColor.RED + "PVP : ", 5);
+        board.set(ChatColor.DARK_BLUE + "Border", 4);
         board.set(ChatColor.WHITE + "Centre ", 3);
 
     }
@@ -92,12 +103,17 @@ public class ScoreboardCreator extends BukkitRunnable {
     }
 
     public void refreshGame() {
-        Pvp pvp = new Pvp(main);
         for (Player x : Bukkit.getOnlinePlayers()) {
             BPlayerBoard board = Netherboard.instance().getBoard(x);
             if (board != null) {
                 board.set(ChatColor.BLACK + "Time :  " + hours + ":" + minutes + numbersMinutes + ":" + seconds + numbersSeconds, 6);
-                board.set(ChatColor.RED + "PVP : "  + pvp.getTimePvpGet() , 5);
+                board.set(ChatColor.WHITE + "Episode(s) : " + ChatColor.WHITE + episode,  10);
+                if (PvpGui.getTimePvp()== 0) {
+                    board.set(ChatColor.RED + "PVP : " + ChatColor.GREEN + "Activé", 5);
+                } else  {
+                    board.set(ChatColor.RED + "PVP : " + ChatColor.WHITE + PvpGui.getTimePvp() + " minute(s)", 5);
+                }
+
             }
         }
 

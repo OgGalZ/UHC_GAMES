@@ -39,6 +39,7 @@ public class Teleportation extends BukkitRunnable implements Listener {
     private final Finish finish;
     private final ScoreboardCreator scoreboardCreator;
 
+
     public Teleportation(Main main, NmsUtils nmsUtils, StateManager stateManager, Finish finish, ScoreboardCreator scoreboardCreator) {
         this.main = main;
         this.nmsUtils = nmsUtils;

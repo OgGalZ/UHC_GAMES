@@ -75,7 +75,7 @@ public class SecondaryListeners implements Listener {
         if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
         }
-        if (PvpGui.getNumbersGaps() != 0) {
+        if (PvpGui.getNumbersGaps() != 0 && stateManager.hasStarted()) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, PvpGui.getNumbersGaps(), null, null));
         }
     }

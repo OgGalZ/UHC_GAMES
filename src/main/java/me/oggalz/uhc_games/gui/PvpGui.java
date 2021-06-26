@@ -27,20 +27,22 @@ public class PvpGui implements InventoryProvider {
     public void init(Player player, InventoryContents contents) {
         contents.set(1, 2, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceRed.getId(), ChatColor.RED + "Reduce of 10 minutes"), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            timePvp -= 10;
+            this.timePvp -= 10;
         }));
         contents.set(1, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceOrange.getId(), ChatColor.GOLD + "Reduce of 1 minute "), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            timePvp -= 1;
+            this.timePvp -= 1;
+
 
         }));
         contents.set(1, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseGreen.getId(), ChatColor.GREEN + "Increase of 1 minute"), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            timePvp += 1;
+            this.timePvp += 1;
+
         }));
         contents.set(1, 6, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "Increase of 10 minutes "), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            timePvp += 10;
+            this.timePvp+= 10;
 
 
         }));
@@ -66,7 +68,7 @@ public class PvpGui implements InventoryProvider {
 
         if(getTimePvp() < 0){
             player.sendMessage(ChatColor.GOLD + "Vous ne pouvez pas mettre un nombre négatif ");
-            timePvp = 0;
+            this.timePvp = 0;
         }
         contents.set(1, 4, ClickableItem.of(Item.createItemstack(Material.DIAMOND_SWORD, 1, ChatColor.WHITE + "" + getTimePvp() + " "+ "minute(s)", null), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)));
         contents.set(2, 4, ClickableItem.of(Item.createItemstack(Material.GOLDEN_APPLE, getNumbersGaps(), null, null), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)));
@@ -78,8 +80,12 @@ public class PvpGui implements InventoryProvider {
         return numbersGaps;
     }
 
-    public static int getTimePvp() {
+    public  static  int getTimePvp() {
         return timePvp;
+    }
+
+    public static void setTimePvp(int value) {
+        timePvp = value;
     }
 }
 
