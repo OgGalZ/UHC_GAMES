@@ -39,7 +39,6 @@ public class Finish implements CommandExecutor {
                 player.getInventory().addItem(Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null));
 
                 return true;
-
             }
         }
 
