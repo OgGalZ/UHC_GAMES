@@ -21,6 +21,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
+import javax.swing.table.TableRowSorter;
+import java.io.IOException;
 import java.util.Optional;
 
 public class SecondaryListeners implements Listener {
@@ -92,13 +94,12 @@ public class SecondaryListeners implements Listener {
 
     }
 
-    @EventHandler(priority = EventPriority.NORMAL)
+  /*  @EventHandler(priority = EventPriority.NORMAL)
     public void uhcEnable(EntityRegainHealthEvent event) {
-        Optional<Player> player = Optional.ofNullable((Player) event.getEntity());
-        if(player.isPresent() && player.get().hasPotionEffect(PotionEffectType.REGENERATION)){
-            event.setCancelled(false);
-        }else{
-            event.setCancelled(true);
-        }
-    }
+
+            Optional<Player> player = Optional.ofNullable((Player) event.getEntity());
+            event.setCancelled(!player.isPresent() || !player.get().hasPotionEffect(PotionEffectType.REGENERATION));
+
+
+    }*/
 }

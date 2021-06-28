@@ -35,16 +35,16 @@ me/oggalz/uhc_games/player/Player.java
  me.oggalz.uhc_games.player.Player
 me/oggalz/uhc_games/gui/PvpGui.java
  me.oggalz.uhc_games.gui.PvpGui
-me/oggalz/uhc_games/tasks/WorldBorder.java
- me.oggalz.uhc_games.tasks.WorldBorder
 me/oggalz/uhc_games/gui/MainGui.java
  me.oggalz.uhc_games.gui.MainGui
-me/oggalz/uhc_games/state/StateManager.java
- me.oggalz.uhc_games.state.StateManager
-me/oggalz/uhc_games/tasks/Pvp.java
- me.oggalz.uhc_games.tasks.Pvp
 me/oggalz/uhc_games/listeners/SecondaryListeners.java
  me.oggalz.uhc_games.listeners.SecondaryListeners
+me/oggalz/uhc_games/state/StateManager.java
+ me.oggalz.uhc_games.state.StateManager
+me/oggalz/uhc_games/tasks/WorldBorder.java
+ me.oggalz.uhc_games.tasks.WorldBorder
+me/oggalz/uhc_games/tasks/Pvp.java
+ me.oggalz.uhc_games.tasks.Pvp
 me/oggalz/uhc_games/utils/ScoreboardCreator.java
  me.oggalz.uhc_games.utils.ScoreboardCreator
 me/oggalz/uhc_games/tasks/Teleportation.java

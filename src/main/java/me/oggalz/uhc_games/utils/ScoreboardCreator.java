@@ -6,6 +6,7 @@ import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.tasks.WorldBorder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -104,9 +105,7 @@ public class ScoreboardCreator extends BukkitRunnable {
     }
 
     public void deleteScoreboard(BPlayerBoard board) {
-        if(board!= null){
             board.delete();
-        }
 
     }
 
@@ -121,9 +120,9 @@ public class ScoreboardCreator extends BukkitRunnable {
                 } if(PvpGui.getTimePvp() > 0) {
                     board.set(ChatColor.RED + "PVP : " + ChatColor.WHITE + PvpGui.getTimePvp() + " minute(s)", 5);
                 }
-                if (WorldBorderGui.getTimeBorder() <= 0) {
+                if (WorldBorder.getEnable()) {
                     board.set(ChatColor.DARK_BLUE + "Border" + ChatColor.WHITE + ": Réduction ", 4);
-                } if(WorldBorderGui.getTimeBorder() > 0){
+                } if(!WorldBorder.getEnable()){
                     board.set(ChatColor.DARK_BLUE + "Border : " + ChatColor.WHITE + WorldBorderGui.getTimeBorder() + " minute(s)", 4);
 
                 }

@@ -22,27 +22,17 @@ public class Pvp extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (PvpGui.getTimePvp() == 0) {
-            cancel();
-            enablePvp = true;
-        }
-
+        Bukkit.broadcastMessage("PVP : seconde " + i);
+        Bukkit.broadcastMessage("PVP :  " + PvpGui.getTimePvp());
         if (this.i == 59) {
             this.i = 0;
             PvpGui.setTimePvp(PvpGui.getTimePvp() - 1);
-            if (PvpGui.getTimePvp() == 0) {
+            if (PvpGui.getTimePvp() <= 0) {
                 enablePvp = true;
                 cancel();
             }
         }
-        if (PvpGui.getTimePvp() == 0) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                player.playSound(player.getLocation(), Sound.FIREWORK_LARGE_BLAST, 99, 12);
-                if (ScenariosGui.isFinalHeal()) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 555));
-                }
-            }
-        }
+
         i++;
     }
 
