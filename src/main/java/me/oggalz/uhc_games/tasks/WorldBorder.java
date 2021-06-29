@@ -1,8 +1,6 @@
 package me.oggalz.uhc_games.tasks;
 
-import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
-import me.oggalz.uhc_games.state.StateManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
@@ -29,7 +27,7 @@ public class WorldBorder extends BukkitRunnable{
         worldBorderGui.setBorderSize(worldBorderGui.getBorderSize() - 1);
         worldBorder.setSize(worldBorderGui.getBorderSize());
         if (worldBorder.getSize() <=125) {
-        cancel();
+
         }
 
     }

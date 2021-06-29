@@ -32,31 +32,31 @@ me/oggalz/uhc_games/utils/Item.java
  me.oggalz.uhc_games.utils.Item
 me/oggalz/uhc_games/gui/ScenariosGui.java
  me.oggalz.uhc_games.gui.ScenariosGui
-me/oggalz/uhc_games/tasks/WorldBorder.java
- me.oggalz.uhc_games.tasks.WorldBorder
-me/oggalz/uhc_games/tasks/Pvp.java
- me.oggalz.uhc_games.tasks.Pvp
+me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
+ me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/tasks/Scheduler.java
  me.oggalz.uhc_games.tasks.Scheduler
+me/oggalz/uhc_games/tasks/Pvp.java
+ me.oggalz.uhc_games.tasks.Pvp
+me/oggalz/uhc_games/utils/ScoreboardCreator.java
+ me.oggalz.uhc_games.utils.ScoreboardCreator
+me/oggalz/uhc_games/scenarios/Timber.java
+ me.oggalz.uhc_games.scenarios.Timber
+ me.oggalz.uhc_games.scenarios.Timber$1
 me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
 me/oggalz/uhc_games/tasks/TaskFactory.java
  me.oggalz.uhc_games.tasks.TaskFactory
-me/oggalz/uhc_games/utils/ScoreboardCreator.java
- me.oggalz.uhc_games.utils.ScoreboardCreator
 me/oggalz/uhc_games/listeners/SecondaryListeners.java
  me.oggalz.uhc_games.listeners.SecondaryListeners
 me/oggalz/uhc_games/gui/MainGui.java
  me.oggalz.uhc_games.gui.MainGui
-me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
- me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/tasks/Teleportation.java
  me.oggalz.uhc_games.tasks.Teleportation
 me/oggalz/uhc_games/tasks/TaskManager.java
  me.oggalz.uhc_games.tasks.TaskManager
-me/oggalz/uhc_games/scenarios/Timber.java
- me.oggalz.uhc_games.scenarios.Timber
- me.oggalz.uhc_games.scenarios.Timber$1
+me/oggalz/uhc_games/tasks/WorldBorder.java
+ me.oggalz.uhc_games.tasks.WorldBorder
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main
 me/oggalz/uhc_games/listeners/PlayerJoinEvent.java

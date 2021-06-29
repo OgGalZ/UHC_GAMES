@@ -7,8 +7,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
-public class Pvp implements Runnable {
+public class Pvp extends BukkitRunnable {
 
 
     private final PlayerManager playerManager;
@@ -22,9 +23,6 @@ public class Pvp implements Runnable {
 
     }
 
-    public boolean isEnablePvp() {
-        return enablePvp;
-    }
 
     @Override
     public void run() {
@@ -39,8 +37,9 @@ public class Pvp implements Runnable {
             }
         }
 
-
-
+    }
+    public boolean isEnablePvp() {
+        return enablePvp;
     }
 
 

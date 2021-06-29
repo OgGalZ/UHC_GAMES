@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games.tasks;
 
+import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.ScenariosGui;
@@ -15,19 +16,18 @@ public class TaskFactory {
     private final ScenariosGui scenariosGui;
     private final PvpGui pvpGui;
     private final WorldBorderGui worldBorderGui;
-    private final StateManager stateManager;
     private final Finish finish;
     private final ScoreboardCreator scoreboardCreator;
-
-    public TaskFactory(int id, PlayerManager playerManager, ScenariosGui scenariosGui, PvpGui pvpGui, WorldBorderGui worldBorderGui, StateManager stateManager, Finish finish, ScoreboardCreator scoreboardCreator) {
+    private final Main main;
+    public TaskFactory(int id, PlayerManager playerManager, ScenariosGui scenariosGui, PvpGui pvpGui, WorldBorderGui worldBorderGui, Finish finish, ScoreboardCreator scoreboardCreator, Main main) {
         this.id = id;
         this.playerManager = playerManager;
         this.scenariosGui = scenariosGui;
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
-        this.stateManager = stateManager;
         this.finish = finish;
         this.scoreboardCreator = scoreboardCreator;
+        this.main = main;
     }
 
     public Pvp createPvpTask() {
@@ -39,6 +39,7 @@ public class TaskFactory {
     }
 
     public Teleportation teleportation() {
+        StateManager stateManager = new StateManager(main, pvpGui , worldBorderGui , this);
         return new Teleportation(stateManager, finish, scoreboardCreator, worldBorderGui);
     }
 

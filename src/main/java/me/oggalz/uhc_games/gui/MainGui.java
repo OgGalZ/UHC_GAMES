@@ -28,12 +28,10 @@ public class MainGui implements InventoryProvider {
     private boolean enable;
     private final Main main;
     private final TaskFactory taskFactory;
-    private final Teleportation teleportation;
 
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, TaskFactory taskFactory, Teleportation teleportation) {
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, TaskFactory taskFactory) {
         this.main = main;
         this.taskFactory = taskFactory;
-        this.teleportation = teleportation;
         enable = false;
         this.pvpGui = pvpGui;
         this.scenarioGui = scenarioGui;
@@ -78,7 +76,7 @@ public class MainGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (!enable) {
                 enable = true;
-                teleportation.runTaskTimer(main , 0 , 20);
+                Bukkit.getScheduler().runTaskTimer(main , (Runnable) taskFactory.teleportation(),   0 , 20L);
             }
         }));
 
