@@ -31,8 +31,4 @@ public class WorldBorder extends BukkitRunnable {
 
     }
 
-
-    public  boolean getEnable() {
-        return enable;
-    }
 }

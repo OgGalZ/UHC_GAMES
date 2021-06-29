@@ -4,6 +4,7 @@ import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.gui.MainGui;
 import me.oggalz.uhc_games.gui.PvpGui;
+import me.oggalz.uhc_games.gui.ScenariosGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
@@ -20,6 +21,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import javax.swing.table.TableRowSorter;
@@ -31,12 +33,16 @@ public class SecondaryListeners implements Listener {
     private final StateManager stateManager;
     private final PlayerManager playerManager;
     private final PvpGui pvpGui;
+    private final Pvp pvp;
+    private final ScenariosGui scenariosGui;
 
-    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui) {
+    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui, Pvp pvp, ScenariosGui scenariosGui) {
         this.mainGUi = mainGUi;
         this.stateManager = stateManager;
         this.playerManager = playerManager;
         this.pvpGui = pvpGui;
+        this.pvp = pvp;
+        this.scenariosGui = scenariosGui;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -62,8 +68,16 @@ public class SecondaryListeners implements Listener {
             if (event.getEntity() instanceof Player) {
                 event.setCancelled(true);
             }
-            if (Pvp.isEnablePvp()) {
+            if (pvp.isEnablePvp()) {
                 event.setCancelled(false);
+                if (scenariosGui.isFinalHeal()) {
+                    Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Activation du scénario FinalHeal ! ");
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        if (playerManager.containsplayers(player.getUniqueId())) {
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 99999999));
+                        }
+                    }
+                }
             }
         }
     }

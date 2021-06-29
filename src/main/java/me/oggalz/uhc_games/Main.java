@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
     private Finish finish;
     private StateManager stateManager;
     private SmartInventory mainGui;
+    private TaskManager taskManager;
 
     @Override
     public void onEnable() {
@@ -43,13 +44,11 @@ public class Main extends JavaPlugin {
 
         finish = new Finish();
 
-        Pvp pvp = new Pvp(guiManager.getPvpGui().getTimePvp());
+        Pvp pvp = new Pvp();
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, worldBorderGui);
         WorldBorder worldBorder = new WorldBorder(this, worldBorderGui);
-
-        TaskManager taskManager = new TaskManager(pvp, teleportation, worldBorder);
-
-        stateManager = new StateManager(this, pvp, worldBorder);
+        stateManager = new StateManager(this, pvp, worldBorder, guiManager.getPvpGui(), guiManager.getWorldBorderGui());
+        taskManager = new TaskManager(pvp, teleportation, worldBorder);
 
         SmartInventory pvpInventory = SmartInventory.builder()
                 .id("PvpGui")
@@ -105,7 +104,7 @@ public class Main extends JavaPlugin {
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
 
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui()), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), taskManager.getPvp() ,guiManager.getScenariosGui()), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
     }
 

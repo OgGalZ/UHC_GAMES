@@ -95,7 +95,6 @@ public class Teleportation extends BukkitRunnable {
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);
-            scoreboardCreator.runScoreboardGame();
             stateManager.startGame();
             if (finish.getItemStacks() != null) {
                 Arrays.stream(finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));

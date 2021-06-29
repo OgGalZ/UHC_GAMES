@@ -14,57 +14,16 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 
-public class ScoreboardCreator extends BukkitRunnable {
+public class ScoreboardCreator {
 
     private final Main main;
     private final PlayerManager playerManager;
-    private int numbersSeconds = 0;
-    private int seconds = 0;
-    private int numbersMinutes = 0;
-    private int minutes = 0;
-    private int episode = 1;
-    private int hours = 0;
 
     public ScoreboardCreator(Main main, PlayerManager playerManager) {
         this.main = main;
         this.playerManager = playerManager;
     }
 
-    @Override
-    public void run() {
-        refreshGame();
-        if(numbersMinutes == 9 && minutes == 5){
-            numbersMinutes = 0;
-            minutes = 0;
-            hours++;
-        }
-        numbersSeconds++;
-        if (numbersSeconds == 9 && seconds == 5) {
-            numbersMinutes++;
-            WorldBorderGui.setTimeBorder(WorldBorderGui.getTimeBorder() - 1 );
-            if(WorldBorderGui.getTimeBorder() == 0){
-                Bukkit.broadcastMessage(ChatColor.GOLD + "Réduction de la bordure en cours ! ");
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.playSound(player.getLocation(), Sound.LAVA, 99, 12);
-                }
-            }
-            this.numbersSeconds = 0;
-            this.seconds = 0;
-            if (numbersMinutes == 10) {
-                minutes++;
-                this.numbersMinutes = 0;
-            }
-        }
-        if (numbersSeconds == 10) {
-            this.numbersSeconds = 0;
-            seconds++;
-        }
-        if (minutes == 2) {
-            episode++;
-        }
-
-
-    }
 
     public void createScoreboardLobby(Player player) {
         BPlayerBoard board = Netherboard.instance().createBoard(player, ChatColor.DARK_AQUA + "{Hobbit UHC}");
@@ -105,36 +64,9 @@ public class ScoreboardCreator extends BukkitRunnable {
     }
 
     public void deleteScoreboard(BPlayerBoard board) {
-            board.delete();
-
-    }
-
-    public void refreshGame() {
-        for (Player x : Bukkit.getOnlinePlayers()) {
-            BPlayerBoard board = Netherboard.instance().getBoard(x);
-            if (board != null) {
-                board.set(ChatColor.BLACK + "Time :  " + hours + ":" + minutes + numbersMinutes + ":" + seconds + numbersSeconds, 6);
-                board.set(ChatColor.WHITE + "Episode(s) : " + ChatColor.WHITE + episode, 10);
-                if (PvpGui.getTimePvp() <= 0) {
-                    board.set(ChatColor.RED + "PVP : " + ChatColor.GREEN + "Activé", 5);
-                } if(PvpGui.getTimePvp() > 0) {
-                    board.set(ChatColor.RED + "PVP : " + ChatColor.WHITE + PvpGui.getTimePvp() + " minute(s)", 5);
-                }
-                if (WorldBorder.getEnable()) {
-                    board.set(ChatColor.DARK_BLUE + "Border" + ChatColor.WHITE + ": Réduction ", 4);
-                } if(!WorldBorder.getEnable()){
-                    board.set(ChatColor.DARK_BLUE + "Border : " + ChatColor.WHITE + WorldBorderGui.getTimeBorder() + " minute(s)", 4);
-
-                }
-
-            }
-        }
+        board.delete();
 
     }
 
 
-    public void runScoreboardGame() {
-        ScoreboardCreator scoreboardCreator = new ScoreboardCreator(main, playerManager);
-        scoreboardCreator.runTaskTimer(main, 0, 20);
-    }
 }

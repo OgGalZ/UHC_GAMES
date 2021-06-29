@@ -88,9 +88,6 @@ public class PvpGui implements InventoryProvider {
         return timePvp;
     }
 
-    public  void setTimePvp(int timePvp) {
-        this.timePvp = timePvp;
-    }
 }
 
 

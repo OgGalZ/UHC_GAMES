@@ -113,7 +113,5 @@ public class WorldBorderGui implements InventoryProvider {
         this.borderSize = borderSize;
     }
 
-    public void setTimeBorder(int timeBorder) {
-        this.timeBorder = timeBorder;
-    }
+
 }

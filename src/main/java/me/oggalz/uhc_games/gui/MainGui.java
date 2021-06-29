@@ -38,7 +38,6 @@ public class MainGui implements InventoryProvider {
         this.scenarioGui = scenarioGui;
         this.worldBorder = worldBorder;
         this.teleportation = teleportation;
-
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BARRIER, 1, ChatColor.YELLOW + "Bordure", null));
         item.add(Item.getCustomTextureHead(ItemsId.SauronEye.getId(), ChatColor.DARK_AQUA + "PVP"));
@@ -71,17 +70,16 @@ public class MainGui implements InventoryProvider {
 
         contents.set(2, 3, ClickableItem.of(item.get(3), e -> {
                     player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-                    if (!enable) {
-                        enable = true;
-                        teleportation.runTaskTimer(main, 0, 20);
-                    }
                 }
 
         ));
 
         contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-
+            if (!enable) {
+                enable = true;
+                teleportation.runTaskTimer(main, 0, 20);
+            }
         }));
 
 
@@ -100,7 +98,6 @@ public class MainGui implements InventoryProvider {
     public void update(Player player, InventoryContents contents) {
 
     }
-
 
 }
 
