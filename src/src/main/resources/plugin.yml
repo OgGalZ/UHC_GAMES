@@ -1,0 +1,8 @@
+main: me.oggalz.uhc_games.Main
+name: UHC_GAMES
+version: 1.0
+commands:
+  finish:
+    description: /finish for stuff
+depend:
+  - SmartInvs
