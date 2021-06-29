@@ -1,6 +1,8 @@
 package me.oggalz.uhc_games.listeners;
 
 
+import fr.minuskube.netherboard.Netherboard;
+import fr.minuskube.netherboard.bukkit.BPlayerBoard;
 import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
@@ -18,6 +20,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
 import java.util.List;
 
 
@@ -39,8 +42,8 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void playerJoinEvent(org.bukkit.event.player.PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if(player.getActivePotionEffects() !=  null){
-            for(PotionEffect potionEffectType : player.getActivePotionEffects()){
+        if (player.getActivePotionEffects() != null) {
+            for (PotionEffect potionEffectType : player.getActivePotionEffects()) {
                 player.removePotionEffect(potionEffectType.getType());
             }
         }
@@ -80,6 +83,17 @@ public class PlayerJoinEvent implements Listener {
         Player player = event.getPlayer();
         playerManager.removePlayer(player.getUniqueId());
         scoreboardCreator.refreshLobby();
+        BPlayerBoard board = Netherboard.instance().getBoard(player);
+        if(board != null){
+            board.delete();
+            for (Player x : Bukkit.getOnlinePlayers()) {
+                if (playerManager.containsplayers(x.getUniqueId())) {
+                    Netherboard.instance().getBoard(x).set(ChatColor.BLUE + "Joueurs : " + ChatColor.WHITE + playerManager.getPlayers(), 9);
+                }
+            }
+        }
+
+
 
     }
 
@@ -91,7 +105,6 @@ public class PlayerJoinEvent implements Listener {
         }
 
     }
-
 
 
 }

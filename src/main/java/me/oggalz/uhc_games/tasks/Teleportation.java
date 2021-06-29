@@ -10,6 +10,7 @@ import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.*;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -27,6 +28,7 @@ public class Teleportation extends BukkitRunnable {
     private final Random random;
     private final WorldBorderGui worldBorderGui;
 
+
     public Teleportation(StateManager stateManager, Finish finish, ScoreboardCreator scoreboardCreator, WorldBorderGui worldBorderGui) {
         this.stateManager = stateManager;
         this.finish = finish;
@@ -38,9 +40,9 @@ public class Teleportation extends BukkitRunnable {
     @Override
     public void run() {
         if (start <= 0) {
-            cancel();
             teleportation();
-            }
+            cancel();
+        }
         if (start == 30) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
             loadChunks();
@@ -89,9 +91,9 @@ public class Teleportation extends BukkitRunnable {
             player.teleport(location);
             Item.clearArmor(player);
             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 999999999));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 999999999));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 9));
+          player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 999999999));
+           player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 999999999));
+          player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 9));
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);
@@ -102,6 +104,7 @@ public class Teleportation extends BukkitRunnable {
             if (finish.getArmor() != null) {
                 Arrays.stream(finish.getArmor()).filter(Objects::nonNull).forEach(i -> player.getInventory().setArmorContents(finish.getArmor()));
             }
+
         }
     }
 

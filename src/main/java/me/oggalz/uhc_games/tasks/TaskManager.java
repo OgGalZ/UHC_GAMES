@@ -1,7 +1,5 @@
 package me.oggalz.uhc_games.tasks;
 
-import org.bukkit.World;
-
 public class TaskManager {
     private Pvp pvp;
     private Teleportation teleportation;

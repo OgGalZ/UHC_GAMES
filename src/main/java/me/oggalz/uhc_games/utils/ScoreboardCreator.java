@@ -64,7 +64,10 @@ public class ScoreboardCreator {
     }
 
     public void deleteScoreboard(BPlayerBoard board) {
-        board.delete();
+        if (board != null) {
+            board.delete();
+        }
+
 
     }
 

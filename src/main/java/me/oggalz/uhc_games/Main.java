@@ -8,10 +8,7 @@ import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
-import me.oggalz.uhc_games.tasks.Pvp;
-import me.oggalz.uhc_games.tasks.TaskManager;
-import me.oggalz.uhc_games.tasks.Teleportation;
-import me.oggalz.uhc_games.tasks.WorldBorder;
+import me.oggalz.uhc_games.tasks.*;
 import me.oggalz.uhc_games.utils.NmsUtils;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.Bukkit;
@@ -44,10 +41,11 @@ public class Main extends JavaPlugin {
 
         finish = new Finish();
 
-        Pvp pvp = new Pvp();
+        Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
+        TaskFactory Factory = new TaskFactory(0, playerManager, guiManager.getScenariosGui(), pvpGui, worldBorderGui, stateManager, finish, scoreboardCreator);
+        WorldBorder worldBorder = new WorldBorder(worldBorderGui);
+        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), Factory, pvp);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, worldBorderGui);
-        WorldBorder worldBorder = new WorldBorder(this, worldBorderGui);
-        stateManager = new StateManager(this, pvp, worldBorder, guiManager.getPvpGui(), guiManager.getWorldBorderGui());
         taskManager = new TaskManager(pvp, teleportation, worldBorder);
 
         SmartInventory pvpInventory = SmartInventory.builder()
@@ -75,7 +73,7 @@ public class Main extends JavaPlugin {
 
         this.mainGui = SmartInventory.builder()
                 .id("MainGui")
-                .provider(new MainGui(pvpInventory, scenarios, bordure, taskManager.getTeleportation(), this))
+                .provider(new MainGui(pvpInventory, scenarios, bordure, this, Factory, teleportation))
                 .size(4, 9)
                 .title(ChatColor.RED + "Configuration")
                 .closeable(true)
@@ -104,7 +102,7 @@ public class Main extends JavaPlugin {
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
 
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), taskManager.getPvp() ,guiManager.getScenariosGui()), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), taskManager.getPvp()), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
     }
 

@@ -7,13 +7,11 @@ import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 
 import me.oggalz.uhc_games.Main;
+import me.oggalz.uhc_games.tasks.TaskFactory;
 import me.oggalz.uhc_games.tasks.Teleportation;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -27,17 +25,19 @@ public class MainGui implements InventoryProvider {
     private final SmartInventory pvpGui;
     private final SmartInventory scenarioGui;
     private final SmartInventory worldBorder;
-    private final Teleportation teleportation;
     private boolean enable;
     private final Main main;
+    private final TaskFactory taskFactory;
+    private final Teleportation teleportation;
 
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Teleportation teleportation, Main main) {
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, TaskFactory taskFactory, Teleportation teleportation) {
         this.main = main;
+        this.taskFactory = taskFactory;
+        this.teleportation = teleportation;
         enable = false;
         this.pvpGui = pvpGui;
         this.scenarioGui = scenarioGui;
         this.worldBorder = worldBorder;
-        this.teleportation = teleportation;
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BARRIER, 1, ChatColor.YELLOW + "Bordure", null));
         item.add(Item.getCustomTextureHead(ItemsId.SauronEye.getId(), ChatColor.DARK_AQUA + "PVP"));
@@ -78,7 +78,7 @@ public class MainGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (!enable) {
                 enable = true;
-                teleportation.runTaskTimer(main, 0, 20);
+                teleportation.runTaskTimer(main , 0 , 20);
             }
         }));
 

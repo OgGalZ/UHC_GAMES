@@ -4,90 +4,94 @@ import fr.minuskube.netherboard.Netherboard;
 import fr.minuskube.netherboard.bukkit.BPlayerBoard;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
+import me.oggalz.uhc_games.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Scheduler extends BukkitRunnable {
+public class Scheduler implements Runnable {
 
     private int seconds = 0;
-    private int numbersSeconds = 0;
     private int minutes = 0;
-    private int numbersMinutes = 0;
     private int hours;
-    private int episode = 0;
-    private BPlayerBoard playerBoard;
+    private int episode = 1;
     private final PvpGui pvpGui;
     private final WorldBorderGui worldBorderGui;
     private int timePvp;
     private int timeBorder;
+    private final PlayerManager playerManager;
 
-    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui) {
+    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager) {
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            playerBoard = Netherboard.instance().getBoard(player);
-        }
-        timeBorder = worldBorderGui.getTimeBorder();
         timePvp = pvpGui.getTimePvp();
+        timeBorder = worldBorderGui.getTimeBorder();
+        this.playerManager = playerManager;
+
     }
 
     @Override
     public void run() {
-        playerBoard.set(ChatColor.RED + "PVP : " + timePvp + "min", 5);
-        playerBoard.set(ChatColor.DARK_BLUE + "Border" + timeBorder, 4);
-        if (timePvp == 0) {
-            playerBoard.set(ChatColor.RED + "PVP : " + " Activé", 5);
-        }
-        if (timeBorder == 0) {
-            playerBoard.set(ChatColor.DARK_BLUE + "Border" + " Reduction", 4);
-        }
-        Bukkit.broadcastMessage(timePvp + "");
-        playerBoard.set(ChatColor.BLACK + "Time : " + hours + "-" + minutes + numbersMinutes + "-" + seconds + numbersMinutes, 6);
-        numbersSeconds++;
-        if (numbersSeconds == 10) {
-            seconds++;
-            numbersSeconds = 0;
-        }
-        if (numbersSeconds == 9 && seconds == 5) {
-            numbersSeconds = 0;
+        seconds++;
+        if (seconds == 60) {
             seconds = 0;
-            numbersMinutes++;
-            if (timePvp != 0) {
-                timePvp--;
-                playerBoard.set(ChatColor.RED + "PVP : " + timePvp + "min", 5);
-            }
-            if(timeBorder != 0){
-                timeBorder--;
-                playerBoard.set(ChatColor.DARK_BLUE + "Border" + timeBorder, 4);
-            }
-            Bukkit.broadcastMessage(timePvp + "");
-            Bukkit.broadcastMessage(timeBorder + "");
-        }
-        if (numbersMinutes == 10) {
-            numbersMinutes = 0;
             minutes++;
-            if (timePvp != 0) {
+            if (timePvp > 0) {
                 timePvp--;
-                playerBoard.set(ChatColor.RED + "PVP : " + timePvp + "min", 5);
             }
-            if(timeBorder != 0){
+            if (timeBorder > 0) {
                 timeBorder--;
-                playerBoard.set(ChatColor.DARK_BLUE + "Border" + timeBorder, 4);
             }
-            Bukkit.broadcastMessage(timePvp + "");
-            Bukkit.broadcastMessage(timeBorder + "");
+            if (minutes == 59) {
+                minutes = 0;
+                hours++;
+            }
+            if (minutes == 20 && seconds == 0) {
+                episode++;
+            }
         }
-        if (minutes == 2 && numbersMinutes == 0) {
-            episode++;
+
+
+        BPlayerBoard playerBoard = null;
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (playerManager.containsplayers(player.getUniqueId())) {
+                playerBoard = Netherboard.instance().getBoard(player);
+            }
+            if (hours == 0) {
+                if (playerBoard != null) {
+                    playerBoard.set(ChatColor.BLACK + "Time : " + ChatColor.WHITE + minutes + "-" + seconds, 6);
+                }
+
+            } else {
+                if (playerBoard != null) {
+                    playerBoard.set(ChatColor.BLACK + "Time : " + ChatColor.WHITE + hours + "-" + minutes + "-" + seconds, 6);
+                }
+            }
+
+            if (timeBorder > 0) {
+                if (playerBoard != null) {
+                    playerBoard.set(ChatColor.DARK_BLUE + "Border :  " + timeBorder + " minute(s)", 4);
+                }
+            } else {
+                if (playerBoard != null) {
+                    playerBoard.set(ChatColor.DARK_BLUE + "Border : " + " Réduction ", 4);
+                }
+            }
+            if (timePvp > 0) {
+                if (playerBoard != null) {
+                    playerBoard.set(ChatColor.RED + "PVP : " + timePvp + " minute(s)", 5);
+                }
+            } else {
+                if (playerBoard != null) {
+                    playerBoard.set(ChatColor.RED + "PVP : " + " Activé", 5);
+                }
+            }
+            assert playerBoard != null;
             playerBoard.set(ChatColor.WHITE + "Episode : " + episode, 10);
-        }
-        if (minutes == 6 && numbersMinutes == 0) {
-            minutes = 0;
-            numbersMinutes = 0;
-            hours++;
+
         }
 
     }
+
 }
