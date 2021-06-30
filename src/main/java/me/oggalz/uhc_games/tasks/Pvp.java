@@ -31,11 +31,9 @@ public class Pvp extends BukkitRunnable {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (playerManager.containsplayers(player.getUniqueId())) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 99999999));
-                    Bukkit.broadcastMessage(ChatColor.RED + "Activation du scénario Final Heal! ! ");
                 }
             }
         }
-        Bukkit.broadcastMessage(ChatColor.RED + "Le PVP est activé ! ");
         cancel();
 
     }

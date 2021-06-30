@@ -41,8 +41,9 @@ public class Teleportation extends BukkitRunnable {
     @Override
     public void run() {
         if (start <= 0) {
-            teleportation();
             this.cancel();
+            teleportation();
+
         }
         if (start == 30) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);

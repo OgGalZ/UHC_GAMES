@@ -63,13 +63,10 @@ public class SecondaryListeners implements Listener {
             }
             if (Pvp.isEnablePvp()) {
                 event.setCancelled(false);
-                Bukkit.broadcastMessage("lol" +" dd" );
 
-            }else{
-                Bukkit.broadcastMessage("lol");
-            }
             }
         }
+    }
 
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -104,7 +101,7 @@ public class SecondaryListeners implements Listener {
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void uhcEnable(EntityRegainHealthEvent event) {
-        if(event.getEntity() instanceof Player ){
+        if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
             event.setCancelled(!player.hasPotionEffect(PotionEffectType.REGENERATION));
         }

@@ -36,9 +36,10 @@ public class StateManager {
         int secondsPvp = pvpGui.getTimePvp() * 60;
         int secondsBorder = worldBorderGui.getTimeBorder() * 60;
         Scheduler scheduler = new Scheduler(pvpGui , worldBorderGui , playerManager);
-       worldBorder.runTaskTimer( main, secondsBorder * 20L, 20);
-       pvp.runTaskLater( main, secondsPvp * 20L);
-       scheduler.runTaskTimer(main ,0, 20L );
+        scheduler.runTaskTimer(main ,0, 20L );
+        pvp.runTaskLater( main, secondsPvp * 20L);
+        worldBorder.runTaskTimer( main, secondsBorder * 20L, 20);
+
     }
 
     public boolean hasStarted() {

@@ -27,7 +27,6 @@ public class PvpGui implements InventoryProvider {
             if(getTimePvp() <= 0){
                 timePvp = 0;
             }
-            Bukkit.broadcastMessage(timePvp + "");
         }));
         contents.set(1, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceOrange.getId(), ChatColor.GOLD + "Reduce of 1 minute "), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
@@ -35,22 +34,14 @@ public class PvpGui implements InventoryProvider {
             if(getTimePvp() <= 0){
                 timePvp = 0;
             }
-            Bukkit.broadcastMessage(timePvp + "");
-
-
         }));
         contents.set(1, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseGreen.getId(), ChatColor.GREEN + "Increase of 1 minute"), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             timePvp += 1;
-            Bukkit.broadcastMessage(timePvp + "");
-
         }));
         contents.set(1, 6, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "Increase of 10 minutes "), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             timePvp+= 10;
-            Bukkit.broadcastMessage(timePvp + "");
-
-
         }));
         contents.set(2, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceRed.getId(), ChatColor.RED + "-1 gap"), e -> {
             numbersGaps -= 1;
