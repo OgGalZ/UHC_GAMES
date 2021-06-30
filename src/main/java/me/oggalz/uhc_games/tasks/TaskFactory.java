@@ -1,7 +1,6 @@
 package me.oggalz.uhc_games.tasks;
 
-import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.commands.Finish;
+/*import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.ScenariosGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
@@ -9,41 +8,40 @@ import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 
-/*public class TaskFactory {
+import java.util.Random;
 
-    private final PlayerManager playerManager;
-    private final ScenariosGui scenariosGui;
-    private final PvpGui pvpGui;
-    private final WorldBorderGui worldBorderGui;
+public class TaskFactory {
+
+    private final StateManager stateManager;
     private final Finish finish;
     private final ScoreboardCreator scoreboardCreator;
-    private final Main main;
-    public TaskFactory( PlayerManager playerManager, ScenariosGui scenariosGui, PvpGui pvpGui, WorldBorderGui worldBorderGui, Finish finish, ScoreboardCreator scoreboardCreator, Main main) {
-        this.playerManager = playerManager;
-        this.scenariosGui = scenariosGui;
-        this.pvpGui = pvpGui;
-        this.worldBorderGui = worldBorderGui;
+    private final Random random;
+    private final WorldBorderGui worldBorderGui;
+    private final PvpGui pvpGui;
+    private final PlayerManager playerManager;
+    private final Pvp pvp;
+    private final ScenariosGui scenariosGui;
+    public TaskFactory(StateManager stateManager, Finish finish, ScoreboardCreator scoreboardCreator, WorldBorderGui worldBorderGui, PvpGui pvpGui, PlayerManager playerManager, Pvp pvp, ScenariosGui scenariosGui) {
+        this.stateManager = stateManager;
         this.finish = finish;
         this.scoreboardCreator = scoreboardCreator;
-        this.main = main;
-    }*/
-/*
-    public Pvp createPvpTask() {
-        return new Pvp(playerManager, scenariosGui);
+        this.worldBorderGui = worldBorderGui;
+        this.pvpGui = pvpGui;
+        this.playerManager = playerManager;
+        this.pvp = pvp;
+        this.scenariosGui = scenariosGui;
+        this.random = new Random();
     }
-
-    public Scheduler createScheduler() {
-        return new Scheduler(pvpGui, worldBorderGui, playerManager);
+    public Teleportation teleportation(){
+        return  new Teleportation(stateManager , finish , scoreboardCreator , worldBorderGui);
     }
-
-    public Teleportation teleportation() {
-        StateManager stateManager = new StateManager(main, pvpGui , worldBorderGui , this, playerManager, scenariosGui);
-        return new Teleportation(stateManager, finish, scoreboardCreator, worldBorderGui);
+    public Scheduler scheduler(){
+        return  new Scheduler(pvpGui , worldBorderGui , playerManager );
     }
-
-    public WorldBorder worldBorder() {
-        return new WorldBorder(worldBorderGui);
-    }*/
-
-
-//}
+    public Pvp pvp(){
+        return  new Pvp(playerManager , scenariosGui );
+    }
+    public WorldBorder worldBorder(){
+        return  new WorldBorder(worldBorderGui);
+    }
+}*/

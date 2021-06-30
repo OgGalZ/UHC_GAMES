@@ -24,7 +24,6 @@ public class WorldBorderGui implements InventoryProvider {
 
                     borderSize = borderSize - 200;
                 }
-
         ));
 
 

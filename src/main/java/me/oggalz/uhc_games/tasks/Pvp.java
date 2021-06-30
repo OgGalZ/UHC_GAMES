@@ -14,7 +14,7 @@ public class Pvp extends BukkitRunnable {
 
     private final PlayerManager playerManager;
     private final ScenariosGui scenariosGui;
-    private boolean enablePvp = false;
+    private static boolean enablePvp = false;
 
 
     public Pvp(PlayerManager playerManager, ScenariosGui scenariosGui) {
@@ -39,7 +39,7 @@ public class Pvp extends BukkitRunnable {
         cancel();
 
     }
-    public boolean isEnablePvp() {
+    public static boolean isEnablePvp() {
         return enablePvp;
     }
 

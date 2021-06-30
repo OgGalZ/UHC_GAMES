@@ -29,14 +29,13 @@ public class SecondaryListeners implements Listener {
     private final StateManager stateManager;
     private final PlayerManager playerManager;
     private final PvpGui pvpGui;
-    private final Pvp pvp;
 
-    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui, Pvp pvp) {
+
+    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui) {
         this.mainGUi = mainGUi;
         this.stateManager = stateManager;
         this.playerManager = playerManager;
         this.pvpGui = pvpGui;
-        this.pvp = pvp;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -62,10 +61,13 @@ public class SecondaryListeners implements Listener {
             if (event.getEntity() instanceof Player) {
                 event.setCancelled(true);
             }
-            if (pvp.isEnablePvp()) {
-                Bukkit.broadcastMessage("pvp");
+            if (Pvp.isEnablePvp()) {
                 event.setCancelled(false);
-                }
+                Bukkit.broadcastMessage("lol" +" dd" );
+
+            }else{
+                Bukkit.broadcastMessage("lol");
+            }
             }
         }
 

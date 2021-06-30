@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class Teleportation extends BukkitRunnable {
     public void run() {
         if (start <= 0) {
             teleportation();
-            cancel();
+            this.cancel();
         }
         if (start == 30) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
@@ -92,9 +93,9 @@ public class Teleportation extends BukkitRunnable {
             player.teleport(location);
             Item.clearArmor(player);
             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
-          player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 999999999));
-           player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 999999999));
-          player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 9));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 999999999));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 999999999));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 200, 9));
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);

@@ -8,7 +8,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class WorldBorder extends BukkitRunnable{
-    private boolean mess = false;
 
     private final WorldBorderGui worldBorderGui;
 
@@ -18,10 +17,7 @@ public class WorldBorder extends BukkitRunnable{
 
     @Override
     public void run() {
-        if(!mess){
-            Bukkit.broadcastMessage(ChatColor.RED  + "La bordure commence à ce rétrécir !  ");
-        }
-        mess = true;
+
         World world = Bukkit.getWorld("world");
         org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
         worldBorderGui.setBorderSize(worldBorderGui.getBorderSize() - 1);

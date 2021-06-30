@@ -17,17 +17,17 @@ public class StateManager {
     private final WorldBorderGui worldBorderGui;
     private final PlayerManager playerManager;
     private final ScenariosGui scenariosGui;
-    private final Pvp pvp;
     private final WorldBorder worldBorder;
+    private final Pvp pvp;
 
-    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, ScenariosGui scenariosGui, Pvp pvp, WorldBorder worldBorder) {
+    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, ScenariosGui scenariosGui, WorldBorder worldBorder, Pvp pvp) {
         this.main = main;
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
         this.playerManager = playerManager;
         this.scenariosGui = scenariosGui;
-        this.pvp = pvp;
         this.worldBorder = worldBorder;
+        this.pvp = pvp;
         gameState = State.WAITING;
     }
 

@@ -28,6 +28,7 @@ public class MainGui implements InventoryProvider {
     private boolean enable;
     private final Main main;
     private final Teleportation teleportation;
+
     public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation) {
         this.main = main;
         this.teleportation = teleportation;
@@ -73,7 +74,7 @@ public class MainGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (!enable) {
                 enable = true;
-               teleportation.runTaskTimer(main ,  0 , 20L);
+              teleportation.runTaskTimer(main , 0 , 20L);
             }
         }));
 

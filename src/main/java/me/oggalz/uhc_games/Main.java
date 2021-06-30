@@ -26,7 +26,6 @@ public class Main extends JavaPlugin {
     private Finish finish;
     private StateManager stateManager;
     private SmartInventory mainGui;
-    private TaskManager taskManager;
 
     @Override
     public void onEnable() {
@@ -37,15 +36,13 @@ public class Main extends JavaPlugin {
         WorldBorderGui worldBorderGui = new WorldBorderGui();
 
         guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui);
-
         finish = new Finish();
-        Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
+
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
-        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, guiManager.getScenariosGui(), pvp, worldBorder);
-        Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
-        taskManager = new TaskManager(pvp, teleportation, worldBorder);
-
+        Pvp pvp = new Pvp(playerManager , guiManager.getScenariosGui());
+        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, guiManager.getScenariosGui(),  worldBorder, pvp);
+        Teleportation teleportation = new Teleportation(stateManager , finish , scoreboardCreator , guiManager.getWorldBorderGui());
         SmartInventory pvpInventory = SmartInventory.builder()
                 .id("PvpGui")
                 .provider(pvpGui)
@@ -100,7 +97,7 @@ public class Main extends JavaPlugin {
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
 
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, scoreboardCreator, nmsUtils), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), taskManager.getPvp()), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui()), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
     }
 

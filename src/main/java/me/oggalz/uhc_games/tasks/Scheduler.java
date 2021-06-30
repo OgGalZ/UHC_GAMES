@@ -89,8 +89,9 @@ public class Scheduler extends BukkitRunnable{
                     playerBoard.set(ChatColor.RED + "PVP : " + " Activé", 5);
                 }
             }
-            assert playerBoard != null;
-            playerBoard.set(ChatColor.WHITE + "Episode : " + episode, 10);
+            if(playerBoard != null){
+                playerBoard.set(ChatColor.WHITE + "Episode : " + episode, 10);
+            }
 
         }
 
