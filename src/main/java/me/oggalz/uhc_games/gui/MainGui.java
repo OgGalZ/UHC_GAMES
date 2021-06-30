@@ -28,10 +28,12 @@ public class MainGui implements InventoryProvider {
     private boolean enable;
     private final Main main;
     private final Teleportation teleportation;
+    private final SmartInventory racesGui;
 
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation) {
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation, SmartInventory racesGui) {
         this.main = main;
         this.teleportation = teleportation;
+        this.racesGui = racesGui;
         enable = false;
         this.pvpGui = pvpGui;
         this.scenarioGui = scenarioGui;
@@ -66,15 +68,17 @@ public class MainGui implements InventoryProvider {
         }));
 
 
-        contents.set(2, 3, ClickableItem.of(item.get(3), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)
-
+        contents.set(2, 3, ClickableItem.of(item.get(3), e -> {
+                    player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+                    racesGui.open(player);
+                }
         ));
 
         contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (!enable) {
                 enable = true;
-              teleportation.runTaskTimer(main , 0 , 20L);
+                teleportation.runTaskTimer(main, 0, 20L);
             }
         }));
 

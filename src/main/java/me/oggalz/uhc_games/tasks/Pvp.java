@@ -4,6 +4,7 @@ import me.oggalz.uhc_games.gui.ScenariosGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -27,16 +28,20 @@ public class Pvp extends BukkitRunnable {
     @Override
     public void run() {
         enablePvp = true;
+        Bukkit.broadcastMessage(ChatColor.GOLD + "Le PVP est maintenant activé ! ");
         if (scenariosGui.isFinalHeal()) {
+            Bukkit.broadcastMessage(ChatColor.RED + "Activation du scénario Final Heal ! ");
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (playerManager.containsplayers(player.getUniqueId())) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 99999999));
+                    player.playSound(player.getLocation(), Sound.GHAST_FIREBALL, 2, 99);
                 }
             }
         }
         cancel();
 
     }
+
     public static boolean isEnablePvp() {
         return enablePvp;
     }

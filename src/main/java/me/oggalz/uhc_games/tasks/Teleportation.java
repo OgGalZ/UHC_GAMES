@@ -81,16 +81,15 @@ public class Teleportation extends BukkitRunnable {
 
     public void teleportation() {
         World world = Bukkit.getWorld("world");
-        int randomTP = generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2);
+        WorldBorder worldBorder = world.getWorldBorder();
+        worldBorder.setCenter(0, 0);
+        worldBorder.setDamageAmount(2);
+        worldBorder.setDamageBuffer(0);
+        worldBorder.setSize(worldBorderGui.getBorderSize());
         for (Player player : Bukkit.getOnlinePlayers()) {
-            Location location = new Location(world, randomTP, 90, randomTP);
+            Location location = new Location(world, generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2), 90, generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2));
             player.teleport(location);
             player.setGameMode(GameMode.SURVIVAL);
-            WorldBorder worldBorder = world.getWorldBorder();
-            worldBorder.setCenter(0, 0);
-            worldBorder.setDamageAmount(2);
-            worldBorder.setDamageBuffer(0);
-            worldBorder.setSize(worldBorderGui.getBorderSize());
             player.teleport(location);
             Item.clearArmor(player);
             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
@@ -100,7 +99,6 @@ public class Teleportation extends BukkitRunnable {
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);
-            stateManager.startGame();
             if (finish.getItemStacks() != null) {
                 Arrays.stream(finish.getItemStacks()).filter(Objects::nonNull).forEach(i -> player.getInventory().addItem(i));
             }
@@ -109,6 +107,7 @@ public class Teleportation extends BukkitRunnable {
             }
 
         }
+        stateManager.startGame();
     }
 
 

@@ -25,26 +25,6 @@ public class ScoreboardCreator {
     }
 
 
-    public void createScoreboardLobby(Player player) {
-        BPlayerBoard board = Netherboard.instance().createBoard(player, ChatColor.DARK_AQUA + "{Hobbit UHC}");
-        board.set("          ", 15);
-        board.set(ChatColor.AQUA + "Waiting players :)", 14);
-        board.set("", 12);
-        board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/" + playerManager.getPlayers(), 11);
-
-    }
-
-    public void refreshLobby() {
-        for (Player x : Bukkit.getOnlinePlayers()) {
-            BPlayerBoard board = Netherboard.instance().getBoard(x);
-            if (board != null) {
-                board.set(ChatColor.BLUE + "players: " + playerManager.getPlayers() + "/" + playerManager.getPlayers(), 11);
-            }
-
-        }
-
-    }
-
     public void createScoreboardGame(Player player) {
         BPlayerBoard board = Netherboard.instance().createBoard(player, ChatColor.DARK_AQUA + "{Hobbit UHC}");
         board.set("     ", 15);

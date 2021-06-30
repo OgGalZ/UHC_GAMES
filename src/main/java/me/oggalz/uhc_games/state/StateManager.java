@@ -16,16 +16,14 @@ public class StateManager {
     private final PvpGui pvpGui;
     private final WorldBorderGui worldBorderGui;
     private final PlayerManager playerManager;
-    private final ScenariosGui scenariosGui;
     private final WorldBorder worldBorder;
     private final Pvp pvp;
 
-    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, ScenariosGui scenariosGui, WorldBorder worldBorder, Pvp pvp) {
+    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, WorldBorder worldBorder, Pvp pvp) {
         this.main = main;
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
         this.playerManager = playerManager;
-        this.scenariosGui = scenariosGui;
         this.worldBorder = worldBorder;
         this.pvp = pvp;
         gameState = State.WAITING;
@@ -39,7 +37,6 @@ public class StateManager {
         scheduler.runTaskTimer(main ,0, 20L );
         pvp.runTaskLater( main, secondsPvp * 20L);
         worldBorder.runTaskTimer( main, secondsBorder * 20L, 20);
-
     }
 
     public boolean hasStarted() {
