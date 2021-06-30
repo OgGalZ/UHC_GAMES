@@ -31,18 +31,19 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         this.playerManager = new PlayerManager();
-        scoreboardCreator = new ScoreboardCreator(this, playerManager);
 
         PvpGui pvpGui = new PvpGui();
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();
+
         guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui);
+
         finish = new Finish();
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
-        TaskFactory Factory = new TaskFactory(0, playerManager, guiManager.getScenariosGui(), pvpGui, worldBorderGui,  finish, scoreboardCreator, this);
-        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), Factory);
+        scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
-        Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, worldBorderGui);
+        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, guiManager.getScenariosGui(), pvp, worldBorder);
+        Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
         taskManager = new TaskManager(pvp, teleportation, worldBorder);
 
         SmartInventory pvpInventory = SmartInventory.builder()
@@ -70,7 +71,7 @@ public class Main extends JavaPlugin {
 
         this.mainGui = SmartInventory.builder()
                 .id("MainGui")
-                .provider(new MainGui(pvpInventory, scenarios, bordure, this, Factory))
+                .provider(new MainGui(pvpInventory, scenarios, bordure, this, teleportation))
                 .size(4, 9)
                 .title(ChatColor.RED + "Configuration")
                 .closeable(true)

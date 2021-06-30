@@ -10,7 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Scheduler implements Runnable {
+public class Scheduler extends BukkitRunnable{
 
     private int seconds = 0;
     private int minutes = 0;
@@ -21,6 +21,7 @@ public class Scheduler implements Runnable {
     private int timePvp;
     private int timeBorder;
     private final PlayerManager playerManager;
+    private int episo = 20 ;
 
     public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager) {
         this.pvpGui = pvpGui;
@@ -47,8 +48,9 @@ public class Scheduler implements Runnable {
                 minutes = 0;
                 hours++;
             }
-            if (minutes == 20 && seconds == 0) {
+            if (minutes == episo && seconds == 0) {
                 episode++;
+                episo += 20;
             }
         }
 

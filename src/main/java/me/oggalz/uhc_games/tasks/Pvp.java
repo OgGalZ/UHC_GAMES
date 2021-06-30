@@ -14,7 +14,7 @@ public class Pvp extends BukkitRunnable {
 
     private final PlayerManager playerManager;
     private final ScenariosGui scenariosGui;
-    private boolean enablePvp;
+    private boolean enablePvp = false;
 
 
     public Pvp(PlayerManager playerManager, ScenariosGui scenariosGui) {
@@ -27,15 +27,16 @@ public class Pvp extends BukkitRunnable {
     @Override
     public void run() {
         enablePvp = true;
-        Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Le pvp est activé !! ");
         if (scenariosGui.isFinalHeal()) {
-            Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "Activation du scénario FinalHeal ! ");
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (playerManager.containsplayers(player.getUniqueId())) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 99999999));
+                    Bukkit.broadcastMessage(ChatColor.RED + "Activation du scénario Final Heal! ! ");
                 }
             }
         }
+        Bukkit.broadcastMessage(ChatColor.RED + "Le PVP est activé ! ");
+        cancel();
 
     }
     public boolean isEnablePvp() {

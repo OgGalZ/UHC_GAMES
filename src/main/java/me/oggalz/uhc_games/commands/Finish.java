@@ -15,6 +15,8 @@ import java.util.Objects;
 
 
 public class Finish implements CommandExecutor {
+
+
     private ItemStack[] itemStacks = null;
     private ItemStack[] armor = null;
     private  boolean check = false;

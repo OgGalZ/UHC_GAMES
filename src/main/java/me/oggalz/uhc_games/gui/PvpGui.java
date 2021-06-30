@@ -1,7 +1,6 @@
 package me.oggalz.uhc_games.gui;
 
 import fr.minuskube.inv.ClickableItem;
-import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.utils.Item;
@@ -17,6 +16,7 @@ public class PvpGui implements InventoryProvider {
 
     private  int numbersGaps = 0;
     private  int timePvp = 0;
+
 
 
     @Override

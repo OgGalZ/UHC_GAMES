@@ -1,36 +1,22 @@
 package me.oggalz.uhc_games.scenarios;
 
-import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.gui.ScenariosGui;
+
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.UniversalMaterial;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.inventory.ClickType;
-import org.bukkit.event.inventory.InventoryAction;
-import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 
-import javax.persistence.GeneratedValue;
-import javax.print.DocFlavor;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 public class CutClean implements Listener {
 

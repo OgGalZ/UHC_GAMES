@@ -7,7 +7,6 @@ import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 
 import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.tasks.TaskFactory;
 import me.oggalz.uhc_games.tasks.Teleportation;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
@@ -21,17 +20,17 @@ import java.util.List;
 
 public class MainGui implements InventoryProvider {
 
+
     private final List<ItemStack> item = new ArrayList<>();
     private final SmartInventory pvpGui;
     private final SmartInventory scenarioGui;
     private final SmartInventory worldBorder;
     private boolean enable;
     private final Main main;
-    private final TaskFactory taskFactory;
-
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, TaskFactory taskFactory) {
+    private final Teleportation teleportation;
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation) {
         this.main = main;
-        this.taskFactory = taskFactory;
+        this.teleportation = teleportation;
         enable = false;
         this.pvpGui = pvpGui;
         this.scenarioGui = scenarioGui;
@@ -66,9 +65,7 @@ public class MainGui implements InventoryProvider {
         }));
 
 
-        contents.set(2, 3, ClickableItem.of(item.get(3), e -> {
-                    player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-                }
+        contents.set(2, 3, ClickableItem.of(item.get(3), e -> player.playSound(player.getLocation(), Sound.CLICK, 99, 2)
 
         ));
 
@@ -76,7 +73,7 @@ public class MainGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (!enable) {
                 enable = true;
-                Bukkit.getScheduler().runTaskTimer(main , (Runnable) taskFactory.teleportation(),   0 , 20L);
+               teleportation.runTaskTimer(main ,  0 , 20L);
             }
         }));
 

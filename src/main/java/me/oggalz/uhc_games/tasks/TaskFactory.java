@@ -9,9 +9,8 @@ import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ScoreboardCreator;
 
-public class TaskFactory {
+/*public class TaskFactory {
 
-    private final int id;
     private final PlayerManager playerManager;
     private final ScenariosGui scenariosGui;
     private final PvpGui pvpGui;
@@ -19,8 +18,7 @@ public class TaskFactory {
     private final Finish finish;
     private final ScoreboardCreator scoreboardCreator;
     private final Main main;
-    public TaskFactory(int id, PlayerManager playerManager, ScenariosGui scenariosGui, PvpGui pvpGui, WorldBorderGui worldBorderGui, Finish finish, ScoreboardCreator scoreboardCreator, Main main) {
-        this.id = id;
+    public TaskFactory( PlayerManager playerManager, ScenariosGui scenariosGui, PvpGui pvpGui, WorldBorderGui worldBorderGui, Finish finish, ScoreboardCreator scoreboardCreator, Main main) {
         this.playerManager = playerManager;
         this.scenariosGui = scenariosGui;
         this.pvpGui = pvpGui;
@@ -28,8 +26,8 @@ public class TaskFactory {
         this.finish = finish;
         this.scoreboardCreator = scoreboardCreator;
         this.main = main;
-    }
-
+    }*/
+/*
     public Pvp createPvpTask() {
         return new Pvp(playerManager, scenariosGui);
     }
@@ -39,13 +37,13 @@ public class TaskFactory {
     }
 
     public Teleportation teleportation() {
-        StateManager stateManager = new StateManager(main, pvpGui , worldBorderGui , this);
+        StateManager stateManager = new StateManager(main, pvpGui , worldBorderGui , this, playerManager, scenariosGui);
         return new Teleportation(stateManager, finish, scoreboardCreator, worldBorderGui);
     }
 
     public WorldBorder worldBorder() {
         return new WorldBorder(worldBorderGui);
-    }
+    }*/
 
 
-}
+//}

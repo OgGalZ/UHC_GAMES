@@ -55,10 +55,11 @@ public class Teleportation extends BukkitRunnable {
         }
         if (start <= 5) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.PORTAL, 99, 2);
+            }
         }
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.playSound(player.getLocation(), Sound.FIREWORK_LARGE_BLAST, 99, 2);
-        }
+
         start--;
     }
 

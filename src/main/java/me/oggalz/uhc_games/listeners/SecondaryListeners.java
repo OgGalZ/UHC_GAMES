@@ -63,6 +63,7 @@ public class SecondaryListeners implements Listener {
                 event.setCancelled(true);
             }
             if (pvp.isEnablePvp()) {
+                Bukkit.broadcastMessage("pvp");
                 event.setCancelled(false);
                 }
             }

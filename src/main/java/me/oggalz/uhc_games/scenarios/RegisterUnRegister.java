@@ -1,10 +1,6 @@
 package me.oggalz.uhc_games.scenarios;
 
-import com.google.common.base.Optional;
 import me.oggalz.uhc_games.Main;
-import me.oggalz.uhc_games.utils.UniversalMaterial;
-import org.apache.commons.lang.ObjectUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

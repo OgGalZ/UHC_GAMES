@@ -1,7 +1,6 @@
 package me.oggalz.uhc_games.gui;
 
 import fr.minuskube.inv.ClickableItem;
-import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.utils.Item;
@@ -14,6 +13,7 @@ public class WorldBorderGui implements InventoryProvider {
 
     private int borderSize = 200;
     private int timeBorder = 0;
+
 
 
     @Override
