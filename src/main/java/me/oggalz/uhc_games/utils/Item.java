@@ -46,8 +46,8 @@ public class Item {
 
 
 
-    public  static  ItemStack getCustomTextureHead(String value , String name) {
-        ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short)3);
+    public  static  ItemStack getCustomTextureHead(String value , String name , int amount) {
+        ItemStack head = new ItemStack(Material.SKULL_ITEM, amount, (short)3);
         SkullMeta meta = (SkullMeta) head.getItemMeta();
         meta.setDisplayName(name);
         GameProfile profile = new GameProfile(UUID.randomUUID(), "");

@@ -12,6 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class Scheduler extends BukkitRunnable{
 
+    private boolean sendTitle = false;
     private int seconds = 0;
     private int minutes = 0;
     private int hours;
@@ -48,6 +49,9 @@ public class Scheduler extends BukkitRunnable{
                 minutes = 0;
                 hours++;
             }
+            if(episo == 60){
+                episo = 0;
+            }
             if (minutes == episo && seconds == 0) {
                 episode++;
                 episo += 20;
@@ -59,6 +63,9 @@ public class Scheduler extends BukkitRunnable{
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (playerManager.containsplayers(player.getUniqueId())) {
                 playerBoard = Netherboard.instance().getBoard(player);
+                if(!sendTitle){
+                    player.sendTitle(ChatColor.GOLD + "Annonce des " , ChatColor.GOLD + "Races ");
+                    sendTitle = true;                }
             }
             if (hours == 0) {
                 if (playerBoard != null) {

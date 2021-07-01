@@ -21,35 +21,35 @@ public class PvpGui implements InventoryProvider {
 
     @Override
     public void init(Player player, InventoryContents contents) {
-        contents.set(1, 2, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceRed.getId(), ChatColor.RED + "Reduce of 10 minutes"), e -> {
+        contents.set(1, 2, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceRed.getId(), ChatColor.RED + "Reduce of 10 minutes" , 1), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             timePvp -= 10;
             if(getTimePvp() <= 0){
                 timePvp = 0;
             }
         }));
-        contents.set(1, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceOrange.getId(), ChatColor.GOLD + "Reduce of 1 minute "), e -> {
+        contents.set(1, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceOrange.getId(), ChatColor.GOLD + "Reduce of 1 minute " , 1), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             timePvp -= 1;
             if(getTimePvp() <= 0){
                 timePvp = 0;
             }
         }));
-        contents.set(1, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseGreen.getId(), ChatColor.GREEN + "Increase of 1 minute"), e -> {
+        contents.set(1, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseGreen.getId(), ChatColor.GREEN + "Increase of 1 minute", 1), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             timePvp += 1;
         }));
-        contents.set(1, 6, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "Increase of 10 minutes "), e -> {
+        contents.set(1, 6, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "Increase of 10 minutes " , 1), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             timePvp+= 10;
         }));
-        contents.set(2, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceRed.getId(), ChatColor.RED + "-1 gap"), e -> {
+        contents.set(2, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.ReduceRed.getId(), ChatColor.RED + "-1 gap" , 1), e -> {
             numbersGaps -= 1;
 
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
 
         }));
-        contents.set(2, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "+1 gap"), e -> {
+        contents.set(2, 5, ClickableItem.of(Item.getCustomTextureHead(ItemsId.IncreaseBlue.getId(), ChatColor.BLUE + "+1 gap" , 1), e -> {
             numbersGaps += 1;
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
 

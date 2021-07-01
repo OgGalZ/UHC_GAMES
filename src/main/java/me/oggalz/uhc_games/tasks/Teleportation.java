@@ -10,15 +10,11 @@ import me.oggalz.uhc_games.utils.ScoreboardCreator;
 import org.bukkit.*;
 import org.bukkit.WorldBorder;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class Teleportation extends BukkitRunnable {
 
@@ -26,7 +22,6 @@ public class Teleportation extends BukkitRunnable {
     private final StateManager stateManager;
     private final Finish finish;
     private final ScoreboardCreator scoreboardCreator;
-    private final Random random;
     private final WorldBorderGui worldBorderGui;
 
 
@@ -35,7 +30,6 @@ public class Teleportation extends BukkitRunnable {
         this.finish = finish;
         this.scoreboardCreator = scoreboardCreator;
         this.worldBorderGui = worldBorderGui;
-        random = new Random();
     }
 
     @Override
@@ -48,17 +42,26 @@ public class Teleportation extends BukkitRunnable {
         if (start == 30) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
             loadChunks();
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.FIRE, 99, 2);
+                player.sendTitle(ChatColor.BLUE + "", " " + start);
+            }
         }
         if (start == 20) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
         }
         if (start == 10) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.sendTitle(ChatColor.BLUE + "Lancement ", " " + start);
+                player.playSound(player.getLocation(), Sound.FIRE, 99, 2);
+            }
         }
         if (start <= 5) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.playSound(player.getLocation(), Sound.PORTAL, 99, 2);
+                player.playSound(player.getLocation(), Sound.FIRE, 99, 2);
+                player.sendTitle(ChatColor.BLUE + "Lancement ", " " + start);
             }
         }
 
@@ -87,7 +90,7 @@ public class Teleportation extends BukkitRunnable {
         worldBorder.setDamageBuffer(0);
         worldBorder.setSize(worldBorderGui.getBorderSize());
         for (Player player : Bukkit.getOnlinePlayers()) {
-            Location location = new Location(world, generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2), 90, generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2));
+            Location location = new Location(world, generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2), 200, generate(-worldBorderGui.getBorderSize() / 2, worldBorderGui.getBorderSize() / 2));
             player.teleport(location);
             player.setGameMode(GameMode.SURVIVAL);
             player.teleport(location);
@@ -105,16 +108,16 @@ public class Teleportation extends BukkitRunnable {
             if (finish.getArmor() != null) {
                 Arrays.stream(finish.getArmor()).filter(Objects::nonNull).forEach(i -> player.getInventory().setArmorContents(finish.getArmor()));
             }
-
         }
         stateManager.startGame();
     }
 
 
-    public int generate(int borneInf, int borneSup) {
+    public static int generate(int borneInf, int borneSup) {
+        Random random = new Random();
         int nb;
-        nb = borneInf + this.random.nextInt(borneSup - borneInf);
+        nb = borneInf + random.nextInt(borneSup - borneInf);
         return nb;
-
     }
+
 }

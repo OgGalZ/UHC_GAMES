@@ -23,12 +23,13 @@ public class WorldBorder extends BukkitRunnable {
     public void run() {
         if (messBorder) {
             Bukkit.broadcastMessage(ChatColor.GREEN + "La bordure commence à se rétrécir ! ");
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                player.playSound(player.getLocation(), Sound.LAVA, 99, 99);
+            }
             messBorder = false;
         }
 
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.playSound(player.getLocation(), Sound.LAVA, 99, 99);
-        }
+
         World world = Bukkit.getWorld("world");
         org.bukkit.WorldBorder worldBorder = world.getWorldBorder();
         worldBorderGui.setBorderSize(worldBorderGui.getBorderSize() - 1);

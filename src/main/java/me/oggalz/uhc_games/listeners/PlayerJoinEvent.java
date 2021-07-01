@@ -44,7 +44,6 @@ public class PlayerJoinEvent implements Listener {
                 player.removePotionEffect(potionEffectType.getType());
             }
         }
-       // nmsUtils.sendActionBar(player, player.getName() + ChatColor.DARK_AQUA + " a rejoint la partie :) ");
         FileConfiguration configuration = main.getConfig();
         World world = Bukkit.getWorld("world");
         List<Integer> coordinate = configuration.getIntegerList("coordinatespawn");

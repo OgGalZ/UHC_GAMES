@@ -1,10 +1,7 @@
 package me.oggalz.uhc_games.player;
 
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class PlayerManager {
 
@@ -36,5 +33,10 @@ public class PlayerManager {
         return players.containsKey(uuid);
     }
 
+
+    public List<UUID> getKeys(){
+        ArrayList<UUID> keyList = new ArrayList<>(players.keySet());
+            return keyList;
+    }
 }
 

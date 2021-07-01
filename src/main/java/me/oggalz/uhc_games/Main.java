@@ -6,6 +6,7 @@ import me.oggalz.uhc_games.gui.*;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.*;
@@ -31,6 +32,7 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+
         World world = Bukkit.getWorld("world");
         world.getWorldBorder().setSize(5000000);
         this.playerManager = new PlayerManager();
@@ -43,7 +45,8 @@ public class Main extends JavaPlugin {
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
-        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp);
+        RacesManager racesManager = new RacesManager(playerManager , guiManager.racesGui());
+        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
 
         SmartInventory races = SmartInventory.builder()
@@ -79,7 +82,7 @@ public class Main extends JavaPlugin {
 
         this.mainGui = SmartInventory.builder()
                 .id("MainGui")
-                .provider(new MainGui(pvpInventory, scenarios, bordure, this, teleportation, races))
+                .provider(new MainGui(pvpInventory, scenarios, bordure, this, teleportation, races, guiManager.racesGui()))
                 .size(4, 9)
                 .title(ChatColor.RED + "Configuration")
                 .closeable(true)

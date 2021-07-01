@@ -29,18 +29,20 @@ public class MainGui implements InventoryProvider {
     private final Main main;
     private final Teleportation teleportation;
     private final SmartInventory racesGui;
+    private final RacesGui races;
 
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation, SmartInventory racesGui) {
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation, SmartInventory racesGui, RacesGui races) {
         this.main = main;
         this.teleportation = teleportation;
         this.racesGui = racesGui;
+        this.races = races;
         enable = false;
         this.pvpGui = pvpGui;
         this.scenarioGui = scenarioGui;
         this.worldBorder = worldBorder;
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.DIAMOND, 1, ChatColor.RED + "Scenarios", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BARRIER, 1, ChatColor.YELLOW + "Bordure", null));
-        item.add(Item.getCustomTextureHead(ItemsId.SauronEye.getId(), ChatColor.DARK_AQUA + "PVP"));
+        item.add(Item.getCustomTextureHead(ItemsId.SauronEye.getId(), ChatColor.DARK_AQUA + "PVP" , 1));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.BOOK, 1, ChatColor.GREEN + "Roles", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.EMERALD_BLOCK, 1, ChatColor.GOLD + "Start", null));
         item.add(me.oggalz.uhc_games.utils.Item.createItemstack(Material.CHEST, 1, ChatColor.GRAY + "Inventaire", null));
@@ -76,10 +78,15 @@ public class MainGui implements InventoryProvider {
 
         contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            if (!enable) {
-                enable = true;
-                teleportation.runTaskTimer(main, 0, 20L);
+            if(races.resultsRaces() == (long) Bukkit.getOnlinePlayers().size() * 4 + races.results()){
+                if (!enable) {
+                    enable = true;
+                    teleportation.runTaskTimer(main, 0, 20L);
+                }
+            }else{
+                player.sendMessage(ChatColor.DARK_BLUE + "Le nombre de rôles correspond pas avec le nombre de joueurs .");
             }
+
         }));
 
 
