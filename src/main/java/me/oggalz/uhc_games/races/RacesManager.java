@@ -1,9 +1,8 @@
 package me.oggalz.uhc_games.races;
 
-import me.oggalz.uhc_games.gui.RacesGui;
-import me.oggalz.uhc_games.player.Player;
+import me.oggalz.uhc_games.gui.RolesGui;
 import me.oggalz.uhc_games.player.PlayerManager;
-import org.bukkit.Bukkit;
+import me.oggalz.uhc_games.races.roles.RolesManagers;
 
 import java.util.*;
 
@@ -11,49 +10,35 @@ public class RacesManager {
 
     private final PlayerManager playerManager;
     private Map<UUID, Races> racesPlayers;
-    private final RacesGui racesGui;
+    private List<Races> racesList;
+    private final RolesGui rolesGui;
+    private final RolesManagers rolesManagers;
 
-    public RacesManager(PlayerManager playerManager, RacesGui racesGui) {
+
+    public RacesManager(PlayerManager playerManager, RolesGui rolesGui, RolesManagers rolesManagers) {
         this.playerManager = playerManager;
-        this.racesGui = racesGui;
+        this.rolesGui = rolesGui;
+        this.rolesManagers = rolesManagers;
         racesPlayers = new HashMap<>();
+        racesList = new ArrayList<>();
+        racesList.add(new Elfes());
+        racesList.add(new Hobbits());
+        racesList.add(new Nains());
+        racesList.add(new Orques());
     }
 
-    public void generateMap() {
-        int statementTrue = 1;
-        Races races = new Elfes();
-        int playersRaces = racesGui.resultsRaces();
-        int test = 0;
-        for (UUID uuid : playerManager.getKeys()) {
-            if (playersRaces == test) {
-                statementTrue++;
-                test = 0;
-                switch (statementTrue) {
-                    case 2:
-                        races = new Hobbits();
-                        break;
-                    case 3:
-                        races = new Nains();
-                        break;
-
-                    case 4:
-                        races = new Orques();
-                        break;
-                    case 5:
-                        races = null;
-                        break;
+    public void generateMapRaces() {
+        for (int i = 0; i < rolesGui.resultsRaces() * 4; i++) {
+            for (UUID uuid : rolesManagers.getPlayersUuid()) {
+                if (i > racesList.size()) {
+                    i = 0;
                 }
+                racesPlayers.put(uuid, racesList.get(i));
             }
 
-            while (playersRaces != test) {
-                racesPlayers.put(uuid, races);
-                test++;
-                Bukkit.broadcastMessage("t" + test);
-            }
         }
-
-
     }
+
 
     public Races getRaces(UUID uuid) {
         return racesPlayers.get(uuid);

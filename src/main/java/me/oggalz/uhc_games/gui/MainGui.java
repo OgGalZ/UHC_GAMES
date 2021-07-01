@@ -29,9 +29,9 @@ public class MainGui implements InventoryProvider {
     private final Main main;
     private final Teleportation teleportation;
     private final SmartInventory racesGui;
-    private final RacesGui races;
+    private final RolesGui races;
 
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation, SmartInventory racesGui, RacesGui races) {
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation, SmartInventory racesGui, RolesGui races) {
         this.main = main;
         this.teleportation = teleportation;
         this.racesGui = racesGui;
@@ -78,7 +78,7 @@ public class MainGui implements InventoryProvider {
 
         contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            if(races.resultsRaces() == (long) Bukkit.getOnlinePlayers().size() * 4 + races.results()){
+            if((races.resultsRaces() * 4L) +  (races.resultsRoles() + 4) == (long) Bukkit.getOnlinePlayers().size()  ){
                 if (!enable) {
                     enable = true;
                     teleportation.runTaskTimer(main, 0, 20L);

@@ -9,7 +9,6 @@ public class Player {
 
     private int kill = 0;
     private final UUID uuid;
-    private  Races races;
 
     public Player(UUID uuid) {
         this.uuid = uuid;
@@ -23,6 +22,4 @@ public class Player {
         this.kill += kill;
     }
 
-    public void sendMessages(){
-    }
 }

@@ -7,6 +7,7 @@ import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
+import me.oggalz.uhc_games.races.roles.RolesManagers;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.*;
@@ -39,13 +40,14 @@ public class Main extends JavaPlugin {
         PvpGui pvpGui = new PvpGui();
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();
-        RacesGui racesGui = new RacesGui();
+        RolesGui racesGui = new RolesGui();
         guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui, racesGui);
         finish = new Finish();
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
-        RacesManager racesManager = new RacesManager(playerManager , guiManager.racesGui());
+        RolesManagers rolesManagers = new RolesManagers(playerManager);
+        RacesManager racesManager = new RacesManager(playerManager , guiManager.racesGui(), rolesManagers);
         stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
 

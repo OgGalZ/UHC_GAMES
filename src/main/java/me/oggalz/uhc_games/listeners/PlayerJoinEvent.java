@@ -93,7 +93,7 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack itemStack = event.getItemDrop().getItemStack();
-        if (stateManager.hasNotStarted() && itemStack.hasItemMeta() && itemStack.getType() == Material.COMPASS) {
+        if ( itemStack.hasItemMeta() ) {
             event.setCancelled(true);
         }
 

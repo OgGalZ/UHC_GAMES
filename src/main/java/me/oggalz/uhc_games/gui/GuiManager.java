@@ -1,15 +1,13 @@
 package me.oggalz.uhc_games.gui;
 
-import fr.minuskube.inv.SmartInventory;
-
 public class GuiManager {
 
     private final PvpGui pvpGui;
     private final ScenariosGui scenariosGui;
     private final WorldBorderGui worldBorderGui;
-    private final RacesGui racesGui;
+    private final RolesGui racesGui;
 
-    public GuiManager(PvpGui pvpGui, ScenariosGui scenariosGui, WorldBorderGui worldBorderGui, RacesGui racesGui) {
+    public GuiManager(PvpGui pvpGui, ScenariosGui scenariosGui, WorldBorderGui worldBorderGui, RolesGui racesGui) {
         this.pvpGui = pvpGui;
         this.scenariosGui = scenariosGui;
         this.worldBorderGui = worldBorderGui;
@@ -28,7 +26,7 @@ public class GuiManager {
         return worldBorderGui;
     }
 
-    public RacesGui racesGui() {
+    public RolesGui racesGui() {
         return racesGui;
     }
 }
