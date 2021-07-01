@@ -48,7 +48,7 @@ public class Main extends JavaPlugin {
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
         RolesManagers rolesManagers = new RolesManagers(playerManager);
         RacesManager racesManager = new RacesManager(playerManager , guiManager.racesGui(), rolesManagers);
-        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager);
+        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
 
         SmartInventory races = SmartInventory.builder()

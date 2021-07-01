@@ -5,6 +5,7 @@ import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
+import me.oggalz.uhc_games.races.roles.RolesManagers;
 import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.tasks.Scheduler;
 import me.oggalz.uhc_games.tasks.WorldBorder;
@@ -24,8 +25,9 @@ public class StateManager {
     private final WorldBorder worldBorder;
     private final Pvp pvp;
     private final RacesManager racesManager;
+    private final RolesManagers rolesManagers;
 
-    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, WorldBorder worldBorder, Pvp pvp, RacesManager racesManager) {
+    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, WorldBorder worldBorder, Pvp pvp, RacesManager racesManager, RolesManagers rolesManagers) {
         this.main = main;
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
@@ -33,6 +35,7 @@ public class StateManager {
         this.worldBorder = worldBorder;
         this.pvp = pvp;
         this.racesManager = racesManager;
+        this.rolesManagers = rolesManagers;
         gameState = State.WAITING;
     }
 
@@ -44,6 +47,13 @@ public class StateManager {
         scheduler.runTaskTimer(main, 0, 20L);
         pvp.runTaskLater(main, secondsPvp * 20L);
         worldBorder.runTaskTimer(main, secondsBorder * 20L, 20);
+        rolesManagers.generateMapPlayersWithoutRaces();
+        racesManager.generateMapRaces();
+        for(Player player : Bukkit.getOnlinePlayers()){
+            player.getInventory().addItem(Item.createItemstack(Material.GHAST_TEAR , 1 , ChatColor.GOLD + "Power" , null));
+        }
+        rolesManagers.messageAnnouncement();
+        racesManager.messageAnnouncement();
     }
 
     public boolean hasStarted() {

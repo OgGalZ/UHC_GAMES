@@ -8,10 +8,7 @@ import me.oggalz.uhc_games.races.roles.heroes.Thorin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-
-import java.sql.BatchUpdateException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class RolesManagers {
     private final PlayerManager playerManager;
@@ -30,7 +27,7 @@ public class RolesManagers {
         playersUuid = playerManager.getKeys();
     }
 
-    public void generateMapHeroes() {
+    public void generateMapPlayersWithoutRaces() {
         for (int i = 0; i < rolesListWithoutRaces.size(); i++) {
             for (UUID uuid : playersUuid) {
                 {

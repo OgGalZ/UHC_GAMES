@@ -3,6 +3,9 @@ package me.oggalz.uhc_games.races;
 import me.oggalz.uhc_games.gui.RolesGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.roles.RolesManagers;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -40,8 +43,14 @@ public class RacesManager {
     }
 
 
-    public Races getRaces(UUID uuid) {
-        return racesPlayers.get(uuid);
+    public void messageAnnouncement() {
+
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (racesPlayers.containsKey(player.getUniqueId())) {
+                player.sendMessage(racesPlayers.get(player.getUniqueId()).messages());
+            }
+        }
     }
 }
+
 
