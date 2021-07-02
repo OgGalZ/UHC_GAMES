@@ -29,7 +29,7 @@ public class PlayerJoinEvent implements Listener {
     private final StateManager stateManager;
     private final ActionBarUtils actionBarUtils;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager,  ActionBarUtils actionBarUtils) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ActionBarUtils actionBarUtils) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
@@ -57,14 +57,14 @@ public class PlayerJoinEvent implements Listener {
             player.getInventory().clear();
             Item.clearArmor(player);
             player.setGameMode(GameMode.ADVENTURE);
-            actionBarUtils.sendActionBarToAllPlayers(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE+ " a rejoint la partie ! " , 100);
+            actionBarUtils.sendActionBarToAllPlayers(ChatColor.BLUE + player.getDisplayName() + ChatColor.WHITE + " a rejoint la partie ! ", 100);
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 9));
             if (player.isOp()) {
                 ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
                 player.getInventory().setItem(4, itemStack);
             }
-        } else if(stateManager.hasStarted()) {
-            if(!playerManager.containsplayers(player.getUniqueId())){
+        } else if (stateManager.hasStarted()) {
+            if (!playerManager.containsplayers(player.getUniqueId())) {
                 event.setJoinMessage("");
                 player.setGameMode(GameMode.SPECTATOR);
                 player.sendMessage(ChatColor.DARK_AQUA + "La partie a déjà commencé :/");
@@ -80,7 +80,7 @@ public class PlayerJoinEvent implements Listener {
         Player player = event.getPlayer();
         playerManager.removePlayer(player.getUniqueId());
         BPlayerBoard board = Netherboard.instance().getBoard(player);
-        if(board != null){
+        if (board != null) {
             board.delete();
             for (Player x : Bukkit.getOnlinePlayers()) {
                 if (playerManager.containsplayers(x.getUniqueId())) {
@@ -93,12 +93,11 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerDropItem(PlayerDropItemEvent event) {
         ItemStack itemStack = event.getItemDrop().getItemStack();
-        if ( itemStack.hasItemMeta() ) {
+        if (itemStack.hasItemMeta() && itemStack.getItemMeta().getDisplayName() != null && itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.BLUE + "Config")) {
+            event.setCancelled(true);
+
+        } else if (itemStack.hasItemMeta() && itemStack.getItemMeta().getDisplayName() != null && itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power")) {
             event.setCancelled(true);
         }
-
     }
-
-
 }
-

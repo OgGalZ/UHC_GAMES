@@ -1,10 +1,21 @@
 package me.oggalz.uhc_games.races;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+
+import java.util.UUID;
 
 public class Orques extends Races {
 
     private String message;
+
+    public Orques(me.oggalz.uhc_games.player.Player player) {
+        super(player);
+    }
 
     @Override
     public String messages() {
@@ -14,7 +25,14 @@ public class Orques extends Races {
         return ChatColor.RED + message;
     }
 
-    public String getMessage() {
-        return message;
+    @Override
+    public void power(Player player, me.oggalz.uhc_games.player.Player playerClass) {
+        if (playerClass.isEnable()) {
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2400, 1);
+            player.addPotionEffect(potionEffect);
+            playerClass.setEnable(false);
+        }
     }
 }
+
+

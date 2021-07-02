@@ -4,6 +4,7 @@ import fr.minuskube.inv.SmartInventory;
 import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.utils.Item;
@@ -29,13 +30,14 @@ public class SecondaryListeners implements Listener {
     private final StateManager stateManager;
     private final PlayerManager playerManager;
     private final PvpGui pvpGui;
+    private final RacesManager racesManager;
 
-
-    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui) {
+    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui, RacesManager racesManager) {
         this.mainGUi = mainGUi;
         this.stateManager = stateManager;
         this.playerManager = playerManager;
         this.pvpGui = pvpGui;
+        this.racesManager = racesManager;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -47,7 +49,11 @@ public class SecondaryListeners implements Listener {
         if (itemStack.isPresent() && itemStack.get().getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.get().getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             mainGUi.open(player);
         }
-
+        if(itemStack.get().getItemMeta().getDisplayName() != null && itemStack.get().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power") ){
+                if(racesManager.containsUuid(player.getUniqueId())){
+                    racesManager.getRaces(player.getUniqueId()).power(player , playerManager.getPlayer(player.getUniqueId()));
+                }
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL)

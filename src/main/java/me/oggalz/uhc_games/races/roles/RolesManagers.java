@@ -8,11 +8,12 @@ import me.oggalz.uhc_games.races.roles.heroes.Thorin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+
 import java.util.*;
 
 public class RolesManagers {
     private final PlayerManager playerManager;
-    private Map<UUID, Roles> rolesPlayersWithoutRaces;
+    private final Map<UUID, Roles> rolesPlayersWithoutRaces;
     private final List<Roles> rolesListWithoutRaces;
     private List<UUID> playersUuid;
 
@@ -24,22 +25,24 @@ public class RolesManagers {
         rolesListWithoutRaces.add(new BilbonSacquet());
         rolesListWithoutRaces.add(new Legolas());
         rolesListWithoutRaces.add(new Thorin());
-        playersUuid = playerManager.getKeys();
     }
 
     public void generateMapPlayersWithoutRaces() {
-        for (int i = 0; i < rolesListWithoutRaces.size(); i++) {
-            for (UUID uuid : playersUuid) {
-                {
-                    rolesPlayersWithoutRaces.put(uuid, rolesListWithoutRaces.get(i));
-                    playersUuid.remove(i);
-                }
+        playersUuid = playerManager.getKeys();
+        int i = 0;
+        for (UUID uuid : playersUuid) {
+            if (i == rolesListWithoutRaces.size()) {
+                break;
             }
+            rolesPlayersWithoutRaces.put(uuid, rolesListWithoutRaces.get(i));
+            i++;
         }
     }
 
-
     public List<UUID> getPlayersUuid() {
+        for (UUID uuid : rolesPlayersWithoutRaces.keySet()) {
+            playersUuid.remove(uuid);
+        }
         return playersUuid;
     }
 

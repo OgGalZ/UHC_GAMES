@@ -30,6 +30,7 @@ public class Main extends JavaPlugin {
     private Finish finish;
     private StateManager stateManager;
     private SmartInventory mainGui;
+    private RacesManager racesManager;
 
     @Override
     public void onEnable() {
@@ -47,14 +48,14 @@ public class Main extends JavaPlugin {
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
         RolesManagers rolesManagers = new RolesManagers(playerManager);
-        RacesManager racesManager = new RacesManager(playerManager , guiManager.racesGui(), rolesManagers);
+        racesManager = new RacesManager(playerManager, guiManager.racesGui(), rolesManagers);
         stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
 
         SmartInventory races = SmartInventory.builder()
                 .id("races ")
                 .provider(racesGui)
-                .size(4 , 9)
+                .size(4, 9)
                 .title(ChatColor.WHITE + "Races")
                 .closeable(true)
                 .build();
@@ -112,9 +113,8 @@ public class Main extends JavaPlugin {
         Timber timber = new Timber();
         ActionBarUtils actionBarUtils = new ActionBarUtils(this);
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
-
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, actionBarUtils), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui()), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), racesManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
     }
 

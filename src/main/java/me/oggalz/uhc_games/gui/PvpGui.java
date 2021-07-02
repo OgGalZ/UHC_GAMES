@@ -5,7 +5,6 @@ import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

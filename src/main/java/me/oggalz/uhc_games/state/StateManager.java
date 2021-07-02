@@ -13,7 +13,10 @@ import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class StateManager {
 
@@ -40,10 +43,11 @@ public class StateManager {
     }
 
     public void startGame() {
+        me.oggalz.uhc_games.player.Player playerClass = new me.oggalz.uhc_games.player.Player(UUID.randomUUID());
         gameState = State.STARTING;
         int secondsPvp = pvpGui.getTimePvp() * 60;
         int secondsBorder = worldBorderGui.getTimeBorder() * 60;
-        Scheduler scheduler = new Scheduler(pvpGui, worldBorderGui, playerManager);
+        Scheduler scheduler = new Scheduler(pvpGui, worldBorderGui, playerManager, playerClass);
         scheduler.runTaskTimer(main, 0, 20L);
         pvp.runTaskLater(main, secondsPvp * 20L);
         worldBorder.runTaskTimer(main, secondsBorder * 20L, 20);
@@ -51,7 +55,9 @@ public class StateManager {
         racesManager.generateMapRaces();
         for(Player player : Bukkit.getOnlinePlayers()){
             player.getInventory().addItem(Item.createItemstack(Material.GHAST_TEAR , 1 , ChatColor.GOLD + "Power" , null));
+            player.playSound(player.getLocation() , Sound.GLASS , 99 , 99);
         }
+
         rolesManagers.messageAnnouncement();
         racesManager.messageAnnouncement();
     }

@@ -35,8 +35,7 @@ public class PlayerManager {
 
 
     public List<UUID> getKeys(){
-        ArrayList<UUID> keyList = new ArrayList<>(players.keySet());
-            return keyList;
+        return new ArrayList<>(players.keySet());
     }
 }
 

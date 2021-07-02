@@ -1,11 +1,21 @@
 package me.oggalz.uhc_games.races;
 
+import me.oggalz.uhc_games.player.Player;
 import org.bukkit.ChatColor;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
+import org.spigotmc.Metrics;
+
+import java.util.UUID;
 
 
 public class Nains extends Races {
 
     private String message;
+
+    public Nains(Player player) {
+        super(player);
+    }
 
     @Override
     public String messages() {
@@ -14,7 +24,14 @@ public class Nains extends Races {
                 "Résistance 1 (1 minute)\n";
         return ChatColor.BLACK + message;
     }
-    public String getMessage() {
-        return message;
+
+
+    @Override
+    public void power(org.bukkit.entity.Player player, Player playerClass) {
+        if (playerClass.isEnable()) {
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1);
+            player.addPotionEffect(potionEffect);
+            playerClass.setEnable(false);
+        }
     }
 }

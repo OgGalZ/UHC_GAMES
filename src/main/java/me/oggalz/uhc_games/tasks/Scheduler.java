@@ -4,10 +4,10 @@ import fr.minuskube.netherboard.Netherboard;
 import fr.minuskube.netherboard.bukkit.BPlayerBoard;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
+import me.oggalz.uhc_games.player.Player;
 import me.oggalz.uhc_games.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Scheduler extends BukkitRunnable{
@@ -23,14 +23,16 @@ public class Scheduler extends BukkitRunnable{
     private int timeBorder;
     private final PlayerManager playerManager;
     private int episo = 20 ;
+    private final Player player;
 
-    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager) {
+    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, Player player) {
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
         timePvp = pvpGui.getTimePvp();
         timeBorder = worldBorderGui.getTimeBorder();
         this.playerManager = playerManager;
 
+        this.player = player;
     }
 
     @Override
@@ -55,12 +57,13 @@ public class Scheduler extends BukkitRunnable{
             if (minutes == episo && seconds == 0) {
                 episode++;
                 episo += 20;
+                player.setEnable(true);
             }
         }
 
 
         BPlayerBoard playerBoard = null;
-        for (Player player : Bukkit.getOnlinePlayers()) {
+        for (org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
             if (playerManager.containsplayers(player.getUniqueId())) {
                 playerBoard = Netherboard.instance().getBoard(player);
                 if(!sendTitle){
@@ -102,6 +105,8 @@ public class Scheduler extends BukkitRunnable{
 
         }
 
+
     }
+
 
 }

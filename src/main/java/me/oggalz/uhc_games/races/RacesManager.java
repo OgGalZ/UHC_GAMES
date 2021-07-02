@@ -4,7 +4,6 @@ import me.oggalz.uhc_games.gui.RolesGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.roles.RolesManagers;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -22,24 +21,28 @@ public class RacesManager {
         this.playerManager = playerManager;
         this.rolesGui = rolesGui;
         this.rolesManagers = rolesManagers;
+        me.oggalz.uhc_games.player.Player player = new me.oggalz.uhc_games.player.Player(UUID.randomUUID());
         racesPlayers = new HashMap<>();
         racesList = new ArrayList<>();
-        racesList.add(new Elfes());
-        racesList.add(new Hobbits());
-        racesList.add(new Nains());
-        racesList.add(new Orques());
+        racesList.add(new Elfes(player));
+        racesList.add(new Hobbits(player));
+        racesList.add(new Nains(player));
+        racesList.add(new Orques(player));
     }
 
     public void generateMapRaces() {
-        for (int i = 0; i < rolesGui.resultsRaces() * 4; i++) {
-            for (UUID uuid : rolesManagers.getPlayersUuid()) {
-                if (i > racesList.size()) {
-                    i = 0;
+        if (rolesGui.resultsRaces() != 0) {
+            for (int i = 0; i < rolesGui.resultsRaces() * 4; i++) {
+                for (UUID uuid : rolesManagers.getPlayersUuid()) {
+                    if (i > racesList.size()) {
+                        i = 0;
+                    }
+                    racesPlayers.put(uuid, racesList.get(i));
                 }
-                racesPlayers.put(uuid, racesList.get(i));
-            }
 
+            }
         }
+
     }
 
 
@@ -50,6 +53,14 @@ public class RacesManager {
                 player.sendMessage(racesPlayers.get(player.getUniqueId()).messages());
             }
         }
+    }
+
+    public boolean containsUuid(UUID uuid) {
+        return racesPlayers.containsKey(uuid);
+    }
+
+    public Races getRaces(UUID uuid) {
+        return racesPlayers.get(uuid);
     }
 }
 
