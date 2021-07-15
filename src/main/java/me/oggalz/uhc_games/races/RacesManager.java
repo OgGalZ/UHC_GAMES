@@ -11,8 +11,8 @@ import java.util.*;
 public class RacesManager {
 
     private final PlayerManager playerManager;
-    private Map<UUID, Races> racesPlayers;
-    private List<Races> racesList;
+    private final Map<UUID, Races> racesPlayers;
+    private final List<Races> racesList;
     private final RolesGui rolesGui;
     private final RolesManagers rolesManagers;
 
@@ -32,22 +32,20 @@ public class RacesManager {
 
     public void generateMapRaces() {
         if (rolesGui.resultsRaces() != 0) {
-            for (int i = 0; i < rolesGui.resultsRaces() * 4; i++) {
-                for (UUID uuid : rolesManagers.getPlayersUuid()) {
-                    if (i > racesList.size()) {
-                        i = 0;
-                    }
-                    racesPlayers.put(uuid, racesList.get(i));
+            int i = 0;
+            for (UUID uuid : rolesManagers.getPlayersUuid()) {
+                if (i > racesList.size()) {
+                    i = 0;
                 }
-
+                racesPlayers.put(uuid, racesList.get(i));
+                i++;
             }
         }
-
+        Bukkit.broadcastMessage("lsdopdfjdfskjsjkgfsdkjk" + racesPlayers.values());
     }
 
 
     public void messageAnnouncement() {
-
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (racesPlayers.containsKey(player.getUniqueId())) {
                 player.sendMessage(racesPlayers.get(player.getUniqueId()).messages());

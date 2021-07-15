@@ -1,5 +1,4 @@
 package me.oggalz.uhc_games.scenarios;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

@@ -2,6 +2,9 @@ package me.oggalz.uhc_games.races.roles.heroes;
 
 import me.oggalz.uhc_games.races.roles.Roles;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Thorin extends Roles {
 
@@ -13,4 +16,10 @@ public class Thorin extends Roles {
         return ChatColor.ITALIC + rolesMessage;
     }
 
+
+    @Override
+    public void powerRoles(Player player) {
+        PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999 ,  0);
+        player.addPotionEffect(potionEffect);
+    }
 }

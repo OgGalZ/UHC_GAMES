@@ -16,6 +16,7 @@ public abstract class Races {
         this.player = player;
     }
 
+
     public abstract String messages();
 
     public abstract void power(org.bukkit.entity.Player player , Player playerClass);

@@ -29,7 +29,7 @@ public class Nains extends Races {
     @Override
     public void power(org.bukkit.entity.Player player, Player playerClass) {
         if (playerClass.isEnable()) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 1);
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 1200, 0);
             player.addPotionEffect(potionEffect);
             playerClass.setEnable(false);
         }

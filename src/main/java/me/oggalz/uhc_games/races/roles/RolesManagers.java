@@ -29,6 +29,7 @@ public class RolesManagers {
 
     public void generateMapPlayersWithoutRaces() {
         playersUuid = playerManager.getKeys();
+        Bukkit.broadcastMessage("size" + playersUuid.size());
         int i = 0;
         for (UUID uuid : playersUuid) {
             if (i == rolesListWithoutRaces.size()) {
@@ -37,12 +38,14 @@ public class RolesManagers {
             rolesPlayersWithoutRaces.put(uuid, rolesListWithoutRaces.get(i));
             i++;
         }
+        Bukkit.broadcastMessage("dd" + rolesPlayersWithoutRaces.values());
     }
 
     public List<UUID> getPlayersUuid() {
         for (UUID uuid : rolesPlayersWithoutRaces.keySet()) {
             playersUuid.remove(uuid);
         }
+        Bukkit.broadcastMessage("sizeafter treatment" + playersUuid.size());
         return playersUuid;
     }
 
@@ -50,6 +53,18 @@ public class RolesManagers {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
                 player.sendMessage(ChatColor.MAGIC + "deffffffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddqssjipsdfiojsiohjhjiodohjdhjodg");
+            }
+        }
+    }
+
+    public void powerMessageRoles(Player player) {
+        if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
+            Object object = rolesPlayersWithoutRaces.get(player.getUniqueId());
+            for (Object o : rolesPlayersWithoutRaces.values()) {
+                if (o == object) {
+                    rolesPlayersWithoutRaces.get(player.getUniqueId()).powerRoles(player);
+                    player.sendMessage(rolesPlayersWithoutRaces.get(player.getUniqueId()).messages());
+                }
             }
         }
     }

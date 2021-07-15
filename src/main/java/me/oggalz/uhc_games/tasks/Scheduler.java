@@ -6,11 +6,13 @@ import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.Player;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.races.RacesManager;
+import me.oggalz.uhc_games.races.roles.RolesManagers;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class Scheduler extends BukkitRunnable{
+public class Scheduler extends BukkitRunnable {
 
     private boolean sendTitle = false;
     private int seconds = 0;
@@ -22,23 +24,34 @@ public class Scheduler extends BukkitRunnable{
     private int timePvp;
     private int timeBorder;
     private final PlayerManager playerManager;
-    private int episo = 20 ;
+    private int episo = 20;
     private final Player player;
+    private final RacesManager racesManager;
+    private final RolesManagers rolesManagers;
+    private boolean racesMessage = true;
 
-    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, Player player) {
+    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, Player player, RacesManager racesManager, RolesManagers rolesManagers) {
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
         timePvp = pvpGui.getTimePvp();
         timeBorder = worldBorderGui.getTimeBorder();
         this.playerManager = playerManager;
-
         this.player = player;
+        this.racesManager = racesManager;
+        this.rolesManagers = rolesManagers;
     }
 
     @Override
     public void run() {
+
         seconds++;
         if (seconds == 60) {
+            if (racesMessage) {
+                rolesManagers.messageAnnouncement();
+                racesManager.messageAnnouncement();
+                racesMessage = false;
+            }
+
             seconds = 0;
             minutes++;
             if (timePvp > 0) {
@@ -51,7 +64,7 @@ public class Scheduler extends BukkitRunnable{
                 minutes = 0;
                 hours++;
             }
-            if(episo == 60){
+            if (episo == 60) {
                 episo = 0;
             }
             if (minutes == episo && seconds == 0) {
@@ -66,9 +79,10 @@ public class Scheduler extends BukkitRunnable{
         for (org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
             if (playerManager.containsplayers(player.getUniqueId())) {
                 playerBoard = Netherboard.instance().getBoard(player);
-                if(!sendTitle){
-                    player.sendTitle(ChatColor.GOLD + "Annonce des " , ChatColor.GOLD + "Races ");
-                    sendTitle = true;                }
+                if (!sendTitle) {
+                    player.sendTitle(ChatColor.GOLD + "Annonce des ", ChatColor.GOLD + "Races ");
+                    sendTitle = true;
+                }
             }
             if (hours == 0) {
                 if (playerBoard != null) {
@@ -99,7 +113,7 @@ public class Scheduler extends BukkitRunnable{
                     playerBoard.set(ChatColor.RED + "PVP : " + " Activé", 5);
                 }
             }
-            if(playerBoard != null){
+            if (playerBoard != null) {
                 playerBoard.set(ChatColor.WHITE + "Episode : " + episode, 10);
             }
 

@@ -28,7 +28,7 @@ public class Orques extends Races {
     @Override
     public void power(Player player, me.oggalz.uhc_games.player.Player playerClass) {
         if (playerClass.isEnable()) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2400, 1);
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2400, 0);
             player.addPotionEffect(potionEffect);
             playerClass.setEnable(false);
         }

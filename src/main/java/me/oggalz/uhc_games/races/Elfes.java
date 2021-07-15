@@ -27,7 +27,7 @@ public class Elfes extends Races {
     @Override
     public void power(Player player, me.oggalz.uhc_games.player.Player playerClass) {
         if (playerClass.isEnable()) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED , 1800, 1);
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED , 1800, 0);
             player.addPotionEffect(potionEffect);
             playerClass.setEnable(false);
         }

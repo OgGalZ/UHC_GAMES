@@ -2,6 +2,7 @@ package me.oggalz.uhc_games.tasks;
 
 import me.oggalz.uhc_games.gui.ScenariosGui;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.races.roles.RolesManagers;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -15,13 +16,15 @@ public class Pvp extends BukkitRunnable {
 
     private final PlayerManager playerManager;
     private final ScenariosGui scenariosGui;
+    private final RolesManagers rolesManagers;
     private static boolean enablePvp = false;
 
 
-    public Pvp(PlayerManager playerManager, ScenariosGui scenariosGui) {
+    public Pvp(PlayerManager playerManager, ScenariosGui scenariosGui, RolesManagers rolesManagers) {
         this.playerManager = playerManager;
         this.scenariosGui = scenariosGui;
 
+        this.rolesManagers = rolesManagers;
     }
 
 
@@ -29,6 +32,9 @@ public class Pvp extends BukkitRunnable {
     public void run() {
         enablePvp = true;
         Bukkit.broadcastMessage(ChatColor.GOLD + "Le PVP est maintenant activé ! ");
+        for(Player player : Bukkit.getOnlinePlayers()){
+            rolesManagers.powerMessageRoles(player);
+        }
         if (scenariosGui.isFinalHeal()) {
             Bukkit.broadcastMessage(ChatColor.RED + "Activation du scénario Final Heal ! ");
             for (Player player : Bukkit.getOnlinePlayers()) {

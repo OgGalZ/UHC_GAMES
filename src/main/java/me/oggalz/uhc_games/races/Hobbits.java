@@ -27,7 +27,7 @@ public class Hobbits extends Races {
     @Override
     public void power(org.bukkit.entity.Player player, Player playerClass) {
         if (playerClass.isEnable()) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.REGENERATION, 600, 1);
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.REGENERATION, 600, 0);
             player.addPotionEffect(potionEffect);
             playerClass.setEnable(false);
         }

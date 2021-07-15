@@ -38,17 +38,17 @@ public class Main extends JavaPlugin {
         World world = Bukkit.getWorld("world");
         world.getWorldBorder().setSize(5000000);
         this.playerManager = new PlayerManager();
+        RolesManagers rolesManagers = new RolesManagers(playerManager);
         PvpGui pvpGui = new PvpGui();
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();
         RolesGui racesGui = new RolesGui();
         guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui, racesGui);
+        racesManager = new RacesManager(playerManager, guiManager.racesGui(), rolesManagers);
         finish = new Finish();
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
-        Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui());
-        RolesManagers rolesManagers = new RolesManagers(playerManager);
-        racesManager = new RacesManager(playerManager, guiManager.racesGui(), rolesManagers);
+        Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui(), rolesManagers);
         stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
 

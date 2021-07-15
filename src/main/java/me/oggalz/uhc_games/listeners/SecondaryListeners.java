@@ -22,15 +22,16 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffectType;
 
-
 import java.util.Optional;
 
 public class SecondaryListeners implements Listener {
+
     private final SmartInventory mainGUi;
     private final StateManager stateManager;
     private final PlayerManager playerManager;
     private final PvpGui pvpGui;
     private final RacesManager racesManager;
+
 
     public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui, RacesManager racesManager) {
         this.mainGUi = mainGUi;
@@ -49,7 +50,7 @@ public class SecondaryListeners implements Listener {
         if (itemStack.isPresent() && itemStack.get().getType() == Material.COMPASS && player.isOp() && stateManager.hasNotStarted() && itemStack.get().getItemMeta().getDisplayName().equals(ChatColor.BLUE + "Config")) {
             mainGUi.open(player);
         }
-        if(itemStack.get().getItemMeta().getDisplayName() != null && itemStack.get().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power") ){
+        if(itemStack.isPresent() && itemStack.get().getItemMeta().getDisplayName() != null && itemStack.get().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power") ){
                 if(racesManager.containsUuid(player.getUniqueId())){
                     racesManager.getRaces(player.getUniqueId()).power(player , playerManager.getPlayer(player.getUniqueId()));
                 }
