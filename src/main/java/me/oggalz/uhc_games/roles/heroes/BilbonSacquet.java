@@ -1,6 +1,6 @@
-package me.oggalz.uhc_games.races.roles.heroes;
+package me.oggalz.uhc_games.roles.heroes;
 
-import me.oggalz.uhc_games.races.roles.Roles;
+import me.oggalz.uhc_games.roles.Roles;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;

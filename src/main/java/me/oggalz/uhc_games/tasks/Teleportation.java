@@ -44,7 +44,6 @@ public class Teleportation extends BukkitRunnable {
             loadChunks();
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.playSound(player.getLocation(), Sound.FIRE, 99, 2);
-                player.sendTitle(ChatColor.BLUE + "", " " + start);
             }
         }
         if (start == 20) {
@@ -53,7 +52,6 @@ public class Teleportation extends BukkitRunnable {
         if (start == 10) {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
             for (Player player : Bukkit.getOnlinePlayers()) {
-                player.sendTitle(ChatColor.BLUE + "Lancement ", " " + start);
                 player.playSound(player.getLocation(), Sound.FIRE, 99, 2);
             }
         }
@@ -61,8 +59,7 @@ public class Teleportation extends BukkitRunnable {
             Bukkit.broadcastMessage(ChatColor.RED + "La partie se lancera dans " + ChatColor.BLUE + start);
             for (Player player : Bukkit.getOnlinePlayers()) {
                 player.playSound(player.getLocation(), Sound.FIRE, 99, 2);
-                player.sendTitle(ChatColor.BLUE + "Lancement ", " " + start);
-            }
+             }
         }
 
         start--;

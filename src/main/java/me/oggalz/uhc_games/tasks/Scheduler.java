@@ -7,7 +7,7 @@ import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.Player;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
-import me.oggalz.uhc_games.races.roles.RolesManagers;
+import me.oggalz.uhc_games.roles.RolesManagers;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;

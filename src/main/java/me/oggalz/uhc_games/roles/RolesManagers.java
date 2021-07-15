@@ -1,10 +1,10 @@
-package me.oggalz.uhc_games.races.roles;
+package me.oggalz.uhc_games.roles;
 
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.races.roles.heroes.Azog;
-import me.oggalz.uhc_games.races.roles.heroes.BilbonSacquet;
-import me.oggalz.uhc_games.races.roles.heroes.Legolas;
-import me.oggalz.uhc_games.races.roles.heroes.Thorin;
+import me.oggalz.uhc_games.roles.heroes.Azog;
+import me.oggalz.uhc_games.roles.heroes.BilbonSacquet;
+import me.oggalz.uhc_games.roles.heroes.Legolas;
+import me.oggalz.uhc_games.roles.heroes.Thorin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -58,14 +58,19 @@ public class RolesManagers {
     }
 
     public void powerMessageRoles(Player player) {
+        List<String> pseudos = new ArrayList<>();
         if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
             Object object = rolesPlayersWithoutRaces.get(player.getUniqueId());
             for (Object o : rolesPlayersWithoutRaces.values()) {
                 if (o == object) {
                     rolesPlayersWithoutRaces.get(player.getUniqueId()).powerRoles(player);
                     player.sendMessage(rolesPlayersWithoutRaces.get(player.getUniqueId()).messages());
+                    if (!o.equals(rolesListWithoutRaces.get(0))) {
+                        pseudos.add(player.getName());
+                    }
                 }
             }
         }
     }
+
 }

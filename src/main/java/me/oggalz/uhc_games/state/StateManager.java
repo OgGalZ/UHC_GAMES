@@ -5,7 +5,7 @@ import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.gui.WorldBorderGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
-import me.oggalz.uhc_games.races.roles.RolesManagers;
+import me.oggalz.uhc_games.roles.RolesManagers;
 import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.tasks.Scheduler;
 import me.oggalz.uhc_games.tasks.WorldBorder;
@@ -55,6 +55,7 @@ public class StateManager {
             player.getInventory().addItem(Item.createItemstack(Material.GHAST_TEAR, 1, ChatColor.GOLD + "Power", null));
             player.playSound(player.getLocation(), Sound.GLASS, 99, 99);
         }
+        rolesManagers.generateMapPlayersWithoutRaces();
         racesManager.generateMapRaces();
 
     }

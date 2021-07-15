@@ -1,4 +1,4 @@
-package me.oggalz.uhc_games.races.roles;
+package me.oggalz.uhc_games.roles;
 
 import org.bukkit.entity.Player;
 
