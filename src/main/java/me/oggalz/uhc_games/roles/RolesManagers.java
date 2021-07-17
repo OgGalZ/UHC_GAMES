@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games.roles;
 
+import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.heroes.Azog;
@@ -11,6 +12,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.logging.Level;
 
 public class RolesManagers {
     private final PlayerManager playerManager;
@@ -21,10 +23,12 @@ public class RolesManagers {
     private final Map<UUID, Roles> rolesPLayers;
     private final List<Roles> rolesList;
     private final RacesManager racesManager;
+    private final Main main;
 
-    public RolesManagers(PlayerManager playerManager, RacesManager racesManager) {
+    public RolesManagers(PlayerManager playerManager, RacesManager racesManager, Main main) {
         this.playerManager = playerManager;
         this.racesManager = racesManager;
+        this.main = main;
         rolesPlayersWithoutRaces = new HashMap<>();
         rolesListWithoutRaces = new ArrayList<>();
         rolesListWithoutRaces.add(new Azog());
@@ -48,21 +52,24 @@ public class RolesManagers {
         }
     }
 
-    public void generateMapRolesPLayers() {
+    public void generateMapRolesPLayers() throws NullPointerException {
         int i = 0;
         int y = 0;
-        for (UUID uuid : racesManager.getRacesPlayers().keySet()) {
-            if (i == rolesList.size()) {
-                i = 0;
-                if (y == 4) {
-                    break;
+        try {
+            for (UUID uuid : racesManager.getRacesPlayers().keySet()) {
+                if (i == rolesList.size()) {
+                    i = 0;
+                    if (y == 4) {
+                        break;
+                    }
+                    y++;
                 }
-                y++;
+                rolesPLayers.put(uuid, rolesList.get(i));
+                i++;
             }
-            rolesPLayers.put(uuid, rolesList.get(i));
-            i++;
+        } catch (NullPointerException e){
+           main.getLogger().log(Level.WARNING, "Aucun joueur n'aura une race dans cette partie.");
         }
-        Bukkit.broadcastMessage("" + rolesPLayers);
 
     }
 

@@ -38,7 +38,7 @@ public class Main extends JavaPlugin {
         World world = Bukkit.getWorld("world");
         world.getWorldBorder().setSize(5000000);
         this.playerManager = new PlayerManager();
-        RolesManagers rolesManagers = new RolesManagers( playerManager, racesManager);
+        RolesManagers rolesManagers = new RolesManagers( playerManager, racesManager, this);
         PvpGui pvpGui = new PvpGui();
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();

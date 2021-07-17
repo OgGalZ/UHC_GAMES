@@ -78,7 +78,7 @@ public class MainGui implements InventoryProvider {
 
         contents.set(2, 4, ClickableItem.of(item.get(4), e -> {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
-            if((races.resultsRaces() * 4L) +  (races.resultsRoles() + 4) == (long) Bukkit.getOnlinePlayers().size()  ){
+            if((races.resultsRaces() * 4L) +  (races.resultsRoles() + 1) == (long) Bukkit.getOnlinePlayers().size()  ){
                 if (!enable) {
                     enable = true;
                     player.getInventory().clear();
