@@ -95,7 +95,7 @@ public class Teleportation extends BukkitRunnable {
             player.removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 100, 999999999));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 999999999));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 600, 9));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2000, 9));
             player.getInventory().clear();
             scoreboardCreator.deleteScoreboard(Netherboard.instance().getBoard(player));
             scoreboardCreator.createScoreboardGame(player);

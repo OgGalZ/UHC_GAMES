@@ -70,7 +70,9 @@ public class Scheduler extends BukkitRunnable {
             if (minutes == episo && seconds == 0) {
                 episode++;
                 episo += 20;
-                player.setEnable(true);
+                for(Player player :  playerManager.getValues()){
+                    player.setEnable(true);
+                }
             }
         }
 
@@ -80,7 +82,6 @@ public class Scheduler extends BukkitRunnable {
             if (playerManager.containsplayers(player.getUniqueId())) {
                 playerBoard = Netherboard.instance().getBoard(player);
                 if (!sendTitle) {
-                    player.sendTitle(ChatColor.GOLD + "Annonce des ", ChatColor.GOLD + "Races ");
                     sendTitle = true;
                 }
             }

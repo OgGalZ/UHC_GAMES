@@ -37,5 +37,8 @@ public class PlayerManager {
     public List<UUID> getKeys(){
         return new ArrayList<>(players.keySet());
     }
+    public List<Player> getValues(){
+        return  new ArrayList<>(players.values());
+    }
 }
 

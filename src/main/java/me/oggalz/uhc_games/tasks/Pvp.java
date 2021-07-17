@@ -34,6 +34,7 @@ public class Pvp extends BukkitRunnable {
         Bukkit.broadcastMessage(ChatColor.GOLD + "Le PVP est maintenant activé ! ");
         for(Player player : Bukkit.getOnlinePlayers()){
             rolesManagers.powerMessageRoles(player);
+            rolesManagers.teamMateHeroes();
         }
         if (scenariosGui.isFinalHeal()) {
             Bukkit.broadcastMessage(ChatColor.RED + "Activation du scénario Final Heal ! ");

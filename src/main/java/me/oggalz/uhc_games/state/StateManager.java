@@ -57,6 +57,7 @@ public class StateManager {
         }
         rolesManagers.generateMapPlayersWithoutRaces();
         racesManager.generateMapRaces();
+        racesManager.messageTeamMate();
 
     }
 

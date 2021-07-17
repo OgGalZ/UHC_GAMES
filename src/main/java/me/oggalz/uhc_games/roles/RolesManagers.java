@@ -16,6 +16,7 @@ public class RolesManagers {
     private final Map<UUID, Roles> rolesPlayersWithoutRaces;
     private final List<Roles> rolesListWithoutRaces;
     private List<UUID> playersUuid;
+    private final  Map<Player, String> pseudos;
 
     public RolesManagers(PlayerManager playerManager) {
         this.playerManager = playerManager;
@@ -25,11 +26,11 @@ public class RolesManagers {
         rolesListWithoutRaces.add(new BilbonSacquet());
         rolesListWithoutRaces.add(new Legolas());
         rolesListWithoutRaces.add(new Thorin());
+        pseudos = new HashMap<>();
     }
 
     public void generateMapPlayersWithoutRaces() {
         playersUuid = playerManager.getKeys();
-        Bukkit.broadcastMessage("size" + playersUuid.size());
         int i = 0;
         for (UUID uuid : playersUuid) {
             if (i == rolesListWithoutRaces.size()) {
@@ -38,14 +39,12 @@ public class RolesManagers {
             rolesPlayersWithoutRaces.put(uuid, rolesListWithoutRaces.get(i));
             i++;
         }
-        Bukkit.broadcastMessage("dd" + rolesPlayersWithoutRaces.values());
     }
 
     public List<UUID> getPlayersUuid() {
         for (UUID uuid : rolesPlayersWithoutRaces.keySet()) {
             playersUuid.remove(uuid);
         }
-        Bukkit.broadcastMessage("sizeafter treatment" + playersUuid.size());
         return playersUuid;
     }
 
@@ -58,7 +57,6 @@ public class RolesManagers {
     }
 
     public void powerMessageRoles(Player player) {
-        List<String> pseudos = new ArrayList<>();
         if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
             Object object = rolesPlayersWithoutRaces.get(player.getUniqueId());
             for (Object o : rolesPlayersWithoutRaces.values()) {
@@ -66,9 +64,18 @@ public class RolesManagers {
                     rolesPlayersWithoutRaces.get(player.getUniqueId()).powerRoles(player);
                     player.sendMessage(rolesPlayersWithoutRaces.get(player.getUniqueId()).messages());
                     if (!o.equals(rolesListWithoutRaces.get(0))) {
-                        pseudos.add(player.getName());
+                        pseudos.put(player, player.getName());
                     }
                 }
+            }
+        }
+    }
+
+    public void teamMateHeroes() {
+        for (Player player : pseudos.keySet()) {
+            player.sendMessage("La compagnie de Thorin est composée de " + pseudos.values());
+            for(String s : pseudos.values()){
+                player.sendMessage("pseudos" + s);
             }
         }
     }

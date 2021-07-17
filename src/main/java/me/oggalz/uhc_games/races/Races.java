@@ -1,12 +1,7 @@
 package me.oggalz.uhc_games.races;
 
 import me.oggalz.uhc_games.player.Player;
-import me.oggalz.uhc_games.player.PlayerManager;
-import org.bukkit.Bukkit;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-import java.util.UUID;
 
 public abstract class Races {
 
@@ -17,7 +12,7 @@ public abstract class Races {
     }
 
 
-    public abstract String messages();
+    public abstract void messages(org.bukkit.entity.Player player);
 
     public abstract void power(org.bukkit.entity.Player player , Player playerClass);
 
