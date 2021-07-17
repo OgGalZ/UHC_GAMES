@@ -3,6 +3,7 @@ package me.oggalz.uhc_games.races;
 import me.oggalz.uhc_games.gui.RolesGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.roles.RolesManagers;
+import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -10,6 +11,7 @@ import java.util.*;
 
 public class RacesManager {
 
+    private final Team team;
     private final PlayerManager playerManager;
     private final Map<UUID, Races> racesPlayers;
     private final List<Races> racesList;
@@ -20,8 +22,8 @@ public class RacesManager {
     private final List<String> nains;
     private final List<String> hobbits;
 
-
-    public RacesManager(PlayerManager playerManager, RolesGui rolesGui, RolesManagers rolesManagers) {
+    public RacesManager(Team team, PlayerManager playerManager, RolesGui rolesGui, RolesManagers rolesManagers) {
+        this.team = team;
         this.playerManager = playerManager;
         this.rolesGui = rolesGui;
         this.rolesManagers = rolesManagers;
@@ -44,6 +46,11 @@ public class RacesManager {
             for (UUID uuid : rolesManagers.getPlayersUuid()) {
                 if (i > racesList.size()) {
                     i = 0;
+                }
+                if (i == racesList.size()) {
+                    team.getTeamAzog().put(uuid, racesList.get(3));
+                } else {
+                    team.getTeamThorin().put(uuid, racesList.get(i));
                 }
                 racesPlayers.put(uuid, racesList.get(i));
                 i++;

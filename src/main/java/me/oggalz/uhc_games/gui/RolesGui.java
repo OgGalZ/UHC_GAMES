@@ -6,13 +6,10 @@ import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.roles.*;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
-import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.omg.PortableServer.LIFESPAN_POLICY_ID;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class RolesGui implements InventoryProvider {
 
@@ -26,19 +23,10 @@ public class RolesGui implements InventoryProvider {
     private int nSauron = 0;
     private int nSmaug = 0;
     private int results;
-    private List<Roles> rolesList;
     private final RolesManagers rolesManagers;
 
     public RolesGui(RolesManagers rolesManagers) {
         this.rolesManagers = rolesManagers;
-        rolesList = new ArrayList<>();
-        rolesList.add(new Marchand());
-        rolesList.add(new Chasseur());
-        rolesList.add(new Garde());
-        rolesList.add(new Nazgul());
-        rolesList.add(new Sage());
-        rolesList.add(new Tavernier());
-        rolesList.add(new Voyant());
     }
 
     @Override
@@ -52,11 +40,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nMarchand++;
-                rolesManagers.getRolesList().add(rolesList.get(0));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Marchand"));
             } else {
                 if ((nMarchand != 0)) {
                     nMarchand--;
-                    rolesManagers.getRolesList().remove(rolesList.get(0));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Marchand"));
                 }
             }
 
@@ -67,11 +55,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nSage++;
-                rolesManagers.getRolesList().add(rolesList.get(4));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Sage"));
             } else {
                 if ((nSage != 0)) {
                     nSage--;
-                    rolesManagers.getRolesList().remove(rolesList.get(4));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Sage"));
                 }
             }
         }));
@@ -81,11 +69,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nVoyant++;
-                rolesManagers.getRolesList().add(rolesList.get(6));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Voyant"));
             } else {
                 if ((nVoyant != 0)) {
                     nVoyant--;
-                    rolesManagers.getRolesList().remove(rolesList.get(6));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Voyant"));
                 }
             }
         }));
@@ -94,11 +82,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nGarde++;
-                rolesManagers.getRolesList().add(rolesList.get(2));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Garde"));
             } else {
                 if ((nGarde != 0)) {
                     nGarde--;
-                    rolesManagers.getRolesList().remove(rolesList.get(2));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Garde"));
                 }
             }
         }));
@@ -108,11 +96,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nChasseur++;
-                rolesManagers.getRolesList().add(rolesList.get(1));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Chasseur"));
             } else {
                 if ((nChasseur != 0)) {
                     nChasseur--;
-                    rolesManagers.getRolesList().remove(rolesList.get(1));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Chasseur"));
                 }
             }
         }));
@@ -121,11 +109,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nNazgûl++;
-                rolesManagers.getRolesList().add(rolesList.get(3));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Nazgul"));
             } else {
                 if ((nNazgûl != 0)) {
                     nNazgûl--;
-                    rolesManagers.getRolesList().remove(rolesList.get(3));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Nazgul"));
                 }
             }
         }));
@@ -134,11 +122,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nTavernier++;
-                rolesManagers.getRolesList().add(rolesList.get(5));
+                rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Tavernier"));
             } else {
                 if ((nTavernier != 0)) {
                     nTavernier--;
-                    rolesManagers.getRolesList().remove(rolesList.get(5));
+                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Tavernier"));
                 }
             }
         }));
@@ -167,11 +155,12 @@ public class RolesGui implements InventoryProvider {
     }
 
     public int resultsRoles() {
-        results =  nSmaug + nSauron;
+        results = nSmaug + nSauron;
         return results;
     }
-    public int resultsRaces(){
-        results = nMarchand + nSage + nVoyant + nGarde + nChasseur + nNazgûl + nTavernier ;
+
+    public int resultsRaces() {
+        results = nMarchand + nSage + nVoyant + nGarde + nChasseur + nNazgûl + nTavernier;
         return results;
     }
 }

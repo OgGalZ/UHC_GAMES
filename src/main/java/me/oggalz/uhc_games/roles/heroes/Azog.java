@@ -18,7 +18,7 @@ public class Azog extends Roles {
 
     @Override
     public void powerRoles(Player player) {
-        PotionEffect potionEffect = new PotionEffect(PotionEffectType.INCREASE_DAMAGE , 999999999, -1);
+        PotionEffect potionEffect = new PotionEffect(PotionEffectType.INCREASE_DAMAGE , 999999999, 0);
         player.addPotionEffect(potionEffect);
     }
 }
