@@ -1,6 +1,7 @@
 package me.oggalz.uhc_games.roles;
 
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.heroes.Azog;
 import me.oggalz.uhc_games.roles.heroes.BilbonSacquet;
 import me.oggalz.uhc_games.roles.heroes.Legolas;
@@ -16,10 +17,14 @@ public class RolesManagers {
     private final Map<UUID, Roles> rolesPlayersWithoutRaces;
     private final List<Roles> rolesListWithoutRaces;
     private List<UUID> playersUuid;
-    private final  Map<Player, String> pseudos;
+    private final Map<Player, String> pseudos;
+    private final Map<UUID, Roles> rolesPLayers;
+    private final List<Roles> rolesList;
+    private final RacesManager racesManager;
 
-    public RolesManagers(PlayerManager playerManager) {
+    public RolesManagers(PlayerManager playerManager, RacesManager racesManager) {
         this.playerManager = playerManager;
+        this.racesManager = racesManager;
         rolesPlayersWithoutRaces = new HashMap<>();
         rolesListWithoutRaces = new ArrayList<>();
         rolesListWithoutRaces.add(new Azog());
@@ -27,6 +32,8 @@ public class RolesManagers {
         rolesListWithoutRaces.add(new Legolas());
         rolesListWithoutRaces.add(new Thorin());
         pseudos = new HashMap<>();
+        rolesPLayers = new HashMap<>();
+        rolesList = new ArrayList<>();
     }
 
     public void generateMapPlayersWithoutRaces() {
@@ -40,6 +47,25 @@ public class RolesManagers {
             i++;
         }
     }
+
+    public void generateMapRolesPLayers() {
+        int i = 0;
+        int y = 0;
+        for (UUID uuid : racesManager.getRacesPlayers().keySet()) {
+            if (i == rolesList.size()) {
+                i = 0;
+                if (y == 4) {
+                    break;
+                }
+                y++;
+            }
+            rolesPLayers.put(uuid, rolesList.get(i));
+            i++;
+        }
+        Bukkit.broadcastMessage("" + rolesPLayers);
+
+    }
+
 
     public List<UUID> getPlayersUuid() {
         for (UUID uuid : rolesPlayersWithoutRaces.keySet()) {
@@ -74,10 +100,11 @@ public class RolesManagers {
     public void teamMateHeroes() {
         for (Player player : pseudos.keySet()) {
             player.sendMessage("La compagnie de Thorin est composée de " + pseudos.values());
-            for(String s : pseudos.values()){
-                player.sendMessage("pseudos" + s);
-            }
         }
     }
 
+
+    public List<Roles> getRolesList() {
+        return rolesList;
+    }
 }

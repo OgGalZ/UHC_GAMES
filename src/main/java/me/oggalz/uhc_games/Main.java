@@ -38,11 +38,11 @@ public class Main extends JavaPlugin {
         World world = Bukkit.getWorld("world");
         world.getWorldBorder().setSize(5000000);
         this.playerManager = new PlayerManager();
-        RolesManagers rolesManagers = new RolesManagers(playerManager);
+        RolesManagers rolesManagers = new RolesManagers( playerManager, racesManager);
         PvpGui pvpGui = new PvpGui();
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();
-        RolesGui racesGui = new RolesGui();
+        RolesGui racesGui = new RolesGui(rolesManagers);
         guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui, racesGui);
         racesManager = new RacesManager(playerManager, guiManager.racesGui(), rolesManagers);
         finish = new Finish();

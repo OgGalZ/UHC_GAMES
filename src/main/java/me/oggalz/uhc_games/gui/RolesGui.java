@@ -3,24 +3,43 @@ package me.oggalz.uhc_games.gui;
 import fr.minuskube.inv.ClickableItem;
 import fr.minuskube.inv.content.InventoryContents;
 import fr.minuskube.inv.content.InventoryProvider;
+import me.oggalz.uhc_games.roles.*;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.omg.PortableServer.LIFESPAN_POLICY_ID;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RolesGui implements InventoryProvider {
 
-    private int nMarchand = 1;
-    private int nSage = 1;
-    private int nVoyant = 1;
-    private int nGarde = 1;
-    private int nChasseur = 1;
-    private int nNazgûl = 1;
-    private int nTavernier = 1;
-    private int nSauron = 1;
-    private int nSmaug = 1;
+    private int nMarchand = 0;
+    private int nSage = 0;
+    private int nVoyant = 0;
+    private int nGarde = 0;
+    private int nChasseur = 0;
+    private int nNazgûl = 0;
+    private int nTavernier = 0;
+    private int nSauron = 0;
+    private int nSmaug = 0;
     private int results;
+    private List<Roles> rolesList;
+    private final RolesManagers rolesManagers;
 
+    public RolesGui(RolesManagers rolesManagers) {
+        this.rolesManagers = rolesManagers;
+        rolesList = new ArrayList<>();
+        rolesList.add(new Marchand());
+        rolesList.add(new Chasseur());
+        rolesList.add(new Garde());
+        rolesList.add(new Nazgul());
+        rolesList.add(new Sage());
+        rolesList.add(new Tavernier());
+        rolesList.add(new Voyant());
+    }
 
     @Override
     public void init(Player player, InventoryContents contents) {
@@ -33,9 +52,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nMarchand++;
+                rolesManagers.getRolesList().add(rolesList.get(0));
             } else {
                 if ((nMarchand != 0)) {
                     nMarchand--;
+                    rolesManagers.getRolesList().remove(rolesList.get(0));
                 }
             }
 
@@ -46,9 +67,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nSage++;
+                rolesManagers.getRolesList().add(rolesList.get(4));
             } else {
                 if ((nSage != 0)) {
                     nSage--;
+                    rolesManagers.getRolesList().remove(rolesList.get(4));
                 }
             }
         }));
@@ -58,9 +81,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nVoyant++;
+                rolesManagers.getRolesList().add(rolesList.get(6));
             } else {
                 if ((nVoyant != 0)) {
                     nVoyant--;
+                    rolesManagers.getRolesList().remove(rolesList.get(6));
                 }
             }
         }));
@@ -69,9 +94,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nGarde++;
+                rolesManagers.getRolesList().add(rolesList.get(2));
             } else {
                 if ((nGarde != 0)) {
                     nGarde--;
+                    rolesManagers.getRolesList().remove(rolesList.get(2));
                 }
             }
         }));
@@ -81,9 +108,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nChasseur++;
+                rolesManagers.getRolesList().add(rolesList.get(1));
             } else {
                 if ((nChasseur != 0)) {
                     nChasseur--;
+                    rolesManagers.getRolesList().remove(rolesList.get(1));
                 }
             }
         }));
@@ -92,9 +121,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nNazgûl++;
+                rolesManagers.getRolesList().add(rolesList.get(3));
             } else {
                 if ((nNazgûl != 0)) {
                     nNazgûl--;
+                    rolesManagers.getRolesList().remove(rolesList.get(3));
                 }
             }
         }));
@@ -103,9 +134,11 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nTavernier++;
+                rolesManagers.getRolesList().add(rolesList.get(5));
             } else {
                 if ((nTavernier != 0)) {
                     nTavernier--;
+                    rolesManagers.getRolesList().remove(rolesList.get(5));
                 }
             }
         }));

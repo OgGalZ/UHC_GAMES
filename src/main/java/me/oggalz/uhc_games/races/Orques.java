@@ -30,16 +30,20 @@ public class Orques extends Races {
             }
         }
         racesManager.getOrques().remove(n);
-        player.sendMessage(ChatColor.RED + message);
-        int random1 = Teleportation.generate(0, racesManager.getOrques().size());
-        int random2 = Teleportation.generate(0, racesManager.getOrques().size());
-        if (racesManager.getOrques().size() == 1) {
-            while (random2 == random1) {
-                random2 = Teleportation.generate(0, racesManager.getOrques().size());
+        if(!(racesManager.getOrques().size() <= 1)){
+            int random1 = Teleportation.generate(0, racesManager.getOrques().size());
+            int random2 = Teleportation.generate(0, racesManager.getOrques().size());
+            if (racesManager.getOrques().size() == 1) {
+                while (random2 == random1) {
+                    random2 = Teleportation.generate(0, racesManager.getOrques().size());
+                }
             }
+            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getOrques().get(random1 + random2));
+            racesManager.getOrques().add(player.getName());
         }
-        player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getOrques().get(random1 + random2));
         racesManager.getOrques().add(player.getName());
+        player.sendMessage(ChatColor.RED + message);
+
 
     }
 

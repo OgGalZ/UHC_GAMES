@@ -77,11 +77,6 @@ public class RacesManager {
                     orques.add(player.getDisplayName());
                 }
             }
-            Bukkit.broadcastMessage("Elfes" + elfes);
-            Bukkit.broadcastMessage("Orques" + orques);
-            Bukkit.broadcastMessage("nains" + nains);
-            Bukkit.broadcastMessage("Hobbit" + hobbits);
-
         }
 
     }
@@ -108,6 +103,10 @@ public class RacesManager {
 
     public List<String> getHobbits() {
         return hobbits;
+    }
+
+    public Map<UUID, Races> getRacesPlayers() {
+        return racesPlayers;
     }
 }
 

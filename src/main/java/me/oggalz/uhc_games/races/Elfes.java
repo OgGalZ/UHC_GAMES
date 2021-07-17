@@ -23,6 +23,8 @@ public class Elfes extends Races {
         message = "Félicitations, vous êtes un elfe, vous recevez un colorant vert foncé quand vous faites clique droit avec, vous gagnez un effet de speed pendant 1 minute 30 secondes.\n" +
                 "effets grâce au colorant vert foncé:\n" +
                 "Speed 1 ( 1min 30)\n";
+
+
         for (int i = 0; i < racesManager.getElfes().size(); i++) {
             for (String s : racesManager.getElfes()) {
                 if (s.equalsIgnoreCase(player.getName())) {
@@ -31,16 +33,20 @@ public class Elfes extends Races {
                 }
             }
         }
-        racesManager.getElfes().remove(n);
         player.sendMessage(ChatColor.BLUE + message);
-        player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getElfes().get(Teleportation.generate(0, racesManager.getElfes().size())));
+        racesManager.getElfes().remove(n);
+        if ((!(racesManager.getElfes().size() <= 0))) {
+            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getElfes().get(Teleportation.generate(0, racesManager.getElfes().size())));
+            racesManager.getElfes().add(player.getName());
+        }
         racesManager.getElfes().add(player.getName());
+
     }
 
     @Override
     public void power(Player player, me.oggalz.uhc_games.player.Player playerClass) {
         if (playerClass.isEnable()) {
-            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED , 1800, 0);
+            PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED, 1800, 0);
             player.addPotionEffect(potionEffect);
             playerClass.setEnable(false);
         }
