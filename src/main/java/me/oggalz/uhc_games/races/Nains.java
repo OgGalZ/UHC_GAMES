@@ -34,10 +34,12 @@ public class Nains extends Races {
         racesManager.getNains().remove(n);
 
         if (!(racesManager.getNains().size() <= 0)) {
-            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getNains().get(Teleportation.generate(0, racesManager.getNains().size())));
+            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getNains().get(Teleportation.generate(0, racesManager.getNains().size() - 1)));
             racesManager.getNains().add(player.getName());
+        }else{
+            racesManager.getNains().add(player.getName());
+
         }
-        racesManager.getNains().add(player.getName());
 
         player.sendMessage(ChatColor.BLACK + message);
 

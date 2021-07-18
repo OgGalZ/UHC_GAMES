@@ -32,8 +32,9 @@ public class Pvp extends BukkitRunnable {
     public void run() {
         enablePvp = true;
         Bukkit.broadcastMessage(ChatColor.GOLD + "Le PVP est maintenant activé ! ");
-        for(Player player : Bukkit.getOnlinePlayers()){
-            rolesManagers.powerMessageRoles(player);
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            rolesManagers.powerMessageRolesWithoutRaces(player);
+            rolesManagers.powerMessagesRoles(player);
         }
         rolesManagers.teamMateHeroes();
         if (scenariosGui.isFinalHeal()) {

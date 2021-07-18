@@ -35,11 +35,13 @@ public class Elfes extends Races {
         }
         player.sendMessage(ChatColor.BLUE + message);
         racesManager.getElfes().remove(n);
-        if ((!(racesManager.getElfes().size() <= 0))) {
-            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getElfes().get(Teleportation.generate(0, racesManager.getElfes().size())));
+        if ((!(racesManager.getElfes().size() <= 1))) {
+            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getElfes().get(Teleportation.generate(0, racesManager.getElfes().size() - 1 )));
             racesManager.getElfes().add(player.getName());
+        }else{
+            racesManager.getElfes().add(player.getName());
+
         }
-        racesManager.getElfes().add(player.getName());
 
     }
 

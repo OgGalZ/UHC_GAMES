@@ -32,10 +32,11 @@ public class Hobbits extends Races {
         }
         racesManager.getHobbits().remove(n);
         if (!(racesManager.getHobbits().size() <= 0)) {
-            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getHobbits().get(Teleportation.generate(0, racesManager.getHobbits().size())));
+            player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getHobbits().get(Teleportation.generate(0, racesManager.getHobbits().size() - 1)));
+            racesManager.getHobbits().add(player.getName());
+        }else{
             racesManager.getHobbits().add(player.getName());
         }
-        racesManager.getHobbits().add(player.getName());
 
         player.sendMessage(ChatColor.BLUE + message);
 

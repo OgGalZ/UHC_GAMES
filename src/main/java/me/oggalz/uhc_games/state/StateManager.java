@@ -65,6 +65,7 @@ public class StateManager {
         rolesManagers.generateMapRolesPLayers();
         rolesManagers.generateTeamsNazgulTavernier();
         team.setTeamTavernier();
+        rolesManagers.generatePseudosTargertsHunter();
 
 
     }

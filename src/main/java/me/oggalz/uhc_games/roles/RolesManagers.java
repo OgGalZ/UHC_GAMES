@@ -1,8 +1,6 @@
 package me.oggalz.uhc_games.roles;
 
-import me.oggalz.uhc_games.Main;
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.heroes.Azog;
 import me.oggalz.uhc_games.roles.heroes.BilbonSacquet;
 import me.oggalz.uhc_games.roles.heroes.Legolas;
@@ -14,7 +12,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import java.util.*;
-import java.util.logging.Level;
 
 public class RolesManagers {
 
@@ -23,18 +20,16 @@ public class RolesManagers {
     private final List<Roles> rolesListWithoutRaces;
     private List<UUID> playersUuid;
     private final Map<Player, String> pseudos;
-    private final List<Roles> rolesListAvailable;
-    private final RacesManager racesManager;
-    private final Main main;
+    private static final List<Roles> rolesListAvailable  = new ArrayList<>();
     private final Map<UUID, Roles> rolesPlayersWithoutRaces;
     private final Map<UUID, Roles> rolesPLayers;
     private final Map<String, Roles> instancesRoles;
+    private final List<Player> pseudosTargertsThorin;
+    private final List<Player> pseudosTargertsAzog;
 
-    public RolesManagers(Team team, PlayerManager playerManager, RacesManager racesManager, Main main) {
+    public RolesManagers(Team team, PlayerManager playerManager) {
         this.team = team;
         this.playerManager = playerManager;
-        this.racesManager = racesManager;
-        this.main = main;
         rolesPlayersWithoutRaces = new HashMap<>();
         rolesListWithoutRaces = new ArrayList<>();
         rolesListWithoutRaces.add(new Azog());
@@ -43,15 +38,38 @@ public class RolesManagers {
         rolesListWithoutRaces.add(new Thorin());
         pseudos = new HashMap<>();
         rolesPLayers = new HashMap<>();
-        rolesListAvailable = new ArrayList<>();
         instancesRoles = new HashMap<>();
         instancesRoles.put("Marchand", new Marchand());
         instancesRoles.put("Sage", new Sage());
         instancesRoles.put("Voyant", new Voyant());
-        instancesRoles.put("Chasseur", new Chasseur());
+        instancesRoles.put("Chasseur", new Chasseur(this, team));
         instancesRoles.put("Garde", new Garde());
         instancesRoles.put("Nazgul", new Nazgul());
         instancesRoles.put("Tavernier", new Tavernier(team));
+        pseudosTargertsThorin = new ArrayList<>();
+        pseudosTargertsAzog = new ArrayList<>();
+    }
+
+
+    public void generatePseudosTargertsHunter() {
+        int i = 0;
+        int y = 0;
+
+        if (rolesListAvailable.contains(instancesRoles.get("Chasseur"))) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                if (team.getTeamAzog().containsKey(player.getUniqueId())) {
+                    if (i < 4) {
+                        pseudosTargertsAzog.add(player);
+                    }
+                    i++;
+                } else if (team.getTeamThorin().containsKey(player.getUniqueId())) {
+                    if (y == 0) {
+                        pseudosTargertsThorin.add(player);
+                    }
+                    y++;
+                }
+            }
+        }
     }
 
     public void generateMapPlayersWithoutRaces() {
@@ -61,7 +79,7 @@ public class RolesManagers {
             if (i == rolesListWithoutRaces.size()) {
                 break;
             }
-            if (rolesPlayersWithoutRaces.get(i) == rolesListWithoutRaces.get(0)) {
+            if (rolesPlayersWithoutRaces.get(uuid) == rolesListWithoutRaces.get(0)) {
                 team.getTeamAzog().put(uuid, rolesListWithoutRaces.get(0));
             } else {
                 team.getTeamThorin().put(uuid, rolesListWithoutRaces.get(i));
@@ -71,11 +89,10 @@ public class RolesManagers {
         }
     }
 
-    public void generateMapRolesPLayers() throws NullPointerException {
+    public void generateMapRolesPLayers()  {
         int i = 0;
         int y = 0;
-        try {
-            for (UUID uuid : racesManager.getRacesPlayers().keySet()) {
+            for (UUID uuid : getPlayersUuid()) {
                 if (i == rolesListAvailable.size()) {
                     i = 0;
                     if (y == 4) {
@@ -86,10 +103,6 @@ public class RolesManagers {
                 rolesPLayers.put(uuid, rolesListAvailable.get(i));
                 i++;
             }
-        } catch (NullPointerException e) {
-            main.getLogger().log(Level.WARNING, "Aucun joueur n'aura de race dans cette partie.");
-        }
-        Bukkit.broadcastMessage("" + rolesPLayers);
     }
 
     public void generateTeamsNazgulTavernier() {
@@ -118,7 +131,7 @@ public class RolesManagers {
         }
     }
 
-    public void powerMessageRoles(Player player) {
+    public void powerMessageRolesWithoutRaces(Player player) {
         if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
             Object object = rolesPlayersWithoutRaces.get(player.getUniqueId());
             for (Object o : rolesPlayersWithoutRaces.values()) {
@@ -134,6 +147,21 @@ public class RolesManagers {
         }
     }
 
+    public void powerMessagesRoles(Player player) {
+        if (rolesPLayers.containsKey(player.getUniqueId())) {
+            Object object = rolesPLayers.get(player.getUniqueId());
+            for (Object o : rolesPLayers.values()) {
+                if (o == object) {
+                    rolesPLayers.get(player.getUniqueId()).powerRoles(player);
+                    player.sendMessage(rolesPLayers.get(player.getUniqueId()).messages());
+
+                }
+            }
+
+        }
+    }
+
+
     public void teamMateHeroes() {
         for (Player player : pseudos.keySet()) {
             player.sendMessage("La compagnie de Thorin est composée de " + pseudos.values());
@@ -141,11 +169,19 @@ public class RolesManagers {
     }
 
 
-    public List<Roles> getRolesList() {
+    public  List<Roles> getRolesList() {
         return rolesListAvailable;
     }
 
     public Map<String, Roles> getInstancesRoles() {
         return instancesRoles;
+    }
+
+    public List<Player> getPseudosTargertsThorin() {
+        return pseudosTargertsThorin;
+    }
+
+    public List<Player> getPseudosTargertsAzog() {
+        return pseudosTargertsAzog;
     }
 }

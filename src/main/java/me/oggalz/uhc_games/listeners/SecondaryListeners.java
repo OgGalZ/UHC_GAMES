@@ -1,13 +1,11 @@
 package me.oggalz.uhc_games.listeners;
 
 import fr.minuskube.inv.SmartInventory;
-import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.Pvp;
-import me.oggalz.uhc_games.utils.Item;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +14,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityRegainHealthEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
@@ -29,15 +26,13 @@ public class SecondaryListeners implements Listener {
     private final SmartInventory mainGUi;
     private final StateManager stateManager;
     private final PlayerManager playerManager;
-    private final PvpGui pvpGui;
     private final RacesManager racesManager;
 
 
-    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, PvpGui pvpGui, RacesManager racesManager) {
+    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, RacesManager racesManager) {
         this.mainGUi = mainGUi;
         this.stateManager = stateManager;
         this.playerManager = playerManager;
-        this.pvpGui = pvpGui;
         this.racesManager = racesManager;
     }
 

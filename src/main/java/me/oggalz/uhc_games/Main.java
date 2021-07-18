@@ -9,6 +9,7 @@ import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.RolesManagers;
+import me.oggalz.uhc_games.roles.races.Chasseur;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.*;
@@ -33,6 +34,7 @@ public class Main extends JavaPlugin {
     private StateManager stateManager;
     private SmartInventory mainGui;
     private RacesManager racesManager;
+    private RolesManagers rolesManagers;
 
     @Override
     public void onEnable() {
@@ -41,13 +43,14 @@ public class Main extends JavaPlugin {
         world.getWorldBorder().setSize(5000000);
         this.playerManager = new PlayerManager();
         Team team = new Team();
-        RolesManagers rolesManagers = new RolesManagers(team, playerManager, racesManager, this);
+
+        rolesManagers = new RolesManagers(team, playerManager);
         PvpGui pvpGui = new PvpGui();
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();
         RolesGui racesGui = new RolesGui(rolesManagers);
         guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui, racesGui);
-        racesManager = new RacesManager(team, playerManager, guiManager.racesGui(), rolesManagers);
+        racesManager = new RacesManager(team,  rolesManagers);
         finish = new Finish();
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
@@ -117,10 +120,11 @@ public class Main extends JavaPlugin {
         Team team = new Team();
         ActionBarUtils actionBarUtils = new ActionBarUtils(this);
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
+        Chasseur chasseur = new Chasseur(rolesManagers , team);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, actionBarUtils), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), racesManager), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager,  racesManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
-        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(stateManager , guiManager.getPvpGui() , playerManager, team) , this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(stateManager , guiManager.getPvpGui() , playerManager, team, chasseur) , this);
     }
 
     public void registersCommands() {

@@ -1,7 +1,6 @@
 package me.oggalz.uhc_games.races;
 
-import me.oggalz.uhc_games.gui.RolesGui;
-import me.oggalz.uhc_games.player.PlayerManager;
+
 import me.oggalz.uhc_games.roles.RolesManagers;
 import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.Bukkit;
@@ -12,23 +11,18 @@ import java.util.*;
 public class RacesManager {
 
     private final Team team;
-    private final PlayerManager playerManager;
-    private final Map<UUID, Races> racesPlayers;
+    private  final Map<UUID, Races> racesPlayers ;
     private final List<Races> racesList;
-    private final RolesGui rolesGui;
     private final RolesManagers rolesManagers;
     private final List<String> orques;
     private final List<String> elfes;
     private final List<String> nains;
     private final List<String> hobbits;
 
-    public RacesManager(Team team, PlayerManager playerManager, RolesGui rolesGui, RolesManagers rolesManagers) {
+    public RacesManager(Team team, RolesManagers rolesManagers) {
         this.team = team;
-        this.playerManager = playerManager;
-        this.rolesGui = rolesGui;
         this.rolesManagers = rolesManagers;
         me.oggalz.uhc_games.player.Player player = new me.oggalz.uhc_games.player.Player(UUID.randomUUID());
-        racesPlayers = new HashMap<>();
         racesList = new ArrayList<>();
         racesList.add(new Elfes(player, this));
         racesList.add(new Hobbits(player, this));
@@ -38,12 +32,12 @@ public class RacesManager {
         elfes = new ArrayList<>();
         nains = new ArrayList<>();
         hobbits = new ArrayList<>();
+        racesPlayers = new HashMap<>();
     }
 
     public void generateMapRaces() {
-        if (rolesGui.resultsRaces() != 0) {
             int i = 0;
-            for (UUID uuid : rolesManagers.getPlayersUuid()) {
+                for (UUID uuid : rolesManagers.getPlayersUuid()) {
                 if (i > racesList.size()) {
                     i = 0;
                 }
@@ -55,7 +49,6 @@ public class RacesManager {
                 racesPlayers.put(uuid, racesList.get(i));
                 i++;
             }
-        }
     }
 
 
@@ -112,9 +105,7 @@ public class RacesManager {
         return hobbits;
     }
 
-    public Map<UUID, Races> getRacesPlayers() {
-        return racesPlayers;
-    }
+
 }
 
 
