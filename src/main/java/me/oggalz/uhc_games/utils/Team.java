@@ -1,9 +1,7 @@
 package me.oggalz.uhc_games.utils;
 
-import me.oggalz.uhc_games.races.RacesManager;
-import me.oggalz.uhc_games.roles.Roles;
-import me.oggalz.uhc_games.roles.RolesManagers;
-import me.oggalz.uhc_games.roles.heroes.Azog;
+
+import org.bukkit.Bukkit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +27,6 @@ public class Team<T extends Object> {
     public Map<UUID, T> getTeamAzog() {
         return teamAzog;
     }
-
     public Map<UUID, T> getTeamThorin() {
         return teamThorin;
     }
@@ -44,5 +41,12 @@ public class Team<T extends Object> {
 
     public Map<UUID, T> getSmaug() {
         return smaug;
+    }
+
+    public void test() {
+        Bukkit.broadcastMessage("" + getTeamAzog());
+        Bukkit.broadcastMessage("" + getTeamThorin());
+        Bukkit.broadcastMessage("" + getTeamNazgul());
+        Bukkit.broadcastMessage("" + getTeamTavernier());
     }
 }

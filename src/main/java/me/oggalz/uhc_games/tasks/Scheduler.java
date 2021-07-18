@@ -8,6 +8,7 @@ import me.oggalz.uhc_games.player.Player;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.RolesManagers;
+import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -29,8 +30,9 @@ public class Scheduler extends BukkitRunnable {
     private final RacesManager racesManager;
     private final RolesManagers rolesManagers;
     private boolean racesMessage = true;
+    private final Team team;
 
-    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, Player player, RacesManager racesManager, RolesManagers rolesManagers) {
+    public Scheduler(PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, Player player, RacesManager racesManager, RolesManagers rolesManagers, Team team) {
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
         timePvp = pvpGui.getTimePvp();
@@ -39,6 +41,7 @@ public class Scheduler extends BukkitRunnable {
         this.player = player;
         this.racesManager = racesManager;
         this.rolesManagers = rolesManagers;
+        this.team = team;
     }
 
     @Override
@@ -50,6 +53,7 @@ public class Scheduler extends BukkitRunnable {
                 rolesManagers.messageAnnouncement();
                 racesManager.messageAnnouncement();
                 racesMessage = false;
+                team.test();
             }
 
             seconds = 0;

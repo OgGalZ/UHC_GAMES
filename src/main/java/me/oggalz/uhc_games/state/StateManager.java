@@ -10,6 +10,7 @@ import me.oggalz.uhc_games.tasks.Pvp;
 import me.oggalz.uhc_games.tasks.Scheduler;
 import me.oggalz.uhc_games.tasks.WorldBorder;
 import me.oggalz.uhc_games.utils.Item;
+import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -47,7 +48,8 @@ public class StateManager {
         gameState = State.STARTING;
         int secondsPvp = pvpGui.getTimePvp() * 60;
         int secondsBorder = worldBorderGui.getTimeBorder() * 60;
-        Scheduler scheduler = new Scheduler(pvpGui, worldBorderGui, playerManager, playerClass, racesManager, rolesManagers);
+        Team team = new Team();
+        Scheduler scheduler = new Scheduler(pvpGui, worldBorderGui, playerManager, playerClass, racesManager, rolesManagers, team);
         scheduler.runTaskTimer(main, 0, 20L);
         pvp.runTaskLater(main, secondsPvp * 20L);
         worldBorder.runTaskTimer(main, secondsBorder * 20L, 20);
