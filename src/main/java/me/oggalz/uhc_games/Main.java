@@ -3,6 +3,7 @@ package me.oggalz.uhc_games;
 import fr.minuskube.inv.SmartInventory;
 import me.oggalz.uhc_games.commands.Finish;
 import me.oggalz.uhc_games.gui.*;
+import me.oggalz.uhc_games.listeners.PlayerDeathEvent;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
 import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
@@ -51,7 +52,7 @@ public class Main extends JavaPlugin {
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
         WorldBorder worldBorder = new WorldBorder(worldBorderGui);
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui(), rolesManagers);
-        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers);
+        stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers, team);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
 
         SmartInventory races = SmartInventory.builder()
@@ -113,11 +114,13 @@ public class Main extends JavaPlugin {
         DiamondLimite diamondLimite = new DiamondLimite(guiManager.getScenariosGui());
         HastyBoy hastyBoy = new HastyBoy();
         Timber timber = new Timber();
+        Team team = new Team();
         ActionBarUtils actionBarUtils = new ActionBarUtils(this);
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, actionBarUtils), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager, guiManager.getPvpGui(), racesManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(stateManager , guiManager.getPvpGui() , playerManager, team) , this);
     }
 
     public void registersCommands() {

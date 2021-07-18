@@ -30,8 +30,9 @@ public class StateManager {
     private final Pvp pvp;
     private final RacesManager racesManager;
     private final RolesManagers rolesManagers;
+    private final Team team;
 
-    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, WorldBorder worldBorder, Pvp pvp, RacesManager racesManager, RolesManagers rolesManagers) {
+    public StateManager(Main main, PvpGui pvpGui, WorldBorderGui worldBorderGui, PlayerManager playerManager, WorldBorder worldBorder, Pvp pvp, RacesManager racesManager, RolesManagers rolesManagers, Team team) {
         this.main = main;
         this.pvpGui = pvpGui;
         this.worldBorderGui = worldBorderGui;
@@ -40,6 +41,7 @@ public class StateManager {
         this.pvp = pvp;
         this.racesManager = racesManager;
         this.rolesManagers = rolesManagers;
+        this.team = team;
         gameState = State.WAITING;
     }
 
@@ -61,6 +63,9 @@ public class StateManager {
         racesManager.generateMapRaces();
         racesManager.messageTeamMate();
         rolesManagers.generateMapRolesPLayers();
+        rolesManagers.generateTeamsNazgulTavernier();
+        team.setTeamTavernier();
+
 
     }
 

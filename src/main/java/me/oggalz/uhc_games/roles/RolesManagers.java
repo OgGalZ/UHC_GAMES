@@ -7,6 +7,7 @@ import me.oggalz.uhc_games.roles.heroes.Azog;
 import me.oggalz.uhc_games.roles.heroes.BilbonSacquet;
 import me.oggalz.uhc_games.roles.heroes.Legolas;
 import me.oggalz.uhc_games.roles.heroes.Thorin;
+import me.oggalz.uhc_games.roles.races.*;
 import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -50,7 +51,7 @@ public class RolesManagers {
         instancesRoles.put("Chasseur", new Chasseur());
         instancesRoles.put("Garde", new Garde());
         instancesRoles.put("Nazgul", new Nazgul());
-        instancesRoles.put("Tavernier", new Tavernier());
+        instancesRoles.put("Tavernier", new Tavernier(team));
     }
 
     public void generateMapPlayersWithoutRaces() {
@@ -124,6 +125,7 @@ public class RolesManagers {
                 if (o == object) {
                     rolesPlayersWithoutRaces.get(player.getUniqueId()).powerRoles(player);
                     player.sendMessage(rolesPlayersWithoutRaces.get(player.getUniqueId()).messages());
+
                     if (!o.equals(rolesListWithoutRaces.get(0))) {
                         pseudos.put(player, player.getName());
                     }

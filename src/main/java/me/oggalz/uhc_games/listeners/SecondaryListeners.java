@@ -76,23 +76,7 @@ public class SecondaryListeners implements Listener {
     }
 
 
-    @EventHandler(priority = EventPriority.HIGH)
-    public void playerDeath(PlayerDeathEvent event) {
-        Location location = event.getEntity().getLocation();
-        Player player = event.getEntity().getKiller();
-        Player playerDeath = event.getEntity();
-        World world = event.getEntity().getWorld();
-        if (stateManager.hasNotStarted()) {
-            event.getDrops().clear();
-        }
-        if (pvpGui.getNumbersGaps() != 0 && stateManager.hasStarted()) {
-            world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, pvpGui.getNumbersGaps(), null, null));
-        }
-        if (player != null && playerDeath != null) {
-            playerManager.getPlayer(player.getUniqueId()).addKill(1);
-            Netherboard.instance().getBoard(player).set(ChatColor.RED + "Kill(s) : " + playerManager.getPlayer(player.getUniqueId()).getKill(), 11);
-        }
-    }
+
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void playerRespawn(PlayerRespawnEvent event) {

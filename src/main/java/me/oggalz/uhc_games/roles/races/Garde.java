@@ -1,8 +1,9 @@
-package me.oggalz.uhc_games.roles;
+package me.oggalz.uhc_games.roles.races;
 
+import me.oggalz.uhc_games.roles.Roles;
 import org.bukkit.entity.Player;
 
-public class Tavernier extends Roles{
+public class Garde extends Roles {
     @Override
     public String messages() {
         return null;
