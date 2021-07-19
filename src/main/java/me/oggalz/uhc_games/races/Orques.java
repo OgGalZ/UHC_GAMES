@@ -1,5 +1,6 @@
 package me.oggalz.uhc_games.races;
 
+import me.oggalz.uhc_games.roles.RolesManagers;
 import me.oggalz.uhc_games.tasks.Teleportation;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -10,10 +11,12 @@ public class Orques extends Races {
 
     private String message;
     private final RacesManager racesManager;
+    private final RolesManagers rolesManagers;
 
-    public Orques(me.oggalz.uhc_games.player.Player player, RacesManager racesManager) {
+    public Orques(me.oggalz.uhc_games.player.Player player, RacesManager racesManager, RolesManagers rolesManagers) {
         super(player);
         this.racesManager = racesManager;
+        this.rolesManagers = rolesManagers;
     }
 
     @Override
@@ -21,7 +24,8 @@ public class Orques extends Races {
         int n = 0;
         message = "Félicitations, vous êtes un orque, vous recevez un colorant vert foncé quand vous faites clique droit avec, vous gagnez un effet de force pendant 2 minutes.\n" +
                 "effets grâce au colorant vert foncé :\n" +
-                "- Strength 1 (20%) (pendant 2 minute)";
+                "- Strength 1 (20%) (pendant 2 minute)" + ChatColor.RED + "Azog : " + rolesManagers.getPseudoAzog();
+
         for (int i = 0; i < racesManager.getOrques().size(); i++) {
             for (String s : racesManager.getOrques()) {
                 if (s.equalsIgnoreCase(player.getName())) {

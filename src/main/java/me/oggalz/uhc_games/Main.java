@@ -9,7 +9,7 @@ import me.oggalz.uhc_games.listeners.SecondaryListeners;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.RolesManagers;
-import me.oggalz.uhc_games.roles.races.Chasseur;
+import me.oggalz.uhc_games.roles.races_roles.Chasseur;
 import me.oggalz.uhc_games.scenarios.*;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.tasks.*;

@@ -1,17 +1,14 @@
-package me.oggalz.uhc_games.roles.races;
+package me.oggalz.uhc_games.roles.races_roles;
 
 import me.oggalz.uhc_games.roles.Roles;
 import me.oggalz.uhc_games.utils.Team;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.potion.PotionType;
-import org.omg.PortableServer.POA;
 
-import java.sql.BatchUpdateException;
-import java.util.*;
 
 public class Tavernier extends Roles {
 
@@ -26,13 +23,13 @@ public class Tavernier extends Roles {
     @Override
     public String messages() {
 
-        String message = "Vous êtes Tavernier votre objectif et de gagner avec l’autre tavernier. Pour cela vous disposez de 20 cœurs à partager avec votre duo vous avez également l’effet “force ou résistance\"(1 a force l’autre à rési) et votre allié possède “ l’autre effet\".Néanmoins si votre duo meurt vous serez bloqué à 8 coeurs permanent mais vous aurez les effet force et résistance permanent.                                                                                                               \n" +
-                "Votre duo est :”pseudo”  \n";
+        String message = "Vous êtes Tavernier votre objectif et de gagner avec l’autre tavernier. Pour cela vous disposez de 20 cœurs à partager avec votre duo vous avez également l’effet “force ou résistance\"(1 a force l’autre à rési) et votre allié possède “ l’autre effet\".Néanmoins si votre duo meurt vous serez bloqué à 8 coeurs permanent mais vous aurez les effet force et résistance permanent.";
         return ChatColor.BLUE + message;
     }
 
     @Override
     public void powerRoles(Player player) {
+        Bukkit.broadcastMessage("1");
         if (team.getTavernier1().containsKey(player)) {
             player.sendMessage(ChatColor.RED + "Votre duo est composée de " + team.getTavernier1().values());
             player.sendMessage(ChatColor.RED + "L'autre duo est " + team.getTavernier2().values());

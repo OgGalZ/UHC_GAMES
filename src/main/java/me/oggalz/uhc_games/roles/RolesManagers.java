@@ -5,7 +5,7 @@ import me.oggalz.uhc_games.roles.heroes.Azog;
 import me.oggalz.uhc_games.roles.heroes.BilbonSacquet;
 import me.oggalz.uhc_games.roles.heroes.Legolas;
 import me.oggalz.uhc_games.roles.heroes.Thorin;
-import me.oggalz.uhc_games.roles.races.*;
+import me.oggalz.uhc_games.roles.races_roles.*;
 import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,6 +26,7 @@ public class RolesManagers {
     private final Map<String, Roles> instancesRoles;
     private final List<Player> pseudosTargertsThorin;
     private final List<Player> pseudosTargertsAzog;
+    private List<String> pseudoAzog;
 
     public RolesManagers(Team team, PlayerManager playerManager) {
         this.team = team;
@@ -48,6 +49,7 @@ public class RolesManagers {
         instancesRoles.put("Tavernier", new Tavernier(team));
         pseudosTargertsThorin = new ArrayList<>();
         pseudosTargertsAzog = new ArrayList<>();
+        pseudoAzog = new ArrayList<>();
     }
 
 
@@ -82,6 +84,11 @@ public class RolesManagers {
             }
             if (i == 0) {
                 team.getTeamAzog().put(uuid, rolesListWithoutRaces.get(0));
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    if (player.getUniqueId() == uuid) {
+                        pseudoAzog.add(player.getName());
+                    }
+                }
             } else {
                 team.getTeamThorin().put(uuid, rolesListWithoutRaces.get(i));
             }
@@ -111,13 +118,13 @@ public class RolesManagers {
             if (entry.getValue() == instancesRoles.get("Nazgul")) {
                 team.getTeamNazgul().put(entry.getKey(), entry.getValue());
             } else if (entry.getValue() == instancesRoles.get("Tavernier")) {
+
                 team.getTeamTavernier().put(entry.getKey(), entry.getValue());
             }
         }
-        Bukkit.broadcastMessage("teamNazgul" + team.getTeamNazgul());
-        Bukkit.broadcastMessage("teamTavernier" + team.getTeamTavernier());
-
-
+        if (instancesRoles.containsKey("Tavernier")) {
+            team.setTeamTavernier();
+        }
     }
 
 
@@ -183,5 +190,9 @@ public class RolesManagers {
 
     public List<Player> getPseudosTargertsAzog() {
         return pseudosTargertsAzog;
+    }
+
+    public List<String> getPseudoAzog() {
+        return pseudoAzog;
     }
 }

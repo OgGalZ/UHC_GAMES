@@ -1,9 +1,9 @@
-package me.oggalz.uhc_games.roles.races;
+package me.oggalz.uhc_games.roles.races_roles;
 
 import me.oggalz.uhc_games.roles.Roles;
 import org.bukkit.entity.Player;
 
-public class Sage extends Roles {
+public class Marchand extends Roles {
     @Override
     public String messages() {
         return null;

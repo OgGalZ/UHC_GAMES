@@ -3,7 +3,7 @@ package me.oggalz.uhc_games.listeners;
 import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.player.PlayerManager;
-import me.oggalz.uhc_games.roles.races.Chasseur;
+import me.oggalz.uhc_games.roles.races_roles.Chasseur;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.Team;

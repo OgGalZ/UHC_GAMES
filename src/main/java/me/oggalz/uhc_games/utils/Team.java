@@ -47,11 +47,6 @@ public class Team {
     public Map<UUID, Roles> getTeamTavernier() {
         return teamTavernier;
     }
-
-    public Map<UUID, Roles> getSmaug() {
-        return smaug;
-    }
-
     public Map<Player, String> getTavernier1() {
         return tavernier1;
     }
@@ -61,16 +56,15 @@ public class Team {
     }
 
     public void setTeamTavernier() {
-        Bukkit.broadcastMessage("yo");
+            int i = 0;
             for (Player player : Bukkit.getOnlinePlayers()) {
-                Bukkit.broadcastMessage("yo1");
                 if (teamTavernier.containsKey(player.getUniqueId())) {
-                    Bukkit.broadcastMessage("yo2");
-                    if (tavernier1.size() == 2 || tavernier1.size() == 1) {
+                    if (i < 2) {
                         tavernier1.put(player, player.getName());
                     } else {
                         tavernier2.put(player, player.getName());
                     }
+                    i++;
                 }
             }
             Bukkit.broadcastMessage("tavernier1" + tavernier1);

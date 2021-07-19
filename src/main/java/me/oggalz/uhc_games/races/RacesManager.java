@@ -27,7 +27,7 @@ public class RacesManager {
         racesList.add(new Elfes(player, this));
         racesList.add(new Hobbits(player, this));
         racesList.add(new Nains(player, this));
-        racesList.add(new Orques(player, this));
+        racesList.add(new Orques(player, this, rolesManagers));
         orques = new ArrayList<>();
         elfes = new ArrayList<>();
         nains = new ArrayList<>();
@@ -77,11 +77,6 @@ public class RacesManager {
                     orques.add(player.getDisplayName());
                 }
             }
-            Bukkit.broadcastMessage("elfes" + elfes);
-            Bukkit.broadcastMessage("hobbits" + hobbits);
-            Bukkit.broadcastMessage("nains" + nains);
-            Bukkit.broadcastMessage("orques" + orques);
-
 
         }
 
