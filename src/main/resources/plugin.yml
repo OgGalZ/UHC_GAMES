@@ -4,5 +4,7 @@ version: 1.0
 commands:
   finish:
     description: /finish for stuff
+  hob:
+    description: /hob pour le sage
 depend:
   - SmartInvs

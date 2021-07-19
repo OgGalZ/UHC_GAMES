@@ -2,6 +2,7 @@ package me.oggalz.uhc_games;
 
 import fr.minuskube.inv.SmartInventory;
 import me.oggalz.uhc_games.commands.Finish;
+import me.oggalz.uhc_games.commands.HobSouvenir;
 import me.oggalz.uhc_games.gui.*;
 import me.oggalz.uhc_games.listeners.PlayerDeathEvent;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
@@ -35,6 +36,7 @@ public class Main extends JavaPlugin {
     private SmartInventory mainGui;
     private RacesManager racesManager;
     private RolesManagers rolesManagers;
+    private HobSouvenir hobSouvenir;
 
     @Override
     public void onEnable() {
@@ -57,6 +59,7 @@ public class Main extends JavaPlugin {
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui(), rolesManagers);
         stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers, team);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
+        hobSouvenir = new HobSouvenir(rolesManagers , team , playerManager);
 
         SmartInventory races = SmartInventory.builder()
                 .id("races ")
@@ -129,5 +132,6 @@ public class Main extends JavaPlugin {
 
     public void registersCommands() {
         getCommand("finish").setExecutor(finish);
+        getCommand("hob").setExecutor(hobSouvenir);
     }
 }
