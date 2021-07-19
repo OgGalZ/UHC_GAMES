@@ -50,7 +50,7 @@ public class StateManager {
         gameState = State.STARTING;
         int secondsPvp = pvpGui.getTimePvp() * 60;
         int secondsBorder = worldBorderGui.getTimeBorder() * 60;
-        Team team = new Team();
+        Team team = new Team(playerManager);
         Scheduler scheduler = new Scheduler(pvpGui, worldBorderGui, playerManager, playerClass, racesManager, rolesManagers, team);
         scheduler.runTaskTimer(main, 0, 20L);
         pvp.runTaskLater(main, secondsPvp * 20L);
@@ -65,6 +65,7 @@ public class StateManager {
         rolesManagers.generateMapRolesPLayers();
         rolesManagers.generateTeamsNazgulTavernier();
         rolesManagers.generatePseudosTargertsHunter();
+        rolesManagers.generateteamAzogThorinWithoutNazgulTavernier();
 
 
     }

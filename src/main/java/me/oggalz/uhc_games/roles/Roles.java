@@ -7,4 +7,6 @@ public abstract class Roles {
     public abstract String  messages();
     public abstract void powerRoles(Player player);
 
+    @Override
+    public abstract String toString();
 }

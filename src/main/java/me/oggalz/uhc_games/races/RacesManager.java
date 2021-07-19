@@ -18,6 +18,8 @@ public class RacesManager {
     private final List<String> elfes;
     private final List<String> nains;
     private final List<String> hobbits;
+    private final List<String> pseudosTeamAzog;
+    private final List<String> pseudosTeamThorin;
 
     public RacesManager(Team team, RolesManagers rolesManagers) {
         this.team = team;
@@ -33,6 +35,8 @@ public class RacesManager {
         nains = new ArrayList<>();
         hobbits = new ArrayList<>();
         racesPlayers = new HashMap<>();
+        pseudosTeamAzog = new ArrayList<>();
+        pseudosTeamThorin = new ArrayList<>();
     }
 
     public void generateMapRaces() {
@@ -82,12 +86,27 @@ public class RacesManager {
 
     }
 
+    public List<String> getPseudosTeamAzog() {
+        pseudosTeamAzog.addAll(orques);
+        return pseudosTeamAzog;
+    }
+
+    public List<String> getPseudosTeamThorin() {
+        pseudosTeamThorin.addAll(elfes);
+        pseudosTeamThorin.addAll(nains);
+        pseudosTeamThorin.addAll(hobbits);
+        return pseudosTeamThorin;
+    }
+
     public boolean containsUuid(UUID uuid) {
         return racesPlayers.containsKey(uuid);
     }
 
     public Races getRaces(UUID uuid) {
         return racesPlayers.get(uuid);
+    }
+    public boolean playerRaceContains(UUID uuid){
+        return racesPlayers.containsKey(uuid);
     }
 
     public List<String> getOrques() {
@@ -107,6 +126,9 @@ public class RacesManager {
     }
 
 
+    public List<Races> getRacesList() {
+        return racesList;
+    }
 }
 
 

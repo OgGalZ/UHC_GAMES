@@ -42,7 +42,7 @@ public class Main extends JavaPlugin {
         World world = Bukkit.getWorld("world");
         world.getWorldBorder().setSize(5000000);
         this.playerManager = new PlayerManager();
-        Team team = new Team();
+        Team team = new Team(playerManager);
 
         rolesManagers = new RolesManagers(team, playerManager);
         PvpGui pvpGui = new PvpGui();
@@ -117,14 +117,14 @@ public class Main extends JavaPlugin {
         DiamondLimite diamondLimite = new DiamondLimite(guiManager.getScenariosGui());
         HastyBoy hastyBoy = new HastyBoy();
         Timber timber = new Timber();
-        Team team = new Team();
+        Team team = new Team(playerManager);
         ActionBarUtils actionBarUtils = new ActionBarUtils(this);
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
         Chasseur chasseur = new Chasseur(rolesManagers , team);
-        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, actionBarUtils), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, actionBarUtils, team), this);
         getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager,  racesManager), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
-        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(stateManager , guiManager.getPvpGui() , playerManager, team, chasseur) , this);
+        getServer().getPluginManager().registerEvents(new PlayerDeathEvent(stateManager , guiManager.getPvpGui() , playerManager, team, chasseur, racesManager) , this);
     }
 
     public void registersCommands() {

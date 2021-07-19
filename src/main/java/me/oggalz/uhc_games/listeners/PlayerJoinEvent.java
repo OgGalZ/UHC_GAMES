@@ -8,6 +8,7 @@ import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.state.StateManager;
 import me.oggalz.uhc_games.utils.ActionBarUtils;
 import me.oggalz.uhc_games.utils.Item;
+import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -28,12 +29,14 @@ public class PlayerJoinEvent implements Listener {
     private final PlayerManager playerManager;
     private final StateManager stateManager;
     private final ActionBarUtils actionBarUtils;
+    private final Team team;
 
-    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ActionBarUtils actionBarUtils) {
+    public PlayerJoinEvent(Main main, PlayerManager playerManager, StateManager stateManager, ActionBarUtils actionBarUtils, Team team) {
         this.main = main;
         this.playerManager = playerManager;
         this.stateManager = stateManager;
         this.actionBarUtils = actionBarUtils;
+        this.team = team;
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -76,10 +79,9 @@ public class PlayerJoinEvent implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
 
     public void playerQuitEvent(PlayerQuitEvent event) {
-
         Player player = event.getPlayer();
-        playerManager.removePlayer(player.getUniqueId());
         BPlayerBoard board = Netherboard.instance().getBoard(player);
+        team.deletePlayerLists(player);
         if (board != null) {
             board.delete();
             for (Player x : Bukkit.getOnlinePlayers()) {
@@ -88,6 +90,7 @@ public class PlayerJoinEvent implements Listener {
                 }
             }
         }
+
     }
 
     @EventHandler(priority = EventPriority.HIGH)

@@ -22,4 +22,9 @@ public class BilbonSacquet extends Roles {
         PotionEffect potionEffect = new PotionEffect(PotionEffectType.REGENERATION , 999999999 , 0);
         player.addPotionEffect(potionEffect);
     }
+
+    @Override
+    public String toString() {
+        return "BilbonSacquet";
+    }
 }

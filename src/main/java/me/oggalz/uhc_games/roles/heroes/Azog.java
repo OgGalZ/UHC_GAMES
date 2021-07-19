@@ -21,4 +21,9 @@ public class Azog extends Roles {
         PotionEffect potionEffect = new PotionEffect(PotionEffectType.INCREASE_DAMAGE , 999999999, 0);
         player.addPotionEffect(potionEffect);
     }
+
+    @Override
+    public String toString() {
+        return "Azog";
+    }
 }

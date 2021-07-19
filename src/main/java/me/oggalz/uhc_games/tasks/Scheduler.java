@@ -75,6 +75,8 @@ public class Scheduler extends BukkitRunnable {
                 episo += 20;
                 for(Player player :  playerManager.getValues()){
                     player.setEnable(true);
+                    player.setSpyCamp(true);
+
                 }
             }
         }

@@ -8,7 +8,8 @@ public class Player {
 
     private int kill = 0;
     private final UUID uuid;
-    private boolean enable =  true;
+    private boolean power =  true;
+    private boolean spyCamp  = true;
 
     public Player(UUID uuid) {
         this.uuid = uuid;
@@ -24,10 +25,18 @@ public class Player {
 
 
     public boolean isEnable() {
-        return enable;
+        return power ;
     }
 
     public void setEnable(boolean enable) {
-        this.enable = enable;
+        this.power = enable;
+    }
+
+    public boolean isSpyCamp() {
+        return spyCamp;
+    }
+
+    public void setSpyCamp(boolean spyCamp) {
+        this.spyCamp = spyCamp;
     }
 }

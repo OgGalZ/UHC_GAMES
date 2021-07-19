@@ -11,6 +11,10 @@ public class Voyant extends Roles {
 
     @Override
     public void powerRoles(Player player) {
+    }
 
+    @Override
+    public String toString() {
+        return "Voyant";
     }
 }

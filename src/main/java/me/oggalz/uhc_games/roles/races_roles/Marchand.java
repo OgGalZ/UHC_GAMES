@@ -13,4 +13,9 @@ public class Marchand extends Roles {
     public void powerRoles(Player player) {
 
     }
+
+    @Override
+    public String toString() {
+        return "Marchand";
+    }
 }

@@ -13,8 +13,8 @@ import org.bukkit.potion.PotionEffectType;
 public class Tavernier extends Roles {
 
     private final Team team;
-    private boolean potion1 = false;
-    private boolean potion2 = false;
+    private boolean potion1 = true;
+    private boolean potion2 = true;
 
     public Tavernier(Team team) {
         this.team = team;
@@ -33,18 +33,18 @@ public class Tavernier extends Roles {
         if (team.getTavernier1().containsKey(player)) {
             player.sendMessage(ChatColor.RED + "Votre duo est composée de " + team.getTavernier1().values());
             player.sendMessage(ChatColor.RED + "L'autre duo est " + team.getTavernier2().values());
-            if (!potion1) {
+            if (potion1) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 0));
-                potion1 = true;
+                potion1 = false;
             } else {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 999999999, 0));
             }
         } else {
             player.sendMessage(ChatColor.RED + "Votre duo est composée de " + team.getTavernier2().values());
             player.sendMessage(ChatColor.RED + "L'autre duo est " + team.getTavernier1().values());
-            if (!potion2) {
+            if (potion2) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999, 0));
-                potion2 = true;
+                potion2 = false;
             } else {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 999999999, 0));
             }
@@ -52,4 +52,8 @@ public class Tavernier extends Roles {
         }
     }
 
+    @Override
+    public String toString() {
+        return "Tavernier";
+    }
 }

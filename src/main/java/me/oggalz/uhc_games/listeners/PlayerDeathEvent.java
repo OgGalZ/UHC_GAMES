@@ -3,8 +3,10 @@ package me.oggalz.uhc_games.listeners;
 import fr.minuskube.netherboard.Netherboard;
 import me.oggalz.uhc_games.gui.PvpGui;
 import me.oggalz.uhc_games.player.PlayerManager;
+import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.roles.races_roles.Chasseur;
 import me.oggalz.uhc_games.state.StateManager;
+import me.oggalz.uhc_games.tasks.Teleportation;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.Team;
 import org.bukkit.ChatColor;
@@ -31,15 +33,17 @@ public class PlayerDeathEvent implements Listener {
     private final PlayerManager playerManager;
     private final Team team;
     private final Chasseur chasseur;
+    private final RacesManager racesManager;
 
 
-    public PlayerDeathEvent(StateManager stateManager, PvpGui pvpGui, PlayerManager playerManager, Team team, Chasseur chasseur) {
+    public PlayerDeathEvent(StateManager stateManager, PvpGui pvpGui, PlayerManager playerManager, Team team, Chasseur chasseur, RacesManager racesManager) {
         this.stateManager = stateManager;
         this.pvpGui = pvpGui;
         this.playerManager = playerManager;
         this.team = team;
         this.chasseur = chasseur;
 
+        this.racesManager = racesManager;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -50,6 +54,9 @@ public class PlayerDeathEvent implements Listener {
         if (event.getEntity() != null) {
             playerDeath = event.getEntity().getPlayer();
         }
+        assert playerDeath != null;
+        team.deletePlayerLists(playerDeath);
+
         World world = event.getEntity().getWorld();
         if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
@@ -89,6 +96,11 @@ public class PlayerDeathEvent implements Listener {
         if (chasseur.getHuntersTagers().containsKey(playerKiller)) {
             if (chasseur.getHuntersTagers().get(playerKiller) == playerDeath) {
                 playerKiller.sendMessage(ChatColor.BLUE + "Bravo , vous avez tué votre cible ");
+                if (team.getTeamAzog().containsKey(playerKiller.getUniqueId())) {
+                    playerKiller.sendMessage(ChatColor.BLUE + "Cette personne est pas de votre camp " + racesManager.getPseudosTeamThorin().get(Teleportation.generate(0, racesManager.getPseudosTeamThorin().size())));
+                } else {
+                    playerKiller.sendMessage(ChatColor.BLUE + "Cette personne est pas de votre camp " + racesManager.getPseudosTeamAzog().get(Teleportation.generate(0, racesManager.getPseudosTeamAzog().size())));
+                }
             }
         }
 

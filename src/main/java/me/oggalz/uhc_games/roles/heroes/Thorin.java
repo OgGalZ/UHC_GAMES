@@ -22,4 +22,9 @@ public class Thorin extends Roles {
         PotionEffect potionEffect = new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 999999999 ,  0);
         player.addPotionEffect(potionEffect);
     }
+
+    @Override
+    public String toString() {
+        return "Thorin";
+    }
 }

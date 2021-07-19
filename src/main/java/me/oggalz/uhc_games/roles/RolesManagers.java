@@ -21,7 +21,7 @@ public class RolesManagers {
     private List<UUID> playersUuid;
     private final Map<Player, String> pseudos;
     private static final List<Roles> rolesListAvailable = new ArrayList<>();
-    private final Map<UUID, Roles> rolesPlayersWithoutRaces;
+    private final Map<UUID, Roles> rolesPlayersHeroes;
     private final Map<UUID, Roles> rolesPLayers;
     private final Map<String, Roles> instancesRoles;
     private final List<Player> pseudosTargertsThorin;
@@ -31,7 +31,7 @@ public class RolesManagers {
     public RolesManagers(Team team, PlayerManager playerManager) {
         this.team = team;
         this.playerManager = playerManager;
-        rolesPlayersWithoutRaces = new HashMap<>();
+        rolesPlayersHeroes = new HashMap<>();
         rolesListWithoutRaces = new ArrayList<>();
         rolesListWithoutRaces.add(new Azog());
         rolesListWithoutRaces.add(new BilbonSacquet());
@@ -53,6 +53,25 @@ public class RolesManagers {
     }
 
 
+    public void generateteamAzogThorinWithoutNazgulTavernier() {
+        int i = 0;
+        for (UUID uuid : team.getTeamNazgul().keySet()) {
+            if (team.getTeamAzogWithoutNazgulTavernier().containsValue(uuid)) {
+                team.getTeamAzogWithoutNazgulTavernier().remove(uuid);
+            } else {
+                team.getTeamThorinWithoutNazgulTavernier().remove(uuid);
+            }
+
+        }
+        for (UUID uuid : team.getTeamTavernier().keySet()) {
+            if (team.getTeamAzogWithoutNazgulTavernier().containsValue(uuid)) {
+                team.getTeamAzogWithoutNazgulTavernier().remove(uuid);
+            } else {
+                team.getTeamThorinWithoutNazgulTavernier().remove(uuid);
+            }
+        }
+    }
+
     public void generatePseudosTargertsHunter() {
         int i = 0;
         int y = 0;
@@ -62,12 +81,16 @@ public class RolesManagers {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (team.getTeamAzog().containsKey(player.getUniqueId())) {
                     if (i < 4) {
-                        pseudosTargertsAzog.add(player);
+                        if (rolesPLayers.get(player.getUniqueId()) != instancesRoles.get("Chasseur")) {
+                            pseudosTargertsAzog.add(player);
+                        }
                     }
                     i++;
                 } else if (team.getTeamThorin().containsKey(player.getUniqueId())) {
                     if (y == 0) {
-                        pseudosTargertsThorin.add(player);
+                        if (rolesPLayers.get(player.getUniqueId()) != instancesRoles.get("Chasseur")) {
+                            pseudosTargertsThorin.add(player);
+                        }
                     }
                     y++;
                 }
@@ -92,7 +115,7 @@ public class RolesManagers {
             } else {
                 team.getTeamThorin().put(uuid, rolesListWithoutRaces.get(i));
             }
-            rolesPlayersWithoutRaces.put(uuid, rolesListWithoutRaces.get(i));
+            rolesPlayersHeroes.put(uuid, rolesListWithoutRaces.get(i));
             i++;
         }
     }
@@ -129,7 +152,7 @@ public class RolesManagers {
 
 
     public List<UUID> getPlayersUuid() {
-        for (UUID uuid : rolesPlayersWithoutRaces.keySet()) {
+        for (UUID uuid : rolesPlayersHeroes.keySet()) {
             playersUuid.remove(uuid);
         }
         return playersUuid;
@@ -137,19 +160,19 @@ public class RolesManagers {
 
     public void messageAnnouncement() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
+            if (rolesPlayersHeroes.containsKey(player.getUniqueId())) {
                 player.sendMessage(ChatColor.MAGIC + "deffffffdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddqssjipsdfiojsiohjhjiodohjdhjodg");
             }
         }
     }
 
     public void powerMessageRolesWithoutRaces(Player player) {
-        if (rolesPlayersWithoutRaces.containsKey(player.getUniqueId())) {
-            Object object = rolesPlayersWithoutRaces.get(player.getUniqueId());
-            for (Object o : rolesPlayersWithoutRaces.values()) {
+        if (rolesPlayersHeroes.containsKey(player.getUniqueId())) {
+            Object object = rolesPlayersHeroes.get(player.getUniqueId());
+            for (Object o : rolesPlayersHeroes.values()) {
                 if (o == object) {
-                    rolesPlayersWithoutRaces.get(player.getUniqueId()).powerRoles(player);
-                    player.sendMessage(rolesPlayersWithoutRaces.get(player.getUniqueId()).messages());
+                    rolesPlayersHeroes.get(player.getUniqueId()).powerRoles(player);
+                    player.sendMessage(rolesPlayersHeroes.get(player.getUniqueId()).messages());
 
                     if (!o.equals(rolesListWithoutRaces.get(0))) {
                         pseudos.put(player, player.getName());
@@ -194,5 +217,13 @@ public class RolesManagers {
 
     public List<String> getPseudoAzog() {
         return pseudoAzog;
+    }
+
+    public Map<UUID, Roles> getRolesPLayers() {
+        return rolesPLayers;
+    }
+
+    public Map<UUID, Roles> getRolesPlayersWithoutRaces() {
+        return rolesPlayersHeroes;
     }
 }
