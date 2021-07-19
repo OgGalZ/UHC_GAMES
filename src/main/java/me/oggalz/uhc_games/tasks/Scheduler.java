@@ -53,7 +53,6 @@ public class Scheduler extends BukkitRunnable {
                 rolesManagers.messageAnnouncement();
                 racesManager.messageAnnouncement();
                 racesMessage = false;
-                team.test();
             }
 
             seconds = 0;

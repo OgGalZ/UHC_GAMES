@@ -15,9 +15,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class PlayerDeathEvent implements Listener {
@@ -50,6 +53,9 @@ public class PlayerDeathEvent implements Listener {
         World world = event.getEntity().getWorld();
         if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
+        } else {
+            List<ItemStack> deleted = event.getDrops().stream().filter(itemStack -> itemStack.getItemMeta() != null && itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power")).collect(Collectors.toList());
+            deleted.clear();
         }
         if (pvpGui.getNumbersGaps() != 0 && stateManager.hasStarted()) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, pvpGui.getNumbersGaps(), null, null));
@@ -80,9 +86,9 @@ public class PlayerDeathEvent implements Listener {
                 }
             }
         }
-        if (chasseur.getHuntersTagers().containsKey(playerKiller)){
-            if(chasseur.getHuntersTagers().get(playerKiller) == playerDeath){
-                playerKiller.sendMessage(ChatColor.BLUE + "Bravo , vous avez tué votre cible " );
+        if (chasseur.getHuntersTagers().containsKey(playerKiller)) {
+            if (chasseur.getHuntersTagers().get(playerKiller) == playerDeath) {
+                playerKiller.sendMessage(ChatColor.BLUE + "Bravo , vous avez tué votre cible ");
             }
         }
 

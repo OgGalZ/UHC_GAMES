@@ -6,6 +6,7 @@ import fr.minuskube.inv.content.InventoryProvider;
 import me.oggalz.uhc_games.roles.*;
 import me.oggalz.uhc_games.utils.Item;
 import me.oggalz.uhc_games.utils.ItemsId;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -146,6 +147,7 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nSmaug++;
+                Bukkit.broadcastMessage("test" + rolesManagers.getRolesList());
             } else {
                 if ((nSmaug != 0)) {
                     nSmaug--;

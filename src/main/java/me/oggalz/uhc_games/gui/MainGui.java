@@ -81,8 +81,10 @@ public class MainGui implements InventoryProvider {
             if((races.resultsRaces() * 4L) +  (races.resultsRoles() + 4) == (long) Bukkit.getOnlinePlayers().size()  ){
                 if (!enable) {
                     enable = true;
-                    player.getInventory().clear();
-                    player.closeInventory();
+                    for(Player x : Bukkit.getOnlinePlayers()){
+                        x.getInventory().clear();;
+                        x.closeInventory();
+                    }
                     teleportation.runTaskTimer(main, 0, 20L);
                 }
             }else{

@@ -61,9 +61,11 @@ public class Team {
     }
 
     public void setTeamTavernier() {
-        if (teamTavernier.size() == 4) {
+        Bukkit.broadcastMessage("yo");
             for (Player player : Bukkit.getOnlinePlayers()) {
+                Bukkit.broadcastMessage("yo1");
                 if (teamTavernier.containsKey(player.getUniqueId())) {
+                    Bukkit.broadcastMessage("yo2");
                     if (tavernier1.size() == 2 || tavernier1.size() == 1) {
                         tavernier1.put(player, player.getName());
                     } else {
@@ -71,13 +73,9 @@ public class Team {
                     }
                 }
             }
-        }
-    }
+            Bukkit.broadcastMessage("tavernier1" + tavernier1);
+            Bukkit.broadcastMessage("tavernier2" + tavernier2);
 
-    public void test() {
-        Bukkit.broadcastMessage("" + getTeamAzog());
-        Bukkit.broadcastMessage("" + getTeamThorin());
-        Bukkit.broadcastMessage("" + getTeamNazgul());
-        Bukkit.broadcastMessage("" + getTeamTavernier());
-    }
+        }
+
 }
