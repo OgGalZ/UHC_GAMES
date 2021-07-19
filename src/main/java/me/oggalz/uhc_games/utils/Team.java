@@ -40,7 +40,6 @@ public class Team {
 
     }
 
-   
 
     public Map<UUID, Object> getTeamAzog() {
         return teamAzog;
@@ -95,16 +94,42 @@ public class Team {
     }
 
 
-
-    public boolean sameTeam(List<Player> players) {
+    public boolean isSameTeam(List<Player> players) {
         int teamA = 0;
-        for (UUID uuid : players.stream().map(Player::getUniqueId).collect(Collectors.toList())) {
-            if (teamAzog.containsKey(uuid)) {
-                teamA++:
-            } else if (tea) {
-
+        int teamT = 0;
+        int teamN = 0;
+        int teamT1 = 0;
+        int teamT2 = 0;
+        boolean check = false;
+        int i = 0;
+        for (Player p : players) {
+            if (teamAzogWithoutNazgulTavernier.containsKey(p.getUniqueId())) {
+                teamA++;
+            } else if (teamThorinWithoutNazgulTavernier.containsKey(p.getUniqueId())) {
+                teamT++;
+            } else if (teamNazgul.containsKey(p.getUniqueId())) {
+                teamN++;
+            } else if (tavernier1.containsKey(players)) {
+                teamT1++;
+            } else if (tavernier2.containsKey(players)) {
+                teamT2++;
             }
         }
+        if (teamA != 0) {
+            i++;
+        } else if (teamT != 0) {
+            i++;
+        } else if (teamN != 0) {
+            i++;
+        } else if (teamT1 != 0) {
+            i++;
+        } else if (teamT2 != 0) {
+            i++;
+        }
+        if (i == 1) {
+            check = true;
+        }
+        return check;
     }
 
     public void deletePlayerLists(Player player) {
