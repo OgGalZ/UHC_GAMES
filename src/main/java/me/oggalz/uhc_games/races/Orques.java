@@ -61,6 +61,11 @@ public class Orques extends Races {
             playerClass.setEnable(false);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Orques";
+    }
 }
 
 

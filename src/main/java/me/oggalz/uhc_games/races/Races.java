@@ -15,6 +15,7 @@ public abstract class Races {
     public abstract void messages(org.bukkit.entity.Player player);
 
     public abstract void power(org.bukkit.entity.Player player , Player playerClass);
+    public abstract String toString();
 
 
 }

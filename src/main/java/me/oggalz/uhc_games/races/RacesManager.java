@@ -105,9 +105,6 @@ public class RacesManager {
     public Races getRaces(UUID uuid) {
         return racesPlayers.get(uuid);
     }
-    public boolean playerRaceContains(UUID uuid){
-        return racesPlayers.containsKey(uuid);
-    }
 
     public List<String> getOrques() {
         return orques;

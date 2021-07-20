@@ -33,7 +33,7 @@ public class Nains extends Races {
         }
         racesManager.getNains().remove(n);
 
-        if (!(racesManager.getNains().size() <= 0)) {
+        if (!(racesManager.getNains().size() <= 1)) {
             player.sendMessage(ChatColor.BLUE + "Team : " + racesManager.getNains().get(Teleportation.generate(0, racesManager.getNains().size() - 1)));
             racesManager.getNains().add(player.getName());
         }else{
@@ -53,5 +53,10 @@ public class Nains extends Races {
             player.addPotionEffect(potionEffect);
             playerClass.setEnable(false);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Nains";
     }
 }

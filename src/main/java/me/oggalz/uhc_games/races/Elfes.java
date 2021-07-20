@@ -53,4 +53,9 @@ public class Elfes extends Races {
             playerClass.setEnable(false);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Elfes";
+    }
 }
