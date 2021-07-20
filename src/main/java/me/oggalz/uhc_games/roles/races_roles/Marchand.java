@@ -14,7 +14,7 @@ public class Marchand extends Roles {
 
     @Override
     public void powerRoles(Player player) {
-            player.getInventory().addItem(Item.createItemstack(Material.BOOK_AND_QUILL , 1 , ChatColor.GOLD + "Marchandise ", null));
+            player.getInventory().addItem(Item.createItemstack(Material.BOOK ,  1 , ChatColor.GOLD + "Marchandise ", null));
     }
 
     @Override

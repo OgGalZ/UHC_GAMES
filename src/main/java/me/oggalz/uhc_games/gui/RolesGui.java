@@ -11,7 +11,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 
-
 public class RolesGui implements InventoryProvider {
 
     private int nMarchand = 0;
@@ -35,6 +34,7 @@ public class RolesGui implements InventoryProvider {
 
     }
 
+
     @Override
     public void update(Player player, InventoryContents contents) {
         contents.set(0, 3, ClickableItem.of(Item.getCustomTextureHead(ItemsId.Merchant.getId(), "Marchand", nMarchand), e -> {
@@ -45,7 +45,7 @@ public class RolesGui implements InventoryProvider {
             } else {
                 if ((nMarchand != 0)) {
                     nMarchand--;
-                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Marchand"));
+                    deleteInstance(rolesManagers.getInstancesRoles().get("Marchand"));
                 }
             }
 
@@ -60,7 +60,7 @@ public class RolesGui implements InventoryProvider {
             } else {
                 if ((nSage != 0)) {
                     nSage--;
-                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Sage"));
+                    deleteInstance(rolesManagers.getInstancesRoles().get("Sage"));
                 }
             }
         }));
@@ -74,7 +74,7 @@ public class RolesGui implements InventoryProvider {
             } else {
                 if ((nVoyant != 0)) {
                     nVoyant--;
-                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Voyant"));
+                    deleteInstance(rolesManagers.getInstancesRoles().get("Voyant"));
                 }
             }
         }));
@@ -101,7 +101,7 @@ public class RolesGui implements InventoryProvider {
             } else {
                 if ((nChasseur != 0)) {
                     nChasseur--;
-                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Chasseur"));
+                    deleteInstance(rolesManagers.getInstancesRoles().get("Chasseur"));
                 }
             }
         }));
@@ -114,7 +114,7 @@ public class RolesGui implements InventoryProvider {
             } else {
                 if ((nNazgûl != 0)) {
                     nNazgûl--;
-                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Nazgul"));
+                    deleteInstance(rolesManagers.getInstancesRoles().get("Nazgul"));
                 }
             }
         }));
@@ -127,7 +127,7 @@ public class RolesGui implements InventoryProvider {
             } else {
                 if ((nTavernier != 0)) {
                     nTavernier--;
-                    rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Tavernier"));
+                    deleteInstance(rolesManagers.getInstancesRoles().get("Tavernier"));
                 }
             }
         }));
@@ -147,7 +147,6 @@ public class RolesGui implements InventoryProvider {
             player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nSmaug++;
-                Bukkit.broadcastMessage("test" + rolesManagers.getRolesList());
             } else {
                 if ((nSmaug != 0)) {
                     nSmaug--;
@@ -164,5 +163,14 @@ public class RolesGui implements InventoryProvider {
     public int resultsRaces() {
         results = nMarchand + nSage + nVoyant + nGarde + nChasseur + nNazgûl + nTavernier;
         return results;
+    }
+    public void deleteInstance(Roles roles) {
+        for (int i = 0; i < rolesManagers.getRolesList().size(); i++) {
+            if (rolesManagers.getRolesList().get(i) == roles) {
+                rolesManagers.getRolesList().remove(i);
+                break;
+            }
+        }
+
     }
 }

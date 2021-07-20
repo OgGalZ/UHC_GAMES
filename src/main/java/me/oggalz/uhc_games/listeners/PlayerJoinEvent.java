@@ -65,7 +65,6 @@ public class PlayerJoinEvent implements Listener {
             if (player.isOp()) {
                 ItemStack itemStack = me.oggalz.uhc_games.utils.Item.createItemstack(Material.COMPASS, 1, ChatColor.BLUE + "Config", null);
                 player.getInventory().setItem(4, itemStack);
-                player.getInventory().addItem(Item.createItemstack(Material.BOOK_AND_QUILL , 1 , ChatColor.GOLD + "Marchandise ", null));
             }
         } else if (stateManager.hasStarted()) {
             if (!playerManager.containsplayers(player.getUniqueId())) {

@@ -72,24 +72,25 @@ me/oggalz/uhc_games/player/PlayerManager.java
  me.oggalz.uhc_games.player.PlayerManager
 me/oggalz/uhc_games/listeners/PlayerDeathEvent.java
  me.oggalz.uhc_games.listeners.PlayerDeathEvent
-me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
- me.oggalz.uhc_games.listeners.PlayerJoinEvent
-me/oggalz/uhc_games/gui/RolesGui.java
- me.oggalz.uhc_games.gui.RolesGui
+me/oggalz/uhc_games/scenarios/Timber.java
+ me.oggalz.uhc_games.scenarios.Timber
+ me.oggalz.uhc_games.scenarios.Timber$1
+me/oggalz/uhc_games/roles/RolesManagers.java
+ me.oggalz.uhc_games.roles.RolesManagers
 me/oggalz/uhc_games/roles/races_roles/Marchand.java
  me.oggalz.uhc_games.roles.races_roles.Marchand
 me/oggalz/uhc_games/roles/races_roles/Voyant.java
  me.oggalz.uhc_games.roles.races_roles.Voyant
-me/oggalz/uhc_games/roles/RolesManagers.java
- me.oggalz.uhc_games.roles.RolesManagers
+me/oggalz/uhc_games/gui/MarchandiseGui.java
+ me.oggalz.uhc_games.gui.MarchandiseGui
 me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
 me/oggalz/uhc_games/utils/ScoreboardCreator.java
  me.oggalz.uhc_games.utils.ScoreboardCreator
 me/oggalz/uhc_games/listeners/SecondaryListeners.java
  me.oggalz.uhc_games.listeners.SecondaryListeners
-me/oggalz/uhc_games/gui/MainGui.java
- me.oggalz.uhc_games.gui.MainGui
+me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
+ me.oggalz.uhc_games.listeners.PlayerJoinEvent
 me/oggalz/uhc_games/utils/ActionBarUtils.java
  me.oggalz.uhc_games.utils.ActionBarUtils
  me.oggalz.uhc_games.utils.ActionBarUtils$1
@@ -98,11 +99,10 @@ me/oggalz/uhc_games/scenarios/RegisterUnRegister.java
  me.oggalz.uhc_games.scenarios.RegisterUnRegister
 me/oggalz/uhc_games/tasks/Teleportation.java
  me.oggalz.uhc_games.tasks.Teleportation
-me/oggalz/uhc_games/scenarios/Timber.java
- me.oggalz.uhc_games.scenarios.Timber
- me.oggalz.uhc_games.scenarios.Timber$1
-me/oggalz/uhc_games/gui/MarchandiseGui.java
- me.oggalz.uhc_games.gui.MarchandiseGui
+me/oggalz/uhc_games/gui/MainGui.java
+ me.oggalz.uhc_games.gui.MainGui
+me/oggalz/uhc_games/gui/RolesGui.java
+ me.oggalz.uhc_games.gui.RolesGui
 me/oggalz/uhc_games/gui/GuiManager.java
  me.oggalz.uhc_games.gui.GuiManager
 me/oggalz/uhc_games/Main.java
