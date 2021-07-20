@@ -76,6 +76,7 @@ public class Scheduler extends BukkitRunnable {
                 for(Player player :  playerManager.getValues()){
                     player.setEnable(true);
                     player.setSpyCamp(true);
+                    player.setSpyPowerVoyant(true);
 
                 }
             }

@@ -6,5 +6,6 @@ commands:
     description: /finish for stuff
   hob:
     description: /hob pour le sage
+
 depend:
   - SmartInvs

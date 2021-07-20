@@ -9,7 +9,8 @@ public class Player {
     private int kill = 0;
     private final UUID uuid;
     private boolean power =  true;
-    private boolean spyCamp  = true;
+    private boolean spyPowerSage  = true;
+    private boolean spyPowerVoyant = true;
 
     public Player(UUID uuid) {
         this.uuid = uuid;
@@ -33,10 +34,18 @@ public class Player {
     }
 
     public boolean isSpyCamp() {
-        return spyCamp;
+        return spyPowerSage;
     }
 
     public void setSpyCamp(boolean spyCamp) {
-        this.spyCamp = spyCamp;
+        this.spyPowerSage = spyCamp;
+    }
+
+    public boolean isSpyPowerVoyant() {
+        return spyPowerVoyant;
+    }
+
+    public void setSpyPowerVoyant(boolean spyPowerVoyant) {
+        this.spyPowerVoyant = spyPowerVoyant;
     }
 }
