@@ -4,18 +4,18 @@ me/oggalz/uhc_games/roles/races_roles/Voyant.java
  me.oggalz.uhc_games.roles.races_roles.Voyant
 me/oggalz/uhc_games/roles/races_roles/Nazgul.java
  me.oggalz.uhc_games.roles.races_roles.Nazgul
-me/oggalz/uhc_games/player/Player.java
- me.oggalz.uhc_games.player.Player
+me/oggalz/uhc_games/roles/heroes/BilbonSacquet.java
+ me.oggalz.uhc_games.roles.heroes.BilbonSacquet
 me/oggalz/uhc_games/roles/races_roles/Marchand.java
  me.oggalz.uhc_games.roles.races_roles.Marchand
 me/oggalz/uhc_games/scenarios/DiamondLimite.java
  me.oggalz.uhc_games.scenarios.DiamondLimite
 me/oggalz/uhc_games/scenarios/VanillaPlus.java
  me.oggalz.uhc_games.scenarios.VanillaPlus
-me/oggalz/uhc_games/races/Races.java
- me.oggalz.uhc_games.races.Races
-me/oggalz/uhc_games/player/PlayerManager.java
- me.oggalz.uhc_games.player.PlayerManager
+me/oggalz/uhc_games/gui/WorldBorderGui.java
+ me.oggalz.uhc_games.gui.WorldBorderGui
+me/oggalz/uhc_games/roles/races_roles/Sage.java
+ me.oggalz.uhc_games.roles.races_roles.Sage
 me/oggalz/uhc_games/roles/Roles.java
  me.oggalz.uhc_games.roles.Roles
 me/oggalz/uhc_games/roles/heroes/Legolas.java
@@ -46,26 +46,30 @@ me/oggalz/uhc_games/utils/ItemsId.java
 me/oggalz/uhc_games/scenarios/CutClean.java
  me.oggalz.uhc_games.scenarios.CutClean
  me.oggalz.uhc_games.scenarios.CutClean$1
-me/oggalz/uhc_games/roles/heroes/BilbonSacquet.java
- me.oggalz.uhc_games.roles.heroes.BilbonSacquet
-me/oggalz/uhc_games/gui/WorldBorderGui.java
- me.oggalz.uhc_games.gui.WorldBorderGui
 me/oggalz/uhc_games/tasks/Scheduler.java
  me.oggalz.uhc_games.tasks.Scheduler
 me/oggalz/uhc_games/races/Hobbits.java
  me.oggalz.uhc_games.races.Hobbits
+me/oggalz/uhc_games/utils/Team.java
+ me.oggalz.uhc_games.utils.Team
 me/oggalz/uhc_games/roles/races_roles/Chasseur.java
  me.oggalz.uhc_games.roles.races_roles.Chasseur
 me/oggalz/uhc_games/races/Elfes.java
  me.oggalz.uhc_games.races.Elfes
+me/oggalz/uhc_games/player/Player.java
+ me.oggalz.uhc_games.player.Player
 me/oggalz/uhc_games/gui/RolesGui.java
  me.oggalz.uhc_games.gui.RolesGui
-me/oggalz/uhc_games/commands/HobSouvenir.java
- me.oggalz.uhc_games.commands.HobSouvenir
+me/oggalz/uhc_games/races/Nains.java
+ me.oggalz.uhc_games.races.Nains
 me/oggalz/uhc_games/gui/GuiManager.java
  me.oggalz.uhc_games.gui.GuiManager
 me/oggalz/uhc_games/roles/races_roles/Tavernier.java
  me.oggalz.uhc_games.roles.races_roles.Tavernier
+me/oggalz/uhc_games/races/Races.java
+ me.oggalz.uhc_games.races.Races
+me/oggalz/uhc_games/player/PlayerManager.java
+ me.oggalz.uhc_games.player.PlayerManager
 me/oggalz/uhc_games/roles/RolesManagers.java
  me.oggalz.uhc_games.roles.RolesManagers
 me/oggalz/uhc_games/tasks/Pvp.java
@@ -74,16 +78,12 @@ me/oggalz/uhc_games/races/Orques.java
  me.oggalz.uhc_games.races.Orques
 me/oggalz/uhc_games/races/RacesManager.java
  me.oggalz.uhc_games.races.RacesManager
-me/oggalz/uhc_games/roles/races_roles/Sage.java
- me.oggalz.uhc_games.roles.races_roles.Sage
-me/oggalz/uhc_games/utils/Team.java
- me.oggalz.uhc_games.utils.Team
-me/oggalz/uhc_games/races/Nains.java
- me.oggalz.uhc_games.races.Nains
 me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
 me/oggalz/uhc_games/utils/ScoreboardCreator.java
  me.oggalz.uhc_games.utils.ScoreboardCreator
+me/oggalz/uhc_games/commands/RolesCommands.java
+ me.oggalz.uhc_games.commands.RolesCommands
 me/oggalz/uhc_games/listeners/SecondaryListeners.java
  me.oggalz.uhc_games.listeners.SecondaryListeners
 me/oggalz/uhc_games/gui/MainGui.java

@@ -2,8 +2,7 @@ package me.oggalz.uhc_games;
 
 import fr.minuskube.inv.SmartInventory;
 import me.oggalz.uhc_games.commands.Finish;
-import me.oggalz.uhc_games.commands.HobCamp;
-import me.oggalz.uhc_games.commands.HobSouvenir;
+import me.oggalz.uhc_games.commands.RolesCommands;
 import me.oggalz.uhc_games.gui.*;
 import me.oggalz.uhc_games.listeners.PlayerDeathEvent;
 import me.oggalz.uhc_games.listeners.PlayerJoinEvent;
@@ -37,9 +36,7 @@ public class Main extends JavaPlugin {
     private SmartInventory mainGui;
     private RacesManager racesManager;
     private RolesManagers rolesManagers;
-    private HobSouvenir hobSouvenir;
-    private HobCamp hobCamp;
-
+    private RolesCommands rolesCommands;
     @Override
     public void onEnable() {
 
@@ -61,8 +58,7 @@ public class Main extends JavaPlugin {
         Pvp pvp = new Pvp(playerManager, guiManager.getScenariosGui(), rolesManagers);
         stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers, team);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
-        hobSouvenir = new HobSouvenir(rolesManagers , team , playerManager);
-        hobCamp = new HobCamp(rolesManagers , playerManager , racesManager);
+        rolesCommands = new RolesCommands(rolesManagers , playerManager , racesManager , team);
 
         SmartInventory races = SmartInventory.builder()
                 .id("races ")
@@ -135,7 +131,6 @@ public class Main extends JavaPlugin {
 
     public void registersCommands() {
         getCommand("finish").setExecutor(finish);
-        getCommand("hob").setExecutor(hobSouvenir);
-        getCommand("hox").setExecutor(hobCamp);
+        getCommand("hob").setExecutor(rolesCommands);
     }
 }
