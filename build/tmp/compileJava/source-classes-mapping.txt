@@ -82,8 +82,8 @@ me/oggalz/uhc_games/state/StateManager.java
  me.oggalz.uhc_games.state.StateManager
 me/oggalz/uhc_games/utils/ScoreboardCreator.java
  me.oggalz.uhc_games.utils.ScoreboardCreator
-me/oggalz/uhc_games/commands/RolesCommands.java
- me.oggalz.uhc_games.commands.RolesCommands
+me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
+ me.oggalz.uhc_games.listeners.PlayerJoinEvent
 me/oggalz/uhc_games/listeners/SecondaryListeners.java
  me.oggalz.uhc_games.listeners.SecondaryListeners
 me/oggalz/uhc_games/gui/MainGui.java
@@ -101,7 +101,7 @@ me/oggalz/uhc_games/scenarios/Timber.java
  me.oggalz.uhc_games.scenarios.Timber$1
 me/oggalz/uhc_games/listeners/PlayerDeathEvent.java
  me.oggalz.uhc_games.listeners.PlayerDeathEvent
+me/oggalz/uhc_games/commands/RolesCommands.java
+ me.oggalz.uhc_games.commands.RolesCommands
 me/oggalz/uhc_games/Main.java
  me.oggalz.uhc_games.Main
-me/oggalz/uhc_games/listeners/PlayerJoinEvent.java
- me.oggalz.uhc_games.listeners.PlayerJoinEvent
