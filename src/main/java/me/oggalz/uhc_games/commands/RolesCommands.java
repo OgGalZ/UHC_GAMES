@@ -76,6 +76,7 @@ public class RolesCommands implements CommandExecutor {
                                     player.sendMessage("Cette personne fait partie de la race des " + racesManager.getRaces(player.getUniqueId()).toString());
                                 }
                                 i++;
+                                return true;
                             } else {
                                 player.sendMessage(ChatColor.GOLD + "Vous ne pouvez plus utiliser ce pouvoir .");
                             }
@@ -112,6 +113,7 @@ public class RolesCommands implements CommandExecutor {
                             } else {
                                 player.sendMessage(wrongCommand);
                             }
+                            return true;
                         } else {
                             player.sendMessage(messAlreadyUse);
                         }
@@ -123,7 +125,7 @@ public class RolesCommands implements CommandExecutor {
                     player.sendMessage(messServer);
                 }
             } else {
-                player.sendMessage(wrongCommand);
+                player.sendMessage(messServer);
             }
 
         }
