@@ -22,6 +22,7 @@ public class RolesCommands implements CommandExecutor {
     private final RacesManager racesManager;
     private final Team team;
     private Player x;
+    private int i;
 
 
     public RolesCommands(RolesManagers rolesManagers, PlayerManager playerManager, RacesManager racesManager, Team team) {
@@ -68,10 +69,15 @@ public class RolesCommands implements CommandExecutor {
                         }
                     } else if (args[0].equals("race") && args.length == 2) {
                         if (findPseudoPlayer(args[1])) {
-                            if (racesManager.containsUuid(x.getUniqueId())) {
-                                player.sendMessage("Cette personne fait partie de la race des " + racesManager.getRaces(x.getUniqueId()).toString());
+                            if (!(i > 2)) {
+                                if (racesManager.containsUuid(x.getUniqueId())) {
+                                    player.sendMessage("Cette personne fait partie de la race des " + racesManager.getRaces(x.getUniqueId()).toString());
+                                } else {
+                                    player.sendMessage("Cette personne fait partie de la race des " + racesManager.getRaces(player.getUniqueId()).toString());
+                                }
+                                i++;
                             } else {
-                                player.sendMessage("Cette personne fait partie de la race des " + racesManager.getRaces(player.getUniqueId()).toString());
+                                player.sendMessage(ChatColor.GOLD + "Vous ne pouvez plus utiliser ce pouvoir .");
                             }
                         } else {
                             player.sendMessage(wrongCommand);
