@@ -80,7 +80,7 @@ public class RolesGui implements InventoryProvider {
         }));
 
         contents.set(1, 4, ClickableItem.of(Item.getCustomTextureHead(ItemsId.Guard.getId(), "Garde", nGarde), e -> {
-            player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
+           /* player.playSound(player.getLocation(), Sound.CLICK, 99, 2);
             if (e.isLeftClick()) {
                 nGarde++;
                 rolesManagers.getRolesList().add(rolesManagers.getInstancesRoles().get("Garde"));
@@ -89,7 +89,7 @@ public class RolesGui implements InventoryProvider {
                     nGarde--;
                     rolesManagers.getRolesList().remove(rolesManagers.getInstancesRoles().remove("Garde"));
                 }
-            }
+            }*/
         }));
 
 

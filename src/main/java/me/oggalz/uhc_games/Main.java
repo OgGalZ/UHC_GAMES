@@ -37,6 +37,7 @@ public class Main extends JavaPlugin {
     private RacesManager racesManager;
     private RolesManagers rolesManagers;
     private RolesCommands rolesCommands;
+    private SmartInventory marchandise;
     @Override
     public void onEnable() {
 
@@ -50,7 +51,8 @@ public class Main extends JavaPlugin {
         ScenariosGui scenariosGui = new ScenariosGui();
         WorldBorderGui worldBorderGui = new WorldBorderGui();
         RolesGui racesGui = new RolesGui(rolesManagers);
-        guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui, racesGui);
+        MarchandiseGui marchandiseGui = new MarchandiseGui();
+        guiManager = new GuiManager(pvpGui, scenariosGui, worldBorderGui, racesGui, marchandiseGui);
         racesManager = new RacesManager(team,  rolesManagers);
         finish = new Finish();
         scoreboardCreator = new ScoreboardCreator(this, playerManager);
@@ -59,6 +61,14 @@ public class Main extends JavaPlugin {
         stateManager = new StateManager(this, guiManager.getPvpGui(), guiManager.getWorldBorderGui(), playerManager, worldBorder, pvp, racesManager, rolesManagers, team);
         Teleportation teleportation = new Teleportation(stateManager, finish, scoreboardCreator, guiManager.getWorldBorderGui());
         rolesCommands = new RolesCommands(rolesManagers , playerManager , racesManager , team);
+
+        marchandise = SmartInventory.builder()
+                .id("marchandise")
+                .provider(marchandiseGui)
+                .size(2 , 9)
+                .title(ChatColor.DARK_AQUA + "Marchandise")
+                .closeable(true)
+                .build();
 
         SmartInventory races = SmartInventory.builder()
                 .id("races ")
@@ -93,7 +103,7 @@ public class Main extends JavaPlugin {
 
         this.mainGui = SmartInventory.builder()
                 .id("MainGui")
-                .provider(new MainGui(pvpInventory, scenarios, bordure, this, teleportation, races, guiManager.racesGui()))
+                .provider(new MainGui(pvpInventory, scenarios, bordure,this, teleportation, races, guiManager.racesGui()))
                 .size(4, 9)
                 .title(ChatColor.RED + "Configuration")
                 .closeable(true)
@@ -124,7 +134,7 @@ public class Main extends JavaPlugin {
         VanillaPlus vanillaPlus = new VanillaPlus(this.getConfig());
         Chasseur chasseur = new Chasseur(rolesManagers , team);
         getServer().getPluginManager().registerEvents(new PlayerJoinEvent(this, playerManager, stateManager, actionBarUtils, team), this);
-        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager,  racesManager), this);
+        getServer().getPluginManager().registerEvents(new SecondaryListeners(mainGui, stateManager, playerManager,  racesManager , marchandise), this);
         getServer().getPluginManager().registerEvents(new RegisterUnRegister(this, cutClean, diamondLimite, hastyBoy, timber, vanillaPlus), this);
         getServer().getPluginManager().registerEvents(new PlayerDeathEvent(stateManager , guiManager.getPvpGui() , playerManager, team, chasseur, racesManager) , this);
     }

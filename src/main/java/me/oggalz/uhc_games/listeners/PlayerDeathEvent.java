@@ -61,8 +61,8 @@ public class PlayerDeathEvent implements Listener {
         if (stateManager.hasNotStarted()) {
             event.getDrops().clear();
         } else {
-            List<ItemStack> deleted = event.getDrops().stream().filter(itemStack -> itemStack.getItemMeta() != null && itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power")).collect(Collectors.toList());
-            deleted.clear();
+            event.getDrops().stream().filter(itemStack -> itemStack.getItemMeta() != null && itemStack.getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Power")).collect(Collectors.toList()).clear();
+            event.getDrops().stream().filter(itemStack -> itemStack == Item.createItemstack(Material.CHEST, 1, ChatColor.GOLD + "Marchandise ", null)).collect(Collectors.toList()).clear();
         }
         if (pvpGui.getNumbersGaps() != 0 && stateManager.hasStarted()) {
             world.dropItem(location, Item.createItemstack(Material.GOLDEN_APPLE, pvpGui.getNumbersGaps(), null, null));

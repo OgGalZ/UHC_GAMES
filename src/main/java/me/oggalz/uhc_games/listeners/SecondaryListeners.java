@@ -1,7 +1,7 @@
 package me.oggalz.uhc_games.listeners;
 
 import fr.minuskube.inv.SmartInventory;
-import me.oggalz.uhc_games.gui.PvpGui;
+import me.oggalz.uhc_games.gui.MarchandiseGui;
 import me.oggalz.uhc_games.player.PlayerManager;
 import me.oggalz.uhc_games.races.RacesManager;
 import me.oggalz.uhc_games.state.StateManager;
@@ -27,13 +27,15 @@ public class SecondaryListeners implements Listener {
     private final StateManager stateManager;
     private final PlayerManager playerManager;
     private final RacesManager racesManager;
+    private final  SmartInventory marchandiseGui;
 
 
-    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, RacesManager racesManager) {
+    public SecondaryListeners(SmartInventory mainGUi, StateManager stateManager, PlayerManager playerManager, RacesManager racesManager, SmartInventory marchandiseGui) {
         this.mainGUi = mainGUi;
         this.stateManager = stateManager;
         this.playerManager = playerManager;
         this.racesManager = racesManager;
+        this.marchandiseGui = marchandiseGui;
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -49,6 +51,9 @@ public class SecondaryListeners implements Listener {
                 if(racesManager.containsUuid(player.getUniqueId())){
                     racesManager.getRaces(player.getUniqueId()).power(player , playerManager.getPlayer(player.getUniqueId()));
                 }
+        }
+        if(itemStack.isPresent() && itemStack.get().getItemMeta().getDisplayName() != null && itemStack.get().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.GOLD + "Marchandise ")){
+            marchandiseGui.open(player);
         }
     }
 

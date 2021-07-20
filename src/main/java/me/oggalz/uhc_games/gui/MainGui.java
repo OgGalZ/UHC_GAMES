@@ -31,7 +31,7 @@ public class MainGui implements InventoryProvider {
     private final SmartInventory racesGui;
     private final RolesGui races;
 
-    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder, Main main, Teleportation teleportation, SmartInventory racesGui, RolesGui races) {
+    public MainGui(SmartInventory pvpGui, SmartInventory scenarioGui, SmartInventory worldBorder,  Main main, Teleportation teleportation, SmartInventory racesGui, RolesGui races) {
         this.main = main;
         this.teleportation = teleportation;
         this.racesGui = racesGui;
