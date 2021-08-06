@@ -42,15 +42,15 @@ public class RacesManager {
     public void generateMapRaces() {
         int i = 0;
         for (UUID uuid : rolesManagers.getPlayersUuid()) {
+            if (i + 1  > racesList.size()) {
+                i = 0;
+            }
             if (i + 1 == racesList.size()) {
                 team.getTeamAzog().put(uuid, racesList.get(3));
             } else {
                 team.getTeamThorin().put(uuid, racesList.get(i));
             }
             racesPlayers.put(uuid, racesList.get(i));
-            if (i > racesList.size()) {
-                i = 0;
-            }
             i++;
         }
     }

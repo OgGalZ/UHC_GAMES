@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class Team {
 
@@ -78,9 +77,13 @@ public class Team {
 
     public void setTeamTavernier() {
         int i = 0;
+        boolean check = false;
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (teamTavernier.containsKey(player.getUniqueId())) {
-                if (i < 2) {
+                if (!check) {
+                    if (i + 1  == teamTavernier.size() / 2) {
+                        check = true;
+                    }
                     tavernier1.put(player, player.getName());
                 } else {
                     tavernier2.put(player, player.getName());

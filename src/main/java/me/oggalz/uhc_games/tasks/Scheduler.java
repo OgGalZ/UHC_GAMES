@@ -81,6 +81,9 @@ public class Scheduler extends BukkitRunnable {
                 }
             }
         }
+        if(seconds == 50 && minutes == episo -1){
+            Bukkit.broadcastMessage(ChatColor.GOLD + "Faite de la place dans votre inventaire, l'annonce des rôles aura lieu dans 10 secondes ");
+        }
 
 
         BPlayerBoard playerBoard = null;
