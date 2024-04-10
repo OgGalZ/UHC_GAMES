@@ -9,3 +9,4 @@ commands:
 
 depend:
   - SmartInvs
+  -SmartInvs
